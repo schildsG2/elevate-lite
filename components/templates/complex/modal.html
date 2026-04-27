@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal Component</title>
+  <link rel="stylesheet" href="../../../tokens/elevate.css">
+  <link rel="stylesheet" href="../../elevate.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+  <style>
+    body {
+      font-family: var(--font-sans);
+      padding: 2rem;
+      background: var(--bg-neutral-5);
+    }
+    .section {
+      background: white;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+    }
+    h1 { margin: 0 0 0.5rem 0; }
+    h2 { margin: 1.5rem 0 0.75rem 0; font-size: var(--text-lg); }
+    h3 { margin: 1rem 0 0.5rem 0; font-size: var(--text-md); font-weight: 600; }
+    .examples { display: flex; flex-direction: column; gap: 1.5rem; margin: 1rem 0; }
+    .example-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: #5746b2;
+      color: white;
+      border: none;
+      border-radius: var(--radius-pill-md);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 150ms;
+      min-height: 40px;
+    }
+    .example-trigger:hover {
+      background: #453798;
+    }
+    pre {
+      background: var(--bg-neutral-10);
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    code {
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Material Symbols */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+
+    /* Modal Styles — based on DESIGN.md specifications */
+
+    /* Base dialog styling */
+    .elv-modal {
+      position: fixed;
+      margin: auto;
+      padding: 0;
+      background: #ffffff;
+      border: none;
+      box-shadow: 0 8px 32px 0 rgba(32, 31, 35, 0.12);
+      border-radius: 16px; /* DESIGN.md: radius-lg (16px) */
+      max-height: 90vh;
+      overflow: visible;
+    }
+
+    /* Backdrop styling */
+    .elv-modal::backdrop {
+      background: rgba(32, 31, 35, 0.40);
+    }
+
+    /* Fade-in animation — modal-specific (not slide) */
+    @keyframes fadeInModal {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .elv-modal[open] {
+      animation: fadeInModal 200ms ease-in-out;
+    }
+
+    /* Size variants */
+    .elv-modal--sm {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .elv-modal--md {
+      width: 100%;
+      max-width: 560px; /* Default per DESIGN.md */
+    }
+
+    .elv-modal--lg {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .elv-modal--xl {
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    /* Inner structure */
+    .elv-modal__inner {
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+    }
+
+    /* Header */
+    .elv-modal__header {
+      padding: 32px; /* DESIGN.md: 32px */
+      border-bottom: 1px solid #e7e5e8;
+      background: #f7f6f7;
+      flex-shrink: 0;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .elv-modal__header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .elv-modal__title {
+      font-size: 21px; /* DESIGN.md: Heading Sm (21px/700) */
+      line-height: 28px;
+      font-weight: 700;
+      color: var(--text-default);
+      margin: 0;
+    }
+
+    .elv-modal__subtitle {
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--text-subtle);
+      margin: 8px 0 0 0;
+    }
+
+    .elv-modal__close {
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: #706c7a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      transition: background 150ms;
+    }
+
+    .elv-modal__close:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .elv-modal__close:focus {
+      outline: 2px solid #5746b2;
+      outline-offset: 2px;
+    }
+
+    /* Body */
+    .elv-modal__body {
+      padding: 32px; /* DESIGN.md: 32px */
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    /* Footer */
+    .elv-modal__footer {
+      padding: 32px; /* DESIGN.md: 32px */
+      border-top: 1px solid #e7e5e8;
+      flex-shrink: 0;
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      border-radius: 0 0 16px 16px;
+    }
+
+    /* Body scroll lock when any dialog is open */
+    body:has(dialog[open]) {
+      overflow: hidden;
+    }
+
+    /* Button styles for footer - pill-shaped per DESIGN.md */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: var(--radius-pill-md);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background 150ms;
+      min-height: 40px;
+    }
+
+    .btn--primary {
+      background: #5746b2;
+      color: white;
+    }
+
+    .btn--primary:hover {
+      background: #453798;
+    }
+
+    .btn--secondary {
+      background: #f2f2f3;
+      color: var(--text-default);
+    }
+
+    .btn--secondary:hover {
+      background: #e7e5e8;
+    }
+  </style>
+</head>
+<body>
+  <div elv>
+    <!-- Header -->
+    <div class="section">
+      <h1>Modal</h1>
+      <p style="color: var(--text-subtle); margin: 0.5rem 0 1rem 0;">
+        A centered overlay dialog for confirmations, alerts, forms, and general user interactions.
+        Uses native <code>&lt;dialog&gt;</code> element with fade animation and focus management.
+      </p>
+      <div style="display: flex; gap: 16px;">
+        <a href="../../../design-system/DESIGN.md" style="color: #5746b2;">View DESIGN.md</a>
+        <a href="https://www.g2.test/elevate/lookbook" style="color: #5746b2;">View Lookbook</a>
+      </div>
+    </div>
+
+    <!-- Examples Section -->
+    <div class="section">
+      <h2>Examples</h2>
+
+      <div class="examples">
+        <!-- Small Modal -->
+        <div>
+          <h3>Small Modal (400px)</h3>
+          <button class="example-trigger" data-modal="modal-sm">
+            Open Small Modal
+          </button>
+        </div>
+
+        <!-- Medium Modal -->
+        <div>
+          <h3>Medium Modal (560px) — Default</h3>
+          <button class="example-trigger" data-modal="modal-md">
+            Open Medium Modal
+          </button>
+        </div>
+
+        <!-- Large Modal -->
+        <div>
+          <h3>Large Modal (800px)</h3>
+          <button class="example-trigger" data-modal="modal-lg">
+            Open Large Modal
+          </button>
+        </div>
+
+        <!-- Extra Large Modal -->
+        <div>
+          <h3>Extra Large Modal (1000px)</h3>
+          <button class="example-trigger" data-modal="modal-xl">
+            Open Extra Large Modal
+          </button>
+        </div>
+
+        <!-- Modal without backdrop close -->
+        <div>
+          <h3>Modal with Backdrop Click Disabled</h3>
+          <button class="example-trigger" data-modal="modal-no-backdrop">
+            Open Modal (No Backdrop Close)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code Snippets Section -->
+    <div class="section">
+      <h2>HTML Structure</h2>
+
+      <h3>Basic Modal Template</h3>
+      <pre><code>&lt;!-- Trigger Button --&gt;
+&lt;button
+  data-modal="unique-modal-id"
+  role="button"
+  aria-haspopup="dialog"
+  aria-expanded="false"
+  aria-controls="unique-modal-id"&gt;
+  Open Modal
+&lt;/button&gt;
+
+&lt;!-- Modal Dialog --&gt;
+&lt;dialog
+  id="unique-modal-id"
+  class="elv-modal elv-modal--md"
+  aria-modal="true"
+  role="dialog"&gt;
+
+  &lt;div class="elv-modal__inner"&gt;
+
+    &lt;!-- Header --&gt;
+    &lt;div class="elv-modal__header"&gt;
+      &lt;div class="elv-modal__header-top"&gt;
+        &lt;div&gt;
+          &lt;h2 class="elv-modal__title"&gt;Modal Title&lt;/h2&gt;
+          &lt;p class="elv-modal__subtitle"&gt;Optional subtitle or description&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button
+          class="elv-modal__close"
+          aria-label="Close modal"&gt;
+          &lt;span class="material-symbols-outlined"&gt;close&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Body --&gt;
+    &lt;div class="elv-modal__body"&gt;
+      &lt;p&gt;Modal content goes here. This area is scrollable when content overflows.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Footer (optional) --&gt;
+    &lt;div class="elv-modal__footer"&gt;
+      &lt;button class="btn btn--secondary"&gt;Cancel&lt;/button&gt;
+      &lt;button class="btn btn--primary"&gt;Confirm&lt;/button&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/dialog&gt;</code></pre>
+
+      <h3>Size Variants</h3>
+      <pre><code>&lt;!-- Small: 400px max-width --&gt;
+&lt;dialog class="elv-modal elv-modal--sm"&gt;...&lt;/dialog&gt;
+
+&lt;!-- Medium (default): 560px max-width --&gt;
+&lt;dialog class="elv-modal elv-modal--md"&gt;...&lt;/dialog&gt;
+
+&lt;!-- Large: 800px max-width --&gt;
+&lt;dialog class="elv-modal elv-modal--lg"&gt;...&lt;/dialog&gt;
+
+&lt;!-- Extra Large: 1000px max-width --&gt;
+&lt;dialog class="elv-modal elv-modal--xl"&gt;...&lt;/dialog&gt;</code></pre>
+
+      <h3>Disable Backdrop Click to Close</h3>
+      <pre><code>&lt;!-- Add data-dismiss-on-backdrop-click="false" to prevent closing when backdrop is clicked --&gt;
+&lt;dialog
+  id="modal-id"
+  class="elv-modal elv-modal--md"
+  data-dismiss-on-backdrop-click="false"
+  aria-modal="true"
+  role="dialog"&gt;
+  ...
+&lt;/dialog&gt;</code></pre>
+    </div>
+
+    <!-- JavaScript Section -->
+    <div class="section">
+      <h2>JavaScript Controller</h2>
+      <p style="color: var(--text-subtle); margin-bottom: 1rem;">
+        Vanilla JavaScript implementation with focus trap, focus restoration, and accessibility features.
+      </p>
+
+      <pre><code>/**
+ * Modal Controller
+ *
+ * Features:
+ * - Native &lt;dialog&gt; element with showModal() API
+ * - Fade-in animation (200ms ease-in-out)
+ * - Centered positioning (default dialog behavior)
+ * - Focus trap (tab cycles within modal)
+ * - Focus restoration to trigger element
+ * - Click outside to close (configurable)
+ * - ESC key to close (native)
+ * - Body scroll lock when open
+ * - ARIA state management
+ */
+class Modal {
+  constructor(dialogElement) {
+    this.dialog = dialogElement;
+    this.triggerElement = null;
+    this.focusableElements = [];
+    // Check if backdrop click should close modal (default: true)
+    this.dismissOnBackdropClick =
+      this.dialog.getAttribute('data-dismiss-on-backdrop-click') !== 'false';
+
+    this.init();
+  }
+
+  init() {
+    // Add body scroll lock class (activates when any dialog[open] exists)
+    if (!document.body.classList.contains('elv-has-dialog-scroll-lock')) {
+      document.body.classList.add('elv-has-dialog-scroll-lock');
+    }
+
+    // Bind event listeners
+    this.dialog.addEventListener('click', this.handleBackdropClick.bind(this));
+    this.dialog.addEventListener('keydown', this.handleKeyDown.bind(this));
+
+    // Find and setup close buttons
+    const closeButtons = this.dialog.querySelectorAll('.elv-modal__close');
+    closeButtons.forEach(btn => {
+      btn.addEventListener('click', () => this.close());
+    });
+  }
+
+  open(triggerElement) {
+    // Store trigger for focus restoration
+    this.triggerElement = triggerElement;
+
+    // Update trigger ARIA state
+    if (this.triggerElement) {
+      this.triggerElement.setAttribute('aria-expanded', 'true');
+    }
+
+    // Close any other open dialogs
+    document.querySelectorAll('dialog[open]').forEach(d => {
+      if (d !== this.dialog) {
+        d.close();
+      }
+    });
+
+    // Open the dialog
+    this.dialog.showModal();
+
+    // Setup focus trap
+    this.setupFocusTrap();
+
+    // Focus first element
+    requestAnimationFrame(() => {
+      this.focusFirstElement();
+    });
+  }
+
+  close() {
+    // Close the dialog
+    this.dialog.close();
+
+    // Update trigger ARIA state
+    if (this.triggerElement) {
+      this.triggerElement.setAttribute('aria-expanded', 'false');
+      this.triggerElement.focus();
+    }
+  }
+
+  setupFocusTrap() {
+    // Get all focusable elements within dialog
+    const focusableSelector =
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    this.focusableElements = Array.from(
+      this.dialog.querySelectorAll(focusableSelector)
+    );
+  }
+
+  focusFirstElement() {
+    if (this.focusableElements.length > 0) {
+      this.focusableElements[0].focus();
+    }
+  }
+
+  handleBackdropClick(event) {
+    // Close if click is directly on dialog element (backdrop), not on content
+    // Only if dismissOnBackdropClick is enabled
+    if (event.target === this.dialog && this.dismissOnBackdropClick) {
+      this.close();
+    }
+  }
+
+  handleKeyDown(event) {
+    // Focus trap: cycle focus within modal
+    if (event.key === 'Tab' && this.focusableElements.length > 0) {
+      const firstElement = this.focusableElements[0];
+      const lastElement = this.focusableElements[this.focusableElements.length - 1];
+
+      if (event.shiftKey) {
+        // Shift+Tab: if on first element, jump to last
+        if (document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        }
+      } else {
+        // Tab: if on last element, jump to first
+        if (document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
+      }
+    }
+  }
+}
+
+// Initialize all modals on page load
+document.addEventListener('DOMContentLoaded', () => {
+  // Create modal instances
+  const modals = new Map();
+
+  document.querySelectorAll('.elv-modal').forEach(dialog => {
+    modals.set(dialog.id, new Modal(dialog));
+  });
+
+  // Setup trigger buttons
+  document.querySelectorAll('[data-modal]').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      const modalId = trigger.getAttribute('data-modal');
+      const modal = modals.get(modalId);
+      if (modal) {
+        modal.open(trigger);
+      }
+    });
+
+    // Keyboard support for triggers
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        trigger.click();
+      }
+    });
+  });
+});</code></pre>
+    </div>
+
+    <!-- Usage Notes Section -->
+    <div class="section">
+      <h2>Usage Notes</h2>
+
+      <h3>When to Use Modal vs Slide-Out Panel</h3>
+      <ul style="line-height: 1.6;">
+        <li><strong>Modal:</strong> General dialogs, confirmations, alerts, short forms, focused tasks</li>
+        <li><strong>Slide-Out Panel:</strong> Contextual content, detailed forms, multi-step workflows, secondary navigation</li>
+      </ul>
+
+      <h3>Accessibility Requirements</h3>
+      <ul style="line-height: 1.6;">
+        <li><strong>ARIA attributes:</strong> Required on trigger (<code>aria-controls</code>, <code>aria-haspopup="dialog"</code>, <code>aria-expanded</code>) and dialog (<code>aria-modal="true"</code>, <code>role="dialog"</code>)</li>
+        <li><strong>Focus trap:</strong> Tab key must cycle within modal (implemented in JS controller)</li>
+        <li><strong>Focus restoration:</strong> Returns focus to trigger element on close</li>
+        <li><strong>Keyboard support:</strong> ESC closes (native), Enter/Space opens from trigger</li>
+        <li><strong>Close button label:</strong> Must have <code>aria-label="Close modal"</code></li>
+      </ul>
+
+      <h3>Behavior Specifications</h3>
+      <ul style="line-height: 1.6;">
+        <li><strong>Animation:</strong> 200ms fade-in with scale (opacity 0→1, scale 0.95→1) using <code>ease-in-out</code> easing</li>
+        <li><strong>Backdrop:</strong> Semi-transparent overlay (40% opacity, <code>rgba(32, 31, 35, 0.4)</code>)</li>
+        <li><strong>Positioning:</strong> Centered vertically and horizontally (native dialog behavior)</li>
+        <li><strong>Click outside:</strong> Closes modal when backdrop is clicked (default). Disable with <code>data-dismiss-on-backdrop-click="false"</code></li>
+        <li><strong>Body scroll lock:</strong> Prevents background scrolling via CSS <code>:has()</code> selector</li>
+        <li><strong>Multiple modals:</strong> Opening a modal automatically closes any other open modals</li>
+      </ul>
+
+      <h3>Configuration Options</h3>
+      <ul style="line-height: 1.6;">
+        <li><strong>data-dismiss-on-backdrop-click:</strong> Set to <code>"false"</code> on the <code>&lt;dialog&gt;</code> element to prevent closing when clicking the backdrop. Useful for required forms or critical confirmations. Default is <code>"true"</code> (clicking backdrop closes modal).</li>
+      </ul>
+
+      <h3>Size Guidelines</h3>
+      <ul style="line-height: 1.6;">
+        <li><strong>Small (400px):</strong> Simple confirmations, alerts, brief messages</li>
+        <li><strong>Medium (560px):</strong> Default size for most use cases, standard forms, moderate content</li>
+        <li><strong>Large (800px):</strong> Complex forms, content-rich dialogs, tables or lists</li>
+        <li><strong>Extra Large (1000px):</strong> Multi-column layouts, data-heavy interfaces, rich content</li>
+      </ul>
+
+      <h3>Design Specifications (from DESIGN.md)</h3>
+      <ul style="line-height: 1.6;">
+        <li><strong>Background:</strong> <code>#ffffff</code> (neutral-0)</li>
+        <li><strong>Border radius:</strong> 16px (radius-lg)</li>
+        <li><strong>Shadow:</strong> <code>0 8px 32px 0 rgba(32, 31, 35, 0.12)</code></li>
+        <li><strong>Backdrop:</strong> <code>rgba(32, 31, 35, 0.40)</code></li>
+        <li><strong>Padding:</strong> 32px all sections (header, body, footer)</li>
+        <li><strong>Title:</strong> 21px / 700 (Heading Sm)</li>
+        <li><strong>Max height:</strong> 90vh to ensure modal fits on screen</li>
+        <li><strong>Header background:</strong> <code>#f7f6f7</code> (neutral-5)</li>
+        <li><strong>Header/footer borders:</strong> 1px, <code>#e7e5e8</code> (medium)</li>
+      </ul>
+
+      <h3>Browser Support</h3>
+      <p style="color: var(--text-subtle); line-height: 1.6;">
+        Uses native <code>&lt;dialog&gt;</code> element (Chrome 37+, Firefox 98+, Safari 15.4+) and CSS <code>:has()</code>
+        selector (Chrome 105+, Firefox 121+, Safari 15.4+). For older browsers, consider a polyfill or fallback implementation.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Live Modal Demos -->
+
+  <!-- Small Modal -->
+  <dialog id="modal-sm" class="elv-modal elv-modal--sm" aria-modal="true" role="dialog">
+    <div class="elv-modal__inner">
+      <div class="elv-modal__header">
+        <div class="elv-modal__header-top">
+          <div>
+            <h2 class="elv-modal__title">Delete Item</h2>
+            <p class="elv-modal__subtitle">This action cannot be undone</p>
+          </div>
+          <button class="elv-modal__close" aria-label="Close modal">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <div class="elv-modal__body">
+        <p style="margin-top: 0;">Are you sure you want to delete this item? This action is permanent and cannot be reversed.</p>
+      </div>
+      <div class="elv-modal__footer">
+        <button class="btn btn--secondary">Cancel</button>
+        <button class="btn btn--primary">Delete</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Medium Modal -->
+  <dialog id="modal-md" class="elv-modal elv-modal--md" aria-modal="true" role="dialog">
+    <div class="elv-modal__inner">
+      <div class="elv-modal__header">
+        <div class="elv-modal__header-top">
+          <div>
+            <h2 class="elv-modal__title">Create New Project</h2>
+            <p class="elv-modal__subtitle">Enter project details to get started</p>
+          </div>
+          <button class="elv-modal__close" aria-label="Close modal">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <div class="elv-modal__body">
+        <p style="margin-top: 0;">This is the default modal size using <code>elv-modal--md</code> with a max-width of 560px.</p>
+
+        <h3>When to use Medium Modal:</h3>
+        <ul>
+          <li>Standard forms with 3-5 fields</li>
+          <li>Confirmation dialogs with moderate content</li>
+          <li>Settings or preferences panels</li>
+          <li>General-purpose dialogs</li>
+        </ul>
+
+        <h3>Key Features</h3>
+        <div style="display: grid; gap: 16px; margin-top: 16px;">
+          <div style="padding: 16px; background: var(--bg-neutral-5); border-radius: var(--radius-sm);">
+            <strong>Centered Position</strong>
+            <p style="margin: 8px 0 0 0; color: var(--text-subtle);">
+              Modal is centered both vertically and horizontally on screen.
+            </p>
+          </div>
+          <div style="padding: 16px; background: var(--bg-neutral-5); border-radius: var(--radius-sm);">
+            <strong>Fade Animation</strong>
+            <p style="margin: 8px 0 0 0; color: var(--text-subtle);">
+              Smoothly fades in over 200ms with a subtle scale effect.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="elv-modal__footer">
+        <button class="btn btn--secondary">Cancel</button>
+        <button class="btn btn--primary">Create Project</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Large Modal -->
+  <dialog id="modal-lg" class="elv-modal elv-modal--lg" aria-modal="true" role="dialog">
+    <div class="elv-modal__inner">
+      <div class="elv-modal__header">
+        <div class="elv-modal__header-top">
+          <div>
+            <h2 class="elv-modal__title">Review Submission</h2>
+            <p class="elv-modal__subtitle">800px wide modal for content-rich interfaces</p>
+          </div>
+          <button class="elv-modal__close" aria-label="Close modal">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <div class="elv-modal__body">
+        <p style="margin-top: 0;">This large modal uses <code>elv-modal--lg</code> with a max-width of 800px.</p>
+
+        <h3>When to use Large Modal:</h3>
+        <ul>
+          <li>Complex forms with 6+ fields or multiple sections</li>
+          <li>Content-rich dialogs with tables, lists, or cards</li>
+          <li>Multi-step wizards requiring more horizontal space</li>
+          <li>Preview or review screens with detailed information</li>
+        </ul>
+
+        <h3>Scrollable Content Demo</h3>
+        <p>The body section is scrollable when content exceeds the viewport height.
+        The header and footer remain fixed while the body scrolls.</p>
+
+        <div style="height: 400px; background: linear-gradient(to bottom, #f7f6f7, #ffffff);
+                    border-radius: var(--radius-sm); padding: 16px; margin: 16px 0;">
+          <p><strong>Scroll down to see more content...</strong></p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua.</p>
+          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.</p>
+          <p style="margin-top: 120px;">Keep scrolling...</p>
+          <p style="margin-top: 120px;"><strong>You've reached the bottom!</strong></p>
+        </div>
+
+        <p>Notice how the header and footer stayed in place while you scrolled.</p>
+      </div>
+      <div class="elv-modal__footer">
+        <button class="btn btn--secondary">Back</button>
+        <button class="btn btn--primary">Submit Review</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Extra Large Modal -->
+  <dialog id="modal-xl" class="elv-modal elv-modal--xl" aria-modal="true" role="dialog">
+    <div class="elv-modal__inner">
+      <div class="elv-modal__header">
+        <div class="elv-modal__header-top">
+          <div>
+            <h2 class="elv-modal__title">Data Analysis Dashboard</h2>
+            <p class="elv-modal__subtitle">1000px wide modal for complex interfaces</p>
+          </div>
+          <button class="elv-modal__close" aria-label="Close modal">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <div class="elv-modal__body">
+        <p style="margin-top: 0;">This extra large modal uses <code>elv-modal--xl</code> with a max-width of 1000px.</p>
+
+        <h3>When to use Extra Large Modal:</h3>
+        <ul>
+          <li>Multi-column layouts requiring significant horizontal space</li>
+          <li>Data-heavy interfaces with tables, charts, or dashboards</li>
+          <li>Rich text editors or WYSIWYG interfaces</li>
+          <li>Complex configuration screens with many options</li>
+          <li>Side-by-side comparisons or before/after views</li>
+        </ul>
+
+        <h3>Accessibility Features</h3>
+        <div style="display: grid; gap: 16px; margin-top: 16px;">
+          <div style="padding: 16px; background: var(--bg-neutral-5); border-radius: var(--radius-sm);">
+            <strong>Focus Trap</strong>
+            <p style="margin: 8px 0 0 0; color: var(--text-subtle);">
+              Tab key cycles through focusable elements within the modal. Try it by pressing Tab!
+            </p>
+          </div>
+          <div style="padding: 16px; background: var(--bg-neutral-5); border-radius: var(--radius-sm);">
+            <strong>Keyboard Navigation</strong>
+            <p style="margin: 8px 0 0 0; color: var(--text-subtle);">
+              Press ESC to close. Focus automatically returns to the trigger button.
+            </p>
+          </div>
+          <div style="padding: 16px; background: var(--bg-neutral-5); border-radius: var(--radius-sm);">
+            <strong>Click Outside to Close</strong>
+            <p style="margin: 8px 0 0 0; color: var(--text-subtle);">
+              Clicking the semi-transparent backdrop closes the modal (unless disabled).
+            </p>
+          </div>
+          <div style="padding: 16px; background: var(--bg-neutral-5); border-radius: var(--radius-sm);">
+            <strong>ARIA State Management</strong>
+            <p style="margin: 8px 0 0 0; color: var(--text-subtle);">
+              Screen readers announce modal opening/closing via <code>aria-expanded</code> and <code>aria-modal</code>.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="elv-modal__footer">
+        <button class="btn btn--secondary">Cancel</button>
+        <button class="btn btn--primary">Save Dashboard</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal without backdrop close -->
+  <dialog id="modal-no-backdrop" class="elv-modal elv-modal--md" aria-modal="true" role="dialog" data-dismiss-on-backdrop-click="false">
+    <div class="elv-modal__inner">
+      <div class="elv-modal__header">
+        <div class="elv-modal__header-top">
+          <div>
+            <h2 class="elv-modal__title">Important Form</h2>
+            <p class="elv-modal__subtitle">Backdrop click disabled for this modal</p>
+          </div>
+          <button class="elv-modal__close" aria-label="Close modal">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <div class="elv-modal__body">
+        <p style="margin-top: 0;">This modal has <code>data-dismiss-on-backdrop-click="false"</code> set on the dialog element.</p>
+
+        <p><strong>Try clicking the backdrop</strong> (the dark area outside this modal). Notice that the modal does not close.</p>
+
+        <p>This is useful for:</p>
+        <ul>
+          <li>Required forms that must be completed</li>
+          <li>Critical confirmations that shouldn't be accidentally dismissed</li>
+          <li>Multi-step workflows where accidental closing would lose progress</li>
+          <li>Legal agreements or important disclosures</li>
+        </ul>
+
+        <p>Users can still close via:</p>
+        <ul>
+          <li>The close button (X icon in header)</li>
+          <li>ESC key</li>
+          <li>Any custom close/cancel buttons in footer</li>
+        </ul>
+      </div>
+      <div class="elv-modal__footer">
+        <button class="btn btn--secondary">Cancel</button>
+        <button class="btn btn--primary">Submit</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    /**
+     * Modal Controller
+     *
+     * Features:
+     * - Native <dialog> element with showModal() API
+     * - Fade-in animation (200ms ease-in-out)
+     * - Centered positioning (default dialog behavior)
+     * - Focus trap (tab cycles within modal)
+     * - Focus restoration to trigger element
+     * - Click outside to close (configurable)
+     * - ESC key to close (native)
+     * - Body scroll lock when open
+     * - ARIA state management
+     */
+    class Modal {
+      constructor(dialogElement) {
+        this.dialog = dialogElement;
+        this.triggerElement = null;
+        this.focusableElements = [];
+        // Check if backdrop click should close modal (default: true)
+        this.dismissOnBackdropClick =
+          this.dialog.getAttribute('data-dismiss-on-backdrop-click') !== 'false';
+
+        this.init();
+      }
+
+      init() {
+        // Add body scroll lock class (activates when any dialog[open] exists)
+        if (!document.body.classList.contains('elv-has-dialog-scroll-lock')) {
+          document.body.classList.add('elv-has-dialog-scroll-lock');
+        }
+
+        // Bind event listeners
+        this.dialog.addEventListener('click', this.handleBackdropClick.bind(this));
+        this.dialog.addEventListener('keydown', this.handleKeyDown.bind(this));
+
+        // Find and setup close buttons
+        const closeButtons = this.dialog.querySelectorAll('.elv-modal__close');
+        closeButtons.forEach(btn => {
+          btn.addEventListener('click', () => this.close());
+        });
+      }
+
+      open(triggerElement) {
+        // Store trigger for focus restoration
+        this.triggerElement = triggerElement;
+
+        // Update trigger ARIA state
+        if (this.triggerElement) {
+          this.triggerElement.setAttribute('aria-expanded', 'true');
+        }
+
+        // Close any other open dialogs
+        document.querySelectorAll('dialog[open]').forEach(d => {
+          if (d !== this.dialog) {
+            d.close();
+          }
+        });
+
+        // Open the dialog
+        this.dialog.showModal();
+
+        // Setup focus trap
+        this.setupFocusTrap();
+
+        // Focus first element
+        requestAnimationFrame(() => {
+          this.focusFirstElement();
+        });
+      }
+
+      close() {
+        // Close the dialog
+        this.dialog.close();
+
+        // Update trigger ARIA state
+        if (this.triggerElement) {
+          this.triggerElement.setAttribute('aria-expanded', 'false');
+          this.triggerElement.focus();
+        }
+      }
+
+      setupFocusTrap() {
+        // Get all focusable elements within dialog
+        const focusableSelector =
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        this.focusableElements = Array.from(
+          this.dialog.querySelectorAll(focusableSelector)
+        );
+      }
+
+      focusFirstElement() {
+        if (this.focusableElements.length > 0) {
+          this.focusableElements[0].focus();
+        }
+      }
+
+      handleBackdropClick(event) {
+        // Close if click is directly on dialog element (backdrop), not on content
+        // Only if dismissOnBackdropClick is enabled
+        if (event.target === this.dialog && this.dismissOnBackdropClick) {
+          this.close();
+        }
+      }
+
+      handleKeyDown(event) {
+        // Focus trap: cycle focus within modal
+        if (event.key === 'Tab' && this.focusableElements.length > 0) {
+          const firstElement = this.focusableElements[0];
+          const lastElement = this.focusableElements[this.focusableElements.length - 1];
+
+          if (event.shiftKey) {
+            // Shift+Tab: if on first element, jump to last
+            if (document.activeElement === firstElement) {
+              event.preventDefault();
+              lastElement.focus();
+            }
+          } else {
+            // Tab: if on last element, jump to first
+            if (document.activeElement === lastElement) {
+              event.preventDefault();
+              firstElement.focus();
+            }
+          }
+        }
+      }
+    }
+
+    // Initialize all modals on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Create modal instances
+      const modals = new Map();
+
+      document.querySelectorAll('.elv-modal').forEach(dialog => {
+        modals.set(dialog.id, new Modal(dialog));
+      });
+
+      // Setup trigger buttons
+      document.querySelectorAll('[data-modal]').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+          const modalId = trigger.getAttribute('data-modal');
+          const modal = modals.get(modalId);
+          if (modal) {
+            modal.open(trigger);
+          }
+        });
+
+        // Keyboard support for triggers
+        trigger.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            trigger.click();
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
