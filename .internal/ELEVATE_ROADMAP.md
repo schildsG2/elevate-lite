@@ -202,6 +202,7 @@ Components requiring JavaScript for full functionality:
 - [ ] Build live component sandbox (like Elevate Lookbook)
 - [ ] Add copy-paste code snippets to all docs
 - [ ] Create project scaffolding script for new epics
+- [ ] **Standardize component template pages** — Add consistent navigation back to component library (elevate-demo.html) from all template pages (e.g., `/templates/complex/slide-out-panel.html`). Apply consistent page styling and navigation pattern across all template documentation pages.
 
 ### 4.2 Quality & Compliance
 - [ ] Accessibility audit (WCAG 2.1 AA)

@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide-Out Panel Component</title>
+  <link rel="stylesheet" href="../../../tokens/elevate.css">
+  <link rel="stylesheet" href="../../elevate.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+  <style>
+    body {
+      font-family: var(--font-sans);
+      padding: 2rem;
+      background: var(--bg-neutral-5);
+    }
+    .section {
+      background: white;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+    }
+    h1 { margin: 0 0 0.5rem 0; }
+    h2 { margin: 1.5rem 0 0.75rem 0; font-size: var(--text-lg); }
+    h3 { margin: 1rem 0 0.5rem 0; font-size: var(--text-md); font-weight: 600; }
+    .examples { display: flex; flex-direction: column; gap: 1.5rem; margin: 1rem 0; }
+    .example-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: #5746b2;
+      color: white;
+      border: none;
+      border-radius: var(--radius-pill-md);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 150ms;
+      min-height: 40px;
+      flex-direction: row-reverse;
+    }
+    .example-trigger:hover {
+      background: #453798;
+    }
+    pre {
+      background: var(--bg-neutral-10);
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    code {
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Material Symbols */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+
+    /* Slide-Out Panel Styles — based on DESIGN.md and UE audit */
+
+    /* Base dialog styling */
+    .elv-slide-out-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: auto;
+      height: 100vh;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      border: none;
+      box-shadow: 0px 0px 1px 0px rgba(32, 31, 35, 0.32), -18px 0px 28px -4px rgba(32, 31, 35, 0.15);
+      border-radius: 0;
+      max-width: 100%;
+      max-height: 100vh;
+      transform-origin: right center;
+    }
+
+    /* Backdrop styling */
+    .elv-slide-out-panel::backdrop {
+      background: rgba(32, 31, 35, 0.4);
+    }
+
+    /* Slide-in animation */
+    @keyframes slideInFromRight {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    .elv-slide-out-panel[open] {
+      animation: slideInFromRight 0.5s ease-in-out;
+    }
+
+    /* Size variants — mobile-first responsive */
+    .elv-slide-out-panel--third {
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .elv-slide-out-panel--third {
+        width: 50%;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .elv-slide-out-panel--third {
+        width: 33.333%;
+      }
+    }
+
+    .elv-slide-out-panel--half {
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .elv-slide-out-panel--half {
+        width: 50%;
+      }
+    }
+
+    .elv-slide-out-panel--full {
+      width: 100%;
+    }
+
+    /* Inner structure */
+    .elv-slide-out-panel__inner {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    /* Header */
+    .elv-slide-out-panel__header {
+      padding: 24px;
+      border-bottom: 1px solid #e7e5e8;
+      background: #f7f6f7;
+      flex-shrink: 0;
+    }
+
+    .elv-slide-out-panel__header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .elv-slide-out-panel__title {
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 600;
+      color: var(--text-default);
+      margin: 0;
+    }
+
+    .elv-slide-out-panel__subtitle {
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--text-subtle);
+      margin: 8px 0 0 0;
+    }
+
+    .elv-slide-out-panel__close {
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: #706c7a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      transition: background 150ms;
+    }
+
+    .elv-slide-out-panel__close:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .elv-slide-out-panel__close:focus {
+      outline: 2px solid #5746b2;
+      outline-offset: 2px;
+    }
+
+    /* Body */
+    .elv-slide-out-panel__body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    /* Footer */
+    .elv-slide-out-panel__footer {
+      padding: 20px;
+      border-top: 1px solid #e7e5e8;
+      flex-shrink: 0;
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    /* Body scroll lock when any dialog is open */
+    body:has(dialog[open]) {
+      overflow: hidden;
+    }
+
+    /* Button styles for footer - pill-shaped per DESIGN.md */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: var(--radius-pill-md);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background 150ms;
+      min-height: 40px;
+    }
+
+    .btn--primary {
+      background: #5746b2;
+      color: white;
+    }
+
+    .btn--primary:hover {
+      background: #453798;
+    }
+
+    .btn--secondary {
+      background: #f2f2f3;
+      color: var(--text-default);
+    }
+
+    .btn--secondary:hover {
+      background: #e7e5e8;
+    }
+  </style>
+</head>
+<body>
+  <div elv>
+    <!-- Header -->
+    <div class="section">
+      <h1>Slide-Out Panel</h1>
+      <p style="color: var(--text-subtle); margin: 0.5rem 0 1rem 0;">
+        A full-height modal variant that slides in from the right side of the screen.
+        Extends modal behavior with slide animation, responsive sizing, and structured layout.
+      </p>
+      <div style="display: flex; gap: 16px;">
+        <a href="../../../design-system/DESIGN.md" style="color: #5746b2;">View DESIGN.md</a>
+        <a href="https://www.g2.test/elevate/lookbook" style="color: #5746b2;">View Lookbook</a>
+      </div>
+    </div>
+
+    <!-- Examples Section -->
+    <div class="section">
+      <h2>Examples</h2>
+
+      <div class="examples">
+        <!-- Third Screen Panel -->
+        <div>
+          <h3>Third Screen (33% on desktop, 50% on tablet)</h3>
+          <button class="example-trigger" data-panel="panel-third">
+            <span class="material-symbols-outlined">arrow_forward</span>
+            Open Third Screen Panel
+          </button>
+        </div>
+
+        <!-- Half Screen Panel -->
+        <div>
+          <h3>Half Screen (50% on tablet+) — Default</h3>
+          <button class="example-trigger" data-panel="panel-half">
+            <span class="material-symbols-outlined">arrow_forward</span>
+            Open Half Screen Panel
+          </button>
+        </div>
+
+        <!-- Full Screen Panel -->
+        <div>
+          <h3>Full Screen (100% on all viewports)</h3>
+          <button class="example-trigger" data-panel="panel-full">
+            <span class="material-symbols-outlined">arrow_forward</span>
+            Open Full Screen Panel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code Snippets Section -->
+    <div class="section">
+      <h2>HTML Structure</h2>
+
+      <h3>Basic Panel Template</h3>
+      <pre><code>&lt;!-- Trigger Button --&gt;
+&lt;button
+  data-panel="unique-panel-id"
+  role="button"
+  aria-haspopup="dialog"
+  aria-expanded="false"
+  aria-controls="unique-panel-id"&gt;
+  Open Panel
+&lt;/button&gt;
+
+&lt;!-- Panel Dialog --&gt;
+&lt;dialog
+  id="unique-panel-id"
+  class="elv-slide-out-panel elv-slide-out-panel--half"
+  aria-modal="true"
+  role="dialog"&gt;
+
+  &lt;div class="elv-slide-out-panel__inner"&gt;
+
+    &lt;!-- Header --&gt;
+    &lt;div class="elv-slide-out-panel__header"&gt;
+      &lt;div class="elv-slide-out-panel__header-top"&gt;
+        &lt;div&gt;
+          &lt;h2 class="elv-slide-out-panel__title"&gt;Panel Title&lt;/h2&gt;
+          &lt;p class="elv-slide-out-panel__subtitle"&gt;Optional subtitle or description&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button
+          class="elv-slide-out-panel__close"
+          aria-label="Close panel"&gt;
+          &lt;span class="material-symbols-outlined"&gt;close&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Body --&gt;
+    &lt;div class="elv-slide-out-panel__body"&gt;
+      &lt;p&gt;Panel content goes here. This area is scrollable when content overflows.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Footer (optional) --&gt;
+    &lt;div class="elv-slide-out-panel__footer"&gt;
+      &lt;button class="btn btn--secondary"&gt;Cancel&lt;/button&gt;
+      &lt;button class="btn btn--primary"&gt;Save Changes&lt;/button&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/dialog&gt;</code></pre>
+
+      <h3>Size Variants</h3>
+      <pre><code>&lt;!-- Third Screen: 33% on desktop, 50% on tablet, 100% on mobile --&gt;
+&lt;dialog class="elv-slide-out-panel elv-slide-out-panel--third"&gt;...&lt;/dialog&gt;
+
+&lt;!-- Half Screen (default): 50% on tablet+, 100% on mobile --&gt;
+&lt;dialog class="elv-slide-out-panel elv-slide-out-panel--half"&gt;...&lt;/dialog&gt;
+
+&lt;!-- Full Screen: 100% on all viewports --&gt;
+&lt;dialog class="elv-slide-out-panel elv-slide-out-panel--full"&gt;...&lt;/dialog&gt;</code></pre>
+    </div>
+
+    <!-- JavaScript Section -->
+    <div class="section">
+      <h2>JavaScript Controller</h2>
+      <p style="color: var(--text-subtle); margin-bottom: 1rem;">
+        Vanilla JavaScript implementation with focus trap, focus restoration, and accessibility features.
+      </p>
+
+      <pre><code>/**
+ * SlideOutPanel Controller
+ *
+ * Features:
+ * - Native &lt;dialog&gt; element with showModal() API
+ * - Slide-in animation from right (500ms ease-in-out)
+ * - Focus trap (tab cycles within panel)
+ * - Focus restoration to trigger element
+ * - Click outside to close
+ * - ESC key to close (native)
+ * - Body scroll lock when open
+ * - ARIA state management
+ */
+class SlideOutPanel {
+  constructor(dialogElement) {
+    this.dialog = dialogElement;
+    this.triggerElement = null;
+    this.focusableElements = [];
+    // Check if backdrop click should close panel (default: true)
+    this.dismissOnBackdropClick = this.dialog.getAttribute('data-dismiss-on-backdrop-click') !== 'false';
+
+    this.init();
+  }
+
+  init() {
+    // Add body scroll lock class (activates when any dialog[open] exists)
+    if (!document.body.classList.contains('elv-has-dialog-scroll-lock')) {
+      document.body.classList.add('elv-has-dialog-scroll-lock');
+    }
+
+    // Bind event listeners
+    this.dialog.addEventListener('click', this.handleBackdropClick.bind(this));
+    this.dialog.addEventListener('keydown', this.handleKeyDown.bind(this));
+
+    // Find and setup close buttons
+    const closeButtons = this.dialog.querySelectorAll('.elv-slide-out-panel__close');
+    closeButtons.forEach(btn => {
+      btn.addEventListener('click', () => this.close());
+    });
+  }
+
+  open(triggerElement) {
+    // Store trigger for focus restoration
+    this.triggerElement = triggerElement;
+
+    // Update trigger ARIA state
+    if (this.triggerElement) {
+      this.triggerElement.setAttribute('aria-expanded', 'true');
+    }
+
+    // Close any other open dialogs
+    document.querySelectorAll('dialog[open]').forEach(d => {
+      if (d !== this.dialog) {
+        d.close();
+      }
+    });
+
+    // Open the dialog
+    this.dialog.showModal();
+
+    // Setup focus trap
+    this.setupFocusTrap();
+
+    // Focus first element
+    requestAnimationFrame(() => {
+      this.focusFirstElement();
+    });
+  }
+
+  close() {
+    // Close the dialog
+    this.dialog.close();
+
+    // Update trigger ARIA state
+    if (this.triggerElement) {
+      this.triggerElement.setAttribute('aria-expanded', 'false');
+      this.triggerElement.focus();
+    }
+  }
+
+  setupFocusTrap() {
+    // Get all focusable elements within dialog
+    const focusableSelector =
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    this.focusableElements = Array.from(
+      this.dialog.querySelectorAll(focusableSelector)
+    );
+  }
+
+  focusFirstElement() {
+    if (this.focusableElements.length > 0) {
+      this.focusableElements[0].focus();
+    }
+  }
+
+  handleBackdropClick(event) {
+    // Close if click is directly on dialog element (backdrop), not on content
+    // Only if dismissOnBackdropClick is enabled
+    if (event.target === this.dialog && this.dismissOnBackdropClick) {
+      this.close();
+    }
+  }
+
+  handleKeyDown(event) {
+    // Focus trap: cycle focus within panel
+    if (event.key === 'Tab' && this.focusableElements.length > 0) {
+      const firstElement = this.focusableElements[0];
+      const lastElement = this.focusableElements[this.focusableElements.length - 1];
+
+      if (event.shiftKey) {
+        // Shift+Tab: if on first element, jump to last
+        if (document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        }
+      } else {
+        // Tab: if on last element, jump to first
+        if (document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
+      }
+    }
+  }
+}
+
+// Initialize all panels on page load
+document.addEventListener('DOMContentLoaded', () => {
+  // Create panel instances
+  const panels = new Map();
+
+  document.querySelectorAll('.elv-slide-out-panel').forEach(dialog => {
+    panels.set(dialog.id, new SlideOutPanel(dialog));
+  });
+
+  // Setup trigger buttons
+  document.querySelectorAll('[data-panel]').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      const panelId = trigger.getAttribute('data-panel');
+      const panel = panels.get(panelId);
+      if (panel) {
+        panel.open(trigger);
+      }
+    });
+
+    // Keyboard support for triggers
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        trigger.click();
+      }
+    });
+  });
+});</code></pre>
+    </div>
+
+    <!-- Usage Notes Section -->
+    <div class="section">
+      <h2>Usage Notes</h2>
+
+      <h3>Accessibility Requirements</h3>
+      <ul style="line-height: 1.6;">
+        <li><strong>ARIA attributes:</strong> Required on trigger (<code>aria-controls</code>, <code>aria-haspopup="dialog"</code>, <code>aria-expanded</code>) and dialog (<code>aria-modal="true"</code>, <code>role="dialog"</code>)</li>
+        <li><strong>Focus trap:</strong> Tab key must cycle within panel (implemented in JS controller)</li>
+        <li><strong>Focus restoration:</strong> Returns focus to trigger element on close</li>
+        <li><strong>Keyboard support:</strong> ESC closes (native), Enter/Space opens from trigger</li>
+        <li><strong>Close button label:</strong> Must have <code>aria-label="Close panel"</code></li>
+      </ul>
+
+      <h3>Behavior Specifications</h3>
+      <ul style="line-height: 1.6;">
+        <li><strong>Animation:</strong> 500ms slide-in from right with <code>ease-in-out</code> easing</li>
+        <li><strong>Backdrop:</strong> Semi-transparent overlay (40% opacity, <code>rgba(32, 31, 35, 0.4)</code>)</li>
+        <li><strong>Click outside:</strong> Closes panel when backdrop is clicked (default). Disable with <code>data-dismiss-on-backdrop-click="false"</code></li>
+        <li><strong>Body scroll lock:</strong> Prevents background scrolling via CSS <code>:has()</code> selector</li>
+        <li><strong>Multiple panels:</strong> Opening a panel automatically closes any other open panels</li>
+      </ul>
+
+      <h3>Configuration Options</h3>
+      <ul style="line-height: 1.6;">
+        <li><strong>data-dismiss-on-backdrop-click:</strong> Set to <code>"false"</code> on the <code>&lt;dialog&gt;</code> element to prevent closing when clicking the backdrop. Useful for required forms or critical workflows. Default is <code>"true"</code> (clicking backdrop closes panel).</li>
+      </ul>
+
+      <h3>Responsive Sizing</h3>
+      <ul style="line-height: 1.6;">
+        <li><strong>Third Screen:</strong> Mobile 100%, Tablet (768px+) 50%, Desktop (1024px+) 33%</li>
+        <li><strong>Half Screen:</strong> Mobile 100%, Tablet+ (768px+) 50%</li>
+        <li><strong>Full Screen:</strong> 100% on all viewports</li>
+      </ul>
+
+      <h3>Design Specifications</h3>
+      <ul style="line-height: 1.6;">
+        <li><strong>Height:</strong> Full viewport height (<code>100vh</code>)</li>
+        <li><strong>Background:</strong> <code>#ffffff</code> (neutral-0)</li>
+        <li><strong>Shadow:</strong> Left shadow for depth (<code>0px 0px 1px 0px rgba(32,31,35,0.32), -18px 0px 28px -4px rgba(32,31,35,0.15)</code>)</li>
+        <li><strong>Header padding:</strong> 24px all sides</li>
+        <li><strong>Header background:</strong> <code>#f7f6f7</code> (neutral-5)</li>
+        <li><strong>Header border:</strong> 1px bottom, <code>#e7e5e8</code> (medium)</li>
+        <li><strong>Body padding:</strong> 24px all sides, scrollable with <code>overflow-y: auto</code></li>
+        <li><strong>Footer padding:</strong> 20px all sides</li>
+        <li><strong>Footer border:</strong> 1px top, <code>#e7e5e8</code> (medium)</li>
+      </ul>
+
+      <h3>Browser Support</h3>
+      <p style="color: var(--text-subtle); line-height: 1.6;">
+        Uses native <code>&lt;dialog&gt;</code> element (Chrome 37+, Firefox 98+, Safari 15.4+) and CSS <code>:has()</code>
+        selector (Chrome 105+, Firefox 121+, Safari 15.4+). For older browsers, consider a polyfill or fallback implementation.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Live Panel Demos -->
+
+  <!-- Third Screen Panel -->
+  <dialog id="panel-third" class="elv-slide-out-panel elv-slide-out-panel--third" aria-modal="true" role="dialog">
+    <div class="elv-slide-out-panel__inner">
+      <div class="elv-slide-out-panel__header">
+        <div class="elv-slide-out-panel__header-top">
+          <div>
+            <h2 class="elv-slide-out-panel__title">Third Screen Panel</h2>
+            <p class="elv-slide-out-panel__subtitle">33% on desktop, 50% on tablet, 100% on mobile</p>
+          </div>
+          <button class="elv-slide-out-panel__close" aria-label="Close panel">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <div class="elv-slide-out-panel__body">
+        <p style="margin-top: 0;">This panel uses the <code>elv-slide-out-panel--third</code> size variant.</p>
+        <p>It adapts to screen size:</p>
+        <ul>
+          <li><strong>Desktop (1024px+):</strong> 33.33% width</li>
+          <li><strong>Tablet (768px-1023px):</strong> 50% width</li>
+          <li><strong>Mobile (&lt;768px):</strong> 100% width</li>
+        </ul>
+        <p>Perfect for lightweight contextual information, compact forms, or quick actions.</p>
+        <p style="padding: 16px; background: var(--bg-neutral-5); border-radius: var(--radius-sm); margin-top: 24px;">
+          <strong>Try it:</strong> Resize your browser window to see the responsive behavior.
+          The panel maintains full height but adjusts width based on viewport size.
+        </p>
+      </div>
+      <div class="elv-slide-out-panel__footer">
+        <button class="btn btn--secondary">Cancel</button>
+        <button class="btn btn--primary">Save</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Half Screen Panel -->
+  <dialog id="panel-half" class="elv-slide-out-panel elv-slide-out-panel--half" aria-modal="true" role="dialog">
+    <div class="elv-slide-out-panel__inner">
+      <div class="elv-slide-out-panel__header">
+        <div class="elv-slide-out-panel__header-top">
+          <div>
+            <h2 class="elv-slide-out-panel__title">Half Screen Panel (Default)</h2>
+            <p class="elv-slide-out-panel__subtitle">50% on tablet+, 100% on mobile</p>
+          </div>
+          <button class="elv-slide-out-panel__close" aria-label="Close panel">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <div class="elv-slide-out-panel__body">
+        <p style="margin-top: 0;">This is the default panel size using <code>elv-slide-out-panel--half</code>.</p>
+
+        <h3>When to use Half Screen:</h3>
+        <ul>
+          <li>Standard forms and data entry</li>
+          <li>Content editing workflows</li>
+          <li>Multi-field forms</li>
+          <li>Detail views with moderate content</li>
+        </ul>
+
+        <h3>Scrollable Content</h3>
+        <p>The body section is scrollable when content exceeds the viewport height.
+        The header and footer remain fixed while the body scrolls.</p>
+
+        <div style="height: 600px; background: linear-gradient(to bottom, #f7f6f7, #ffffff);
+                    border-radius: var(--radius-sm); padding: 16px; margin: 16px 0;">
+          <p><strong>Scroll down to see more content...</strong></p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua.</p>
+          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.</p>
+          <p style="margin-top: 200px;">Keep scrolling...</p>
+          <p style="margin-top: 200px;">Almost there...</p>
+          <p style="margin-top: 100px;"><strong>You've reached the bottom of this demo content!</strong></p>
+        </div>
+
+        <p>Notice how the header and footer stayed in place while you scrolled.</p>
+      </div>
+      <div class="elv-slide-out-panel__footer">
+        <button class="btn btn--secondary">Discard</button>
+        <button class="btn btn--primary">Save Changes</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Full Screen Panel -->
+  <dialog id="panel-full" class="elv-slide-out-panel elv-slide-out-panel--full" aria-modal="true" role="dialog">
+    <div class="elv-slide-out-panel__inner">
+      <div class="elv-slide-out-panel__header">
+        <div class="elv-slide-out-panel__header-top">
+          <div>
+            <h2 class="elv-slide-out-panel__title">Full Screen Panel</h2>
+            <p class="elv-slide-out-panel__subtitle">100% width on all viewports</p>
+          </div>
+          <button class="elv-slide-out-panel__close" aria-label="Close panel">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <div class="elv-slide-out-panel__body">
+        <p style="margin-top: 0;">This panel uses <code>elv-slide-out-panel--full</code> to occupy the entire viewport width.</p>
+
+        <h3>When to use Full Screen:</h3>
+        <ul>
+          <li>Complex multi-step workflows</li>
+          <li>Rich content editing (WYSIWYG editors, etc.)</li>
+          <li>Data-heavy interfaces (tables, charts)</li>
+          <li>Immersive experiences requiring maximum space</li>
+        </ul>
+
+        <h3>Key Features</h3>
+        <div style="display: grid; gap: 16px; margin-top: 16px;">
+          <div style="padding: 16px; background: var(--bg-neutral-5); border-radius: var(--radius-sm);">
+            <strong>Slide Animation</strong>
+            <p style="margin: 8px 0 0 0; color: var(--text-subtle);">
+              Smoothly slides in from the right edge over 500ms with ease-in-out easing.
+            </p>
+          </div>
+          <div style="padding: 16px; background: var(--bg-neutral-5); border-radius: var(--radius-sm);">
+            <strong>Focus Trap</strong>
+            <p style="margin: 8px 0 0 0; color: var(--text-subtle);">
+              Tab key cycles through focusable elements within the panel. Try it by pressing Tab!
+            </p>
+          </div>
+          <div style="padding: 16px; background: var(--bg-neutral-5); border-radius: var(--radius-sm);">
+            <strong>Keyboard Navigation</strong>
+            <p style="margin: 8px 0 0 0; color: var(--text-subtle);">
+              Press ESC to close. Focus automatically returns to the trigger button.
+            </p>
+          </div>
+          <div style="padding: 16px; background: var(--bg-neutral-5); border-radius: var(--radius-sm);">
+            <strong>Click Outside to Close</strong>
+            <p style="margin: 8px 0 0 0; color: var(--text-subtle);">
+              Clicking the semi-transparent backdrop closes the panel.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="elv-slide-out-panel__footer">
+        <button class="btn btn--secondary">Cancel</button>
+        <button class="btn btn--primary">Confirm</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    /**
+     * SlideOutPanel Controller
+     *
+     * Features:
+     * - Native <dialog> element with showModal() API
+     * - Slide-in animation from right (500ms ease-in-out)
+     * - Focus trap (tab cycles within panel)
+     * - Focus restoration to trigger element
+     * - Click outside to close
+     * - ESC key to close (native)
+     * - Body scroll lock when open
+     * - ARIA state management
+     */
+    class SlideOutPanel {
+      constructor(dialogElement) {
+        this.dialog = dialogElement;
+        this.triggerElement = null;
+        this.focusableElements = [];
+
+        this.init();
+      }
+
+      init() {
+        // Add body scroll lock class (activates when any dialog[open] exists)
+        if (!document.body.classList.contains('elv-has-dialog-scroll-lock')) {
+          document.body.classList.add('elv-has-dialog-scroll-lock');
+        }
+
+        // Bind event listeners
+        this.dialog.addEventListener('click', this.handleBackdropClick.bind(this));
+        this.dialog.addEventListener('keydown', this.handleKeyDown.bind(this));
+
+        // Find and setup close buttons
+        const closeButtons = this.dialog.querySelectorAll('.elv-slide-out-panel__close');
+        closeButtons.forEach(btn => {
+          btn.addEventListener('click', () => this.close());
+        });
+      }
+
+      open(triggerElement) {
+        // Store trigger for focus restoration
+        this.triggerElement = triggerElement;
+
+        // Update trigger ARIA state
+        if (this.triggerElement) {
+          this.triggerElement.setAttribute('aria-expanded', 'true');
+        }
+
+        // Close any other open dialogs
+        document.querySelectorAll('dialog[open]').forEach(d => {
+          if (d !== this.dialog) {
+            d.close();
+          }
+        });
+
+        // Open the dialog
+        this.dialog.showModal();
+
+        // Setup focus trap
+        this.setupFocusTrap();
+
+        // Focus first element
+        requestAnimationFrame(() => {
+          this.focusFirstElement();
+        });
+      }
+
+      close() {
+        // Close the dialog
+        this.dialog.close();
+
+        // Update trigger ARIA state
+        if (this.triggerElement) {
+          this.triggerElement.setAttribute('aria-expanded', 'false');
+          this.triggerElement.focus();
+        }
+      }
+
+      setupFocusTrap() {
+        // Get all focusable elements within dialog
+        const focusableSelector =
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        this.focusableElements = Array.from(
+          this.dialog.querySelectorAll(focusableSelector)
+        );
+      }
+
+      focusFirstElement() {
+        if (this.focusableElements.length > 0) {
+          this.focusableElements[0].focus();
+        }
+      }
+
+      handleBackdropClick(event) {
+        // Close if click is directly on dialog element (backdrop), not on content
+        if (event.target === this.dialog) {
+          this.close();
+        }
+      }
+
+      handleKeyDown(event) {
+        // Focus trap: cycle focus within panel
+        if (event.key === 'Tab' && this.focusableElements.length > 0) {
+          const firstElement = this.focusableElements[0];
+          const lastElement = this.focusableElements[this.focusableElements.length - 1];
+
+          if (event.shiftKey) {
+            // Shift+Tab: if on first element, jump to last
+            if (document.activeElement === firstElement) {
+              event.preventDefault();
+              lastElement.focus();
+            }
+          } else {
+            // Tab: if on last element, jump to first
+            if (document.activeElement === lastElement) {
+              event.preventDefault();
+              firstElement.focus();
+            }
+          }
+        }
+      }
+    }
+
+    // Initialize all panels on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Create panel instances
+      const panels = new Map();
+
+      document.querySelectorAll('.elv-slide-out-panel').forEach(dialog => {
+        panels.set(dialog.id, new SlideOutPanel(dialog));
+      });
+
+      // Setup trigger buttons
+      document.querySelectorAll('[data-panel]').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+          const panelId = trigger.getAttribute('data-panel');
+          const panel = panels.get(panelId);
+          if (panel) {
+            panel.open(trigger);
+          }
+        });
+
+        // Keyboard support for triggers
+        trigger.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            trigger.click();
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
