@@ -193,6 +193,92 @@ Components requiring JavaScript for full functionality:
 
 ---
 
+### 3.4 Page-Level Navigation Components 📋 NEXT
+**Timeline**: 3-4 weeks
+**Status**: Audit phase
+
+Page-level compositions that combine multiple primitives (buttons, icons, dropdowns, links) into full navigation systems matching G2 production. Unlike design system primitives (Phase 3.1-3.3), these are **page-level structures** specific to G2.com.
+
+**Source of truth**: UE production source code (not DESIGN.md — discrepancies documented in audits)
+
+#### G2.com Navigation (Topbar)
+**Audit**: [G2_NAVIGATION_AUDIT.md](./G2_NAVIGATION_AUDIT.md)
+**Source**: `engines/web_style/app/views/web_style/header/` + `webpack/assets/stylesheets/components/_topnav.scss`
+
+The global navigation bar appearing on every g2.com page. Requires templates for three distinct user states and multiple sub-components:
+
+**Core Structure**:
+- [ ] **topbar-logged-out** — G2 logo, search, nav links, mega menu triggers, "For Vendors" dropdown, wishlist pin, "Join or Sign In" CTA
+- [ ] **topbar-logged-in-buyer** — Same as above but replaces sign-in CTA with: Write Review CTA, profile avatar dropdown
+- [ ] **topbar-logged-in-seller** — Same as buyer but with conditional admin CTA replacing Write Review when user has vendor_id
+
+**Sub-components** (shared across states):
+- [ ] **mega-menu** — Software/Services category browser (2-column: parent categories left, subcategories right, Turbo-frame-style lazy loaded)
+- [ ] **vendor-dropdown** — "For Vendors" hover menu (Vendor, Sales, Services, Invest, Developers with sub-headings)
+- [ ] **profile-dropdown** — Logged-in user menu (avatar, name, industry/company, member since, 8 nav items with pictogram icons, vendor admin conditional, sign out)
+- [ ] **mobile-nav** — Off-canvas hamburger menu (drilldown pattern: Home, Write Review, Browse categories, My Profile section with user-state-aware items)
+- [ ] **search-bar** — Rounded search input (hidden mobile, visible medium+)
+
+**Key specs** (from production SCSS):
+- Height: 72px, Logo: 52px, Nav links: 15px/semibold
+- Background: white, border-bottom: midnight-40
+- Hover: blue-10 background, midnight text
+- Breakpoints: xlarge (desktop nav visible), xxlarge (services + vendor + deals visible)
+- z-index: 99
+
+**Dependencies**: dropdown_menu (Phase 3.3), icon_button (✅ complete), search_input (✅ complete), avatar (✅ complete), chip (✅ complete)
+
+#### My G2 Navigation
+**Audit**: [MY_G2_NAVIGATION_AUDIT.md](./MY_G2_NAVIGATION_AUDIT.md)
+**Source**: Multiple — `app/components/users/profile/`, `app/view_models/vendor_admin/`, `engines/teams/app/components/`
+
+"My G2" is actually three distinct navigation systems for different user types on the `my.g2.com` subdomain:
+
+**Variant A: Buyer Profile Sidebar** (`g2.com/users/:id`)
+- [ ] **buyer-profile-sidenav** — Vertical sidebar tab navigation
+  - Tabs: Activity Center, Profile Details, Reviews, Products, Q&A, My Lists, Achievements, My Rewards, Notifications, Settings
+  - Sub-tabs expand per section (e.g., Settings → Privacy Settings, Account)
+  - Different defaults: own profile (Activity Center) vs viewing others (Profile Details)
+  - Tab visibility gated by `Users::Profile::GenerateTabs` permission logic
+  - Mobile: horizontal tab bar variant
+- [ ] **buyer-profile-mobile-nav** — Mobile-responsive version of the sidebar
+
+**Variant B: Vendor Admin Dashboard** (`my.g2.com/:product_id/`)
+- [ ] **vendor-admin-headnav** — Top header bar with product switcher dropdown, search, invite teammate, report card, support menu, notifications bell, user avatar menu
+- [ ] **vendor-admin-sidenav** — Collapsible left sidebar (expanded/collapsed states)
+  - Top-level sections: Home, Profile, Review Management, Buyer Activity, Advertising, Marketing Content, Analytics, Integrations, Market Intelligence, ROI, Account, Sales Call Brief
+  - Each section has nested sub-items gated by subscription level and feature flags
+  - Collapsed state shows icons only; expanded shows icon + label
+- [ ] **vendor-admin-product-switcher** — Dropdown to switch between managed products
+
+**Variant C: Teams Portal** (`my.g2.com/organizations/:id/`)
+- [ ] **teams-portal-sidenav** — Icon-based sidebar navigation
+  - Items: Users, Groups, Products, SSO, OAuth Apps, Resources
+  - Each item has icon + label
+- [ ] **teams-portal-headnav** — Organization-level header
+
+**User Type Mapping**:
+| User Type | Navigation Variant | Location |
+|---|---|---|
+| Buyer (own profile) | Buyer Profile Sidebar (full tabs) | g2.com/users/~ |
+| Buyer (viewing other) | Buyer Profile Sidebar (limited tabs) | g2.com/users/:id |
+| Seller/Vendor Admin | Vendor Admin Headnav + Sidenav | my.g2.com/:product_id/ |
+| Organization Admin | Teams Portal Headnav + Sidenav | my.g2.com/organizations/:id/ |
+
+**Dependencies**: icon_button (✅), avatar (✅), tab (✅), accordion (✅), tooltip (✅), dropdown_menu (Phase 3.3), breadcrumbs (✅), link (✅)
+
+**Approach**: Build each variant as independent HTML template sets. Use data attributes for state toggling (expanded/collapsed, active tab). Include both desktop and mobile-responsive versions.
+
+**Deliverables**:
+- Audit documents (detailed source-code-level analysis) — 📋 In Progress
+- HTML templates in `/components/templates/navigation/`
+- CSS for navigation-specific styling (not covered by elevate.css)
+- Vanilla JS for interactions (mega menu, mobile nav, sidebar collapse)
+- Documentation with user-type-to-navigation mapping
+- Demo page sections showing each variant
+
+---
+
 ## Phase 4: Integration & Polish 🎯 FUTURE
 
 **Objective**: Make the library production-ready and easy to adopt
@@ -240,10 +326,11 @@ Components requiring JavaScript for full functionality:
 | Phase | Duration | Status |
 |-------|----------|--------|
 | Phase 1: Foundation | Complete | ✅ |
-| Phase 2: Icon System | 1-2 weeks | 🔄 |
-| Phase 3.1: Simple Components | 1 week | 📋 |
-| Phase 3.2: Moderate Components | 2 weeks | 📋 |
-| Phase 3.3: Complex Components | 3-4 weeks | 📋 |
+| Phase 2: Icon System | Complete | ✅ |
+| Phase 3.1: Simple Components | Complete | ✅ |
+| Phase 3.2: Moderate Components | Complete | ✅ |
+| Phase 3.3: Complex Components | 3-4 weeks | 🔄 |
+| Phase 3.4: Navigation Components | 3-4 weeks | 📋 Audit |
 | Phase 4: Integration & Polish | 2-3 weeks | 🎯 |
 | Phase 5: Advanced Features | TBD | ⏭️ |
 
@@ -379,9 +466,10 @@ Every component template should include:
 ## Next Actions
 
 1. ✅ **Continue icon port** — Let the agent complete the icon library
-2. 📋 **Start Phase 3.1** — Build HTML templates for simple components
-3. 📋 **Create component template directory structure**
-4. 📋 **Pick 3-5 most-used components** from epics to prioritize
+2. ✅ **Phase 3.1-3.2** — All simple and moderate components complete
+3. 🔄 **Phase 3.3** — Complete remaining complex components (dropdown_menu, popover, notification/toast)
+4. 📋 **Phase 3.4 Audits** — G2.com Navigation and My G2 Navigation audits in progress
+5. 📋 **Phase 3.4 Build** — Build navigation templates after audits complete (depends on dropdown_menu from 3.3)
 
 ---
 

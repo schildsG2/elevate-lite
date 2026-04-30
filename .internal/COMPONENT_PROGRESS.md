@@ -15,9 +15,12 @@ Track the porting status of all Elevate components from UE to Chicago Labs HTML 
 | **Simple Components** | 13 | 13 | 0 | 0 |
 | **Moderate Components** | 10 | 10 | 0 | 0 |
 | **Complex Components** | 12 | 4 | 0 | 8 |
-| **TOTAL** | 170 | 162 | 0 | 8 |
+| **Navigation Components** 🆕 | 17 | 6 | 0 | 11 |
+| **TOTAL** | 187 | 168 | 0 | 19 |
 
-**Overall Completion**: ~95% (162/170 total items)
+**Overall Completion**: ~90% (168/187 total items)
+
+**Phase 3.4 ADDED (April 30, 2026)**: G2.com navigation (8 components) + My G2 navigation (9 components across 3 user variants). Audits in progress.
 
 **COMPLETED APRIL 27**:
 - Complex Components: modal ✅ (added to demo page)
@@ -152,9 +155,58 @@ Track the porting status of all Elevate components from UE to Chicago Labs HTML 
 | table (sortable) | ✅ Complete | [View](../components/templates/complex/table.html) | Vanilla JS | High | Click headers to sort, supports text/number data types ✨ |
 | table (filterable) | ⬜ Not Started | — | TBD | Medium | Advanced tables |
 
-**Next 3 to Build**: modal, dropdown_menu, popover
+**Next 3 to Build**: dropdown_menu, popover, notification/toast
 
 **JS Decision Needed**: Vanilla JS vs Alpine.js vs Hybrid
+
+---
+
+## Page-Level Navigation Components (Phase 3.4)
+
+**Goal**: Faithful reproduction of G2.com navigation systems for all user types
+
+**Status**: 🔍 Audit Phase — Source code analysis in progress
+
+### G2.com Topbar Navigation
+
+| Component | Status | Template | JS Approach | Priority | Notes |
+|-----------|--------|----------|-------------|----------|-------|
+| topbar-logged-out | ✅ Complete | [View](../components/templates/navigation/g2-topbar.html) | Vanilla JS | High | Logo, search, nav links, mega menu stubs, vendor dropdown stub, sign-in CTA |
+| topbar-logged-in-buyer | 🔍 Audit | — | Vanilla JS | High | + Write Review CTA, profile avatar dropdown |
+| topbar-logged-in-seller | 🔍 Audit | — | Vanilla JS | High | + Admin CTA (conditional), vendor_admin link |
+| mega-menu | 🔍 Audit | — | Vanilla JS | High | 2-col category browser (parent left, subcategories right) |
+| vendor-dropdown | 🔍 Audit | — | Vanilla JS | Medium | Vendor/Sales/Services/Invest/Developers with sub-headings |
+| profile-dropdown | 🔍 Audit | — | Vanilla JS | High | Avatar, user info, 8 nav items with icons, sign out |
+| mobile-nav | 🔍 Audit | — | Vanilla JS | High | Off-canvas drilldown menu, user-state-aware |
+| search-bar | 🔍 Audit | — | Vanilla JS | Medium | Rounded search input, responsive visibility |
+
+**Audit Document**: [G2_NAVIGATION_AUDIT.md](./G2_NAVIGATION_AUDIT.md)
+
+### My G2 Navigation — Buyer Profile
+
+| Component | Status | Template | JS Approach | Priority | Notes |
+|-----------|--------|----------|-------------|----------|-------|
+| buyer-profile-sidenav | ✅ Complete | [View](../components/templates/navigation/buyer-profile-sidenav.html) | Vanilla JS | High | 10 top-level tabs, permission-gated sub-tabs, mobile variant |
+| buyer-profile-mobile-nav | 🔍 Audit | — | Vanilla JS | Medium | Horizontal tab bar for mobile |
+
+### My G2 Navigation — Vendor Admin
+
+| Component | Status | Template | JS Approach | Priority | Notes |
+|-----------|--------|----------|-------------|----------|-------|
+| vendor-admin-headnav | ✅ Complete | [View](../components/templates/navigation/vendor-admin-shell.html) | Vanilla JS | High | Product switcher, search, invite, report card, support, user menu |
+| vendor-admin-sidenav | ✅ Complete | [View](../components/templates/navigation/vendor-admin-shell.html) | Vanilla JS | High | 12 top-level sections, expand/collapse toggle, navy bg, 72/240px |
+| vendor-admin-product-switcher | ✅ Complete | [View](../components/templates/navigation/vendor-admin-shell.html) | Vanilla JS | Medium | Trigger built, dropdown panel ready (needs Phase 3.3) |
+
+### My G2 Navigation — Teams Portal
+
+| Component | Status | Template | JS Approach | Priority | Notes |
+|-----------|--------|----------|-------------|----------|-------|
+| teams-portal-sidenav | ✅ Complete | [View](../components/templates/navigation/teams-portal-sidenav.html) | Vanilla JS | Medium | 6 items: Users, Groups, Products, SSO, OAuth Apps, Resources |
+| teams-portal-headnav | 🔍 Audit | — | Vanilla JS | Medium | Organization-level header |
+
+**Audit Document**: [MY_G2_NAVIGATION_AUDIT.md](./MY_G2_NAVIGATION_AUDIT.md)
+
+**Depends on**: dropdown_menu (Phase 3.3)
 
 ---
 
@@ -207,6 +259,20 @@ Track the porting status of all Elevate components from UE to Chicago Labs HTML 
 - [ ] Cross-browser tested
 
 **Target**: June 24, 2026
+
+### 📋 Milestone 5.5: Navigation Components (Phase 3.4)
+- [x] G2.com Navigation audit (source code analysis)
+- [x] My G2 Navigation audit (3 variants: buyer, vendor admin, teams)
+- [ ] Roadmap items defined with user-state mapping
+- [ ] G2 topbar templates (3 user states + sub-components)
+- [ ] My G2 buyer profile sidebar
+- [ ] My G2 vendor admin headnav + sidenav
+- [ ] My G2 teams portal sidenav + headnav
+- [ ] Mobile-responsive variants for all
+- [ ] Demo page integration
+
+**Target**: TBD (after Phase 3.3 dropdown_menu dependency)
+**Audit Started**: April 30, 2026
 
 ### 🎯 Milestone 6: Production Ready
 - [ ] Component sandbox live
