@@ -1,0 +1,25 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#009C64;}
+	.st1{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st2{fill:#01E14D;}
+	.st3{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#01E14D;stroke-miterlimit:10;}
+</style>
+<path class="st0" d="M20,28.9l-7.8-4.5v-8.9L20,20V28.9z"/>
+<polygon class="st0" points="5,11.4 20,20 20,36.2 5.4,27.7"/>
+<line class="st1" x1="37.7" y1="16.6" x2="18.2" y2="27.8"/>
+<line class="st1" x1="38.7" y1="13.7" x2="18.2" y2="25.5"/>
+<line class="st1" x1="38.7" y1="11.4" x2="18.2" y2="23.1"/>
+<g><g><polygon class="st2" points="27.8,15.5 20,20 20,28.9 27.8,24.5 27.8,15.5"/></g>
+<line class="st1" x1="27.8" y1="22.4" x2="18.2" y2="27.8"/>
+<line class="st1" x1="27.8" y1="20" x2="18.2" y2="25.5"/>
+<line class="st1" x1="27.8" y1="17.6" x2="18.2" y2="23.1"/>
+<path class="st0" d="M20,28.9l-7.8-4.5v-8.9L20,20V28.9z"/></g>
+<g><path class="st2" d="M20,6.8l11.5,6.6v13.2L20,33.2L8.5,26.6V13.4L20,6.8 M20,1L3.5,10.5v19L20,39l16.5-9.5v-19L20,1L20,1z"/></g>
+<g><path class="st2" d="M20,12.5l6.5,3.7v7.4L20,27.5l-6.5-3.7v-7.4L20,12.5 M20,9.7l-9,5.2v10.3l9,5.2l9-5.2V14.8L20,9.7L20,9.7z"/></g>
+<g><path class="st3" d="M27.8,15.5L20,11.1l-7.8,4.5v8.9l7.8,4.5l7.8-4.5V15.5z"/></g>
+<g><path class="st2" d="M20,6.8l11.5,6.6v13.2L20,33.2L8.5,26.6V13.4L20,6.8 M20,1L3.5,10.5v19L20,39l16.5-9.5v-19L20,1L20,1z"/></g>
+<g><line class="st1" x1="37.7" y1="16.6" x2="30" y2="21.1"/>
+<line class="st1" x1="38.7" y1="13.7" x2="30" y2="18.7"/>
+<line class="st1" x1="38.7" y1="11.4" x2="30" y2="16.4"/></g>
+</svg>
