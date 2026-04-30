@@ -2071,6 +2071,14 @@
       <a href="#combobox" class="elv-index-nav__item">Combobox</a>
       <a href="#backgrounds" class="elv-index-nav__item">Background Colors</a>
       <a href="#spacing" class="elv-index-nav__item">Spacing Scale</a>
+
+      <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-light);">
+        <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-nonessential); padding: 4px 16px; display: block; margin-bottom: 4px;">Navigation</span>
+        <a href="#g2-topbar" class="elv-index-nav__item">G2 Topbar</a>
+        <a href="#buyer-profile-nav" class="elv-index-nav__item">Buyer Profile Nav</a>
+        <a href="#vendor-admin-nav" class="elv-index-nav__item">Vendor Admin Shell</a>
+        <a href="#teams-portal-nav" class="elv-index-nav__item">Teams Portal Nav</a>
+      </div>
     </nav>
   </aside>
 
@@ -5023,6 +5031,150 @@
         <span class="elv-text-sm elv-text-subtle">2rem</span>
       </div>
     </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- NAVIGATION COMPONENTS (Phase 3.4)                             -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <div id="g2-topbar" class="demo-section">
+    <h2 class="elv-text-2xl elv-font-bold elv-text-default elv-mb-2">G2 Topbar Navigation</h2>
+    <p class="elv-text-sm elv-text-subtle elv-mb-6">
+      The global G2.com top navigation bar. Logged-out state shown — logged-in buyer and seller variants require the dropdown_menu component (Phase 3.3).
+      <a href="./templates/navigation/g2-topbar.html" class="elv-text-link elv-underline" target="_blank">View standalone template →</a>
+    </p>
+
+    <div style="border: 1px solid var(--border-light); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 24px;">
+      <iframe src="./templates/navigation/g2-topbar.html" style="width: 100%; height: 520px; border: none;" title="G2 Topbar Navigation Preview"></iframe>
+    </div>
+
+    <details style="margin-top: 16px;">
+      <summary style="cursor: pointer; font-weight: 600; font-size: 14px; color: var(--text-default);">Component Specs</summary>
+      <div style="margin-top: 12px; font-size: 13px;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Height</td><td style="padding: 6px 12px;">72px</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Logo</td><td style="padding: 6px 12px;">52×52px, #ff492c</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Border</td><td style="padding: 6px 12px;">1px solid #a7a7ac</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Nav links</td><td style="padding: 6px 12px;">15px, semibold</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">User states</td><td style="padding: 6px 12px;">Logged out ✅ · Logged in buyer 🔜 · Logged in seller 🔜</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 12px; font-weight: 600;">Audit</td><td style="padding: 6px 12px;"><a href="../.internal/G2_NAVIGATION_AUDIT.md" class="elv-text-link">G2_NAVIGATION_AUDIT.md</a> (2,804 lines)</td>
+          </tr>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div id="buyer-profile-nav" class="demo-section">
+    <h2 class="elv-text-2xl elv-font-bold elv-text-default elv-mb-2">Buyer Profile Navigation</h2>
+    <p class="elv-text-sm elv-text-subtle elv-mb-6">
+      My G2 sidebar navigation for buyer profiles (g2.com/users/:id). Shows own-profile (full tabs), public-profile (limited), and mobile variants.
+      <a href="./templates/navigation/buyer-profile-sidenav.html" class="elv-text-link elv-underline" target="_blank">View standalone template →</a>
+    </p>
+
+    <div style="border: 1px solid var(--border-light); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 24px;">
+      <iframe src="./templates/navigation/buyer-profile-sidenav.html" style="width: 100%; height: 620px; border: none;" title="Buyer Profile Sidenav Preview"></iframe>
+    </div>
+
+    <details style="margin-top: 16px;">
+      <summary style="cursor: pointer; font-weight: 600; font-size: 14px; color: var(--text-default);">Component Specs</summary>
+      <div style="margin-top: 12px; font-size: 13px;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Active state</td><td style="padding: 6px 12px;">purple-10 pill bg, 24px radius, purple text</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Tab icons</td><td style="padding: 6px 12px;">24px, 10 unique icons mapped to tabs</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Variants</td><td style="padding: 6px 12px;">Own profile (10 tabs) · Public (5 tabs) · Mobile</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 12px; font-weight: 600;">Audit</td><td style="padding: 6px 12px;"><a href="../.internal/MY_G2_NAVIGATION_AUDIT.md" class="elv-text-link">MY_G2_NAVIGATION_AUDIT.md</a> — Variant A</td>
+          </tr>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div id="vendor-admin-nav" class="demo-section">
+    <h2 class="elv-text-2xl elv-font-bold elv-text-default elv-mb-2">Vendor Admin Shell</h2>
+    <p class="elv-text-sm elv-text-subtle elv-mb-6">
+      My G2 seller dashboard shell — 60px headnav with product switcher + 72px/240px collapsible navy sidenav with 12 nav sections. Click the arrow in the sidenav to toggle expanded/collapsed.
+      <a href="./templates/navigation/vendor-admin-shell.html" class="elv-text-link elv-underline" target="_blank">View standalone template →</a>
+    </p>
+
+    <div style="border: 1px solid var(--border-light); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 24px;">
+      <iframe src="./templates/navigation/vendor-admin-shell.html" style="width: 100%; height: 640px; border: none;" title="Vendor Admin Shell Preview"></iframe>
+    </div>
+
+    <details style="margin-top: 16px;">
+      <summary style="cursor: pointer; font-weight: 600; font-size: 14px; color: var(--text-default);">Component Specs</summary>
+      <div style="margin-top: 12px; font-size: 13px;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Headnav height</td><td style="padding: 6px 12px;">60px, fixed, white, z-index 102</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Sidenav collapsed</td><td style="padding: 6px 12px;">72px, navy (#062846), icon-only</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Sidenav expanded</td><td style="padding: 6px 12px;">240px (72 + 168), labels visible</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Transition</td><td style="padding: 6px 12px;">0.5s cubic-bezier(0.86, 0, 0.07, 1)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Nav sections</td><td style="padding: 6px 12px;">12: Home, Profile, Reviews, Buyer Activity, Ads, Marketing, Analytics, Integrations, MI, ROI, Account, Sales Call Brief</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 12px; font-weight: 600;">Audit</td><td style="padding: 6px 12px;"><a href="../.internal/MY_G2_NAVIGATION_AUDIT.md" class="elv-text-link">MY_G2_NAVIGATION_AUDIT.md</a> — Variant B</td>
+          </tr>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div id="teams-portal-nav" class="demo-section">
+    <h2 class="elv-text-2xl elv-font-bold elv-text-default elv-mb-2">Teams Portal Navigation</h2>
+    <p class="elv-text-sm elv-text-subtle elv-mb-6">
+      My G2 Teams Portal admin sidebar (my.g2.com/organizations/:id/). Dark navy sidebar with 6 flat nav items.
+      <a href="./templates/navigation/teams-portal-sidenav.html" class="elv-text-link elv-underline" target="_blank">View standalone template →</a>
+    </p>
+
+    <div style="border: 1px solid var(--border-light); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 24px;">
+      <iframe src="./templates/navigation/teams-portal-sidenav.html" style="width: 100%; height: 520px; border: none;" title="Teams Portal Sidenav Preview"></iframe>
+    </div>
+
+    <details style="margin-top: 16px;">
+      <summary style="cursor: pointer; font-weight: 600; font-size: 14px; color: var(--text-default);">Component Specs</summary>
+      <div style="margin-top: 12px; font-size: 13px;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Sidebar width</td><td style="padding: 6px 12px;">240px</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Background</td><td style="padding: 6px 12px;">navy-100 (dark)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 6px 12px; font-weight: 600;">Items</td><td style="padding: 6px 12px;">6: Users, Groups, Products, SSO, OAuth Apps, Resources</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 12px; font-weight: 600;">Audit</td><td style="padding: 6px 12px;"><a href="../.internal/MY_G2_NAVIGATION_AUDIT.md" class="elv-text-link">MY_G2_NAVIGATION_AUDIT.md</a> — Variant C</td>
+          </tr>
+        </table>
+      </div>
+    </details>
   </div>
 
   <hr class="elv-border-t elv-border-light elv-my-12">
