@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G2 Topbar Navigation</title>
+  <link rel="stylesheet" href="../../../tokens/elevate.css">
+  <link rel="stylesheet" href="../../elevate.css">
+  <style>
+    body {
+      font-family: var(--font-sans);
+      padding: 0;
+      margin: 0;
+      background: var(--bg-neutral-5);
+    }
+    .page-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+    .variant-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-nonessential);
+      margin: 32px 0 12px;
+    }
+    .variant-label:first-child { margin-top: 0; }
+
+    /* G2 Topnav Tokens */
+    :root {
+      --g2-topnav-height: 72px;
+      --g2-topnav-logo-size: 52px;
+      --g2-topnav-border: #a7a7ac;
+      --g2-topnav-link: #505059;
+      --g2-topnav-hover-bg: #e7f1fb;
+      --g2-topnav-hover-text: #252530;
+      --g2-topnav-brand: #ff492c;
+      --g2-topnav-simple-bg: #fef5f4;
+      --g2-topnav-bg: var(--bg-neutral-0);
+      --g2-topnav-font: var(--font-sans);
+    }
+
+    /* Topnav Shell */
+    .elv-g2-topnav {
+      background: var(--g2-topnav-bg);
+      border-bottom: 1px solid var(--g2-topnav-border);
+      position: relative;
+      z-index: 99;
+      font-family: var(--g2-topnav-font);
+      width: 100%;
+    }
+    
+    .elv-g2-topnav--simple {
+      background-color: var(--g2-topnav-simple-bg);
+      border-bottom: none;
+    }
+
+    .elv-g2-topnav__inner {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      height: var(--g2-topnav-height);
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 12px;
+    }
+
+    @media (min-width: 600px) {
+      .elv-g2-topnav__inner {
+        padding: 0 18px;
+      }
+    }
+    @media (min-width: 1000px) {
+      .elv-g2-topnav__inner {
+        padding: 0 12px;
+      }
+    }
+
+    .elv-g2-topnav__item {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .elv-g2-topnav__item--logo {
+      flex-shrink: 0;
+    }
+
+    .elv-g2-topnav__logo {
+      display: flex;
+      align-items: center;
+      color: var(--g2-topnav-brand);
+      text-decoration: none;
+    }
+
+    .elv-g2-topnav__logo img {
+      width: var(--g2-topnav-logo-size);
+      height: var(--g2-topnav-logo-size);
+      display: block;
+    }
+
+    .elv-g2-topnav__search {
+      display: flex;
+      flex: 1 1 0%;
+      min-width: 0;
+      padding: 0 12px;
+      box-sizing: border-box;
+      align-items: center;
+    }
+
+    .elv-rounded-search {
+      border: 1px solid var(--g2-topnav-border);
+      background: var(--bg-neutral-0);
+      border-radius: 18px;
+      display: flex;
+      position: relative;
+      height: 40px;
+      z-index: 2;
+      align-items: center;
+      transition: all 150ms;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .elv-rounded-search:focus-within {
+      box-shadow: 0 0 0 1px white;
+      outline: 4px solid var(--border-focus);
+      outline-offset: 1px;
+    }
+
+    .elv-rounded-search__icon {
+      position: absolute;
+      left: 15px;
+      color: var(--g2-topnav-hover-text);
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .elv-rounded-search__input {
+      border: 0;
+      height: 100%;
+      width: 100%;
+      background: transparent;
+      padding-left: 36px;
+      padding-right: 36px;
+      font-size: 15px;
+      color: var(--g2-topnav-hover-text);
+      outline: none;
+      border-radius: 18px;
+      box-sizing: border-box;
+    }
+    .elv-rounded-search__input::placeholder {
+      color: var(--g2-topnav-hover-text);
+    }
+
+    .elv-rounded-search__clear {
+      position: absolute;
+      right: 8px;
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      color: #6f6d78;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .elv-rounded-search__clear.is-visible {
+      display: flex;
+    }
+    .elv-rounded-search__clear:hover {
+      background: var(--bg-neutral-10);
+    }
+
+    /* Desktop Nav */
+    .elv-g2-topnav__nav {
+      display: none;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      align-items: center;
+    }
+    @media (min-width: 1000px) {
+      .elv-g2-topnav__nav {
+        display: flex;
+      }
+    }
+
+    .elv-g2-topnav__nav-li {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      position: relative;
+      font-weight: 600;
+    }
+
+    .elv-g2-topnav__nav-li--hoverable {
+      cursor: pointer;
+    }
+    .elv-g2-topnav__nav-li--hoverable:hover {
+      background-color: var(--g2-topnav-hover-bg);
+    }
+
+    .elv-g2-topnav__link {
+      font-size: 15px;
+      padding: 10px 12px;
+      white-space: nowrap;
+      color: var(--g2-topnav-link);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      transition: background-color 150ms, color 150ms;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .elv-g2-topnav__link:hover,
+    .elv-g2-topnav__nav-li--hoverable:hover > .elv-g2-topnav__link {
+      background-color: var(--g2-topnav-hover-bg);
+      color: var(--g2-topnav-hover-text);
+    }
+
+    .elv-g2-topnav__link-icon {
+      margin-left: 4px;
+      display: inline-flex;
+    }
+
+    /* Legacy Buttons */
+    .elv-g2-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      border-radius: 18px;
+      padding: 8px 24px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: inherit;
+      transition: all 150ms;
+      line-height: 1.2;
+      box-sizing: border-box;
+      height: 40px;
+    }
+    .elv-g2-btn--purple {
+      background-color: var(--palette-purple-100);
+      color: #ffffff;
+      border: 1px solid var(--palette-purple-100);
+    }
+    .elv-g2-btn--purple:hover {
+      background-color: var(--palette-purple-120);
+      border-color: var(--palette-purple-120);
+      color: #ffffff;
+    }
+    .elv-g2-btn--hollow.elv-g2-btn--purple {
+      background-color: transparent;
+      color: var(--palette-purple-100);
+      border: 1px solid var(--palette-purple-100);
+    }
+    .elv-g2-btn--hollow.elv-g2-btn--purple:hover {
+      background-color: transparent;
+      box-shadow: inset 0 0 0 1px var(--palette-purple-100);
+      color: var(--palette-purple-100);
+    }
+
+    /* Actions */
+    .elv-g2-topnav__actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-left: 12px;
+      height: 100%;
+    }
+
+    .elv-g2-topnav__pin-desktop {
+      background: var(--bg-neutral-0);
+      color: var(--text-primary);
+      border: 1px solid #cacace;
+      border-radius: 24px;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 150ms;
+      flex-shrink: 0;
+    }
+    .elv-g2-topnav__pin-desktop:hover {
+      border-color: var(--bg-neutral-0);
+      box-shadow: 0 2px 8px 2px rgba(32, 31, 35, 0.149), 0 0 0 1px var(--text-primary);
+    }
+
+    /* Mobile Utilities */
+    .elv-g2-topnav__mobile-utils {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      margin-right: 12px;
+      gap: 8px;
+    }
+    @media (min-width: 1000px) {
+      .elv-g2-topnav__mobile-utils {
+        display: none;
+      }
+    }
+
+    .elv-g2-topnav__icon-btn {
+      background: transparent;
+      border: none;
+      width: 32px;
+      height: 32px;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      transition: all 150ms;
+    }
+    .elv-g2-topnav__icon-btn:hover {
+      background: var(--bg-primary-20);
+    }
+    .elv-g2-topnav__hamburger {
+      color: var(--g2-topnav-hover-text);
+      transition: color 150ms;
+    }
+    .elv-g2-topnav__hamburger.is-active {
+      color: var(--g2-topnav-brand);
+    }
+
+    /* Off-canvas */
+    .elv-g2-offcanvas {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      max-width: 85vw;
+      height: 100vh;
+      background: var(--bg-neutral-0);
+      z-index: 1000;
+      transition: right 0.3s ease;
+      box-shadow: none;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .elv-g2-offcanvas.is-open {
+      right: 0;
+      box-shadow: -6px 0 12px 0 rgba(0,0,0,0.3);
+    }
+
+    .elv-g2-offcanvas-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(255,255,255,0.6);
+      z-index: 999;
+      display: none;
+      transition: opacity 0.3s ease;
+    }
+    .elv-g2-offcanvas-overlay.is-open {
+      display: block;
+    }
+
+    /* Mobile Menu Items */
+    .elv-g2-mobile-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-weight: 600;
+      color: var(--g2-topnav-hover-text);
+      display: flex;
+      flex-direction: column;
+    }
+    .elv-g2-mobile-menu__item {
+      margin-bottom: 8px;
+    }
+    .elv-g2-mobile-menu__link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 16px;
+      color: inherit;
+      text-decoration: none;
+      font-size: 15px;
+    }
+    .elv-g2-mobile-menu__link:hover {
+      background: var(--bg-neutral-5);
+    }
+    .elv-g2-mobile-menu__header {
+      padding: 24px 16px 11px 16px;
+      border-top: 1px solid var(--border-light);
+      color: var(--text-subtle);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1;
+      margin: 0;
+    }
+    .elv-g2-mobile-menu__indented {
+      padding-left: 24px;
+    }
+    .elv-g2-mobile-menu__btn-wrap {
+      padding: 11px 16px;
+    }
+    .elv-g2-mobile-menu__close {
+      display: block;
+      padding: 11px 16px;
+      font-weight: 600;
+      color: transparent;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      border-top: 1px solid var(--border-light);
+      width: 100%;
+      font-size: 15px;
+      font-family: inherit;
+      text-align: left;
+      text-decoration: none;
+      margin-top: auto;
+    }
+    .elv-g2-mobile-menu__close:hover,
+    .elv-g2-mobile-menu__close:focus,
+    .elv-g2-mobile-menu__close:active {
+      color: var(--text-subtle);
+    }
+
+    /* Utilities */
+    .elv-show-xxlarge {
+      display: none !important;
+    }
+    @media (min-width: 1270px) {
+      .elv-show-xxlarge {
+        display: flex !important;
+      }
+    }
+    
+    .elv-sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Primary Topbar — Logged Out -->
+        <header class="elv-g2-topnav">
+          <div class="elv-g2-topnav__inner">
+            <!-- Logo -->
+            <div class="elv-g2-topnav__item elv-g2-topnav__item--logo">
+              <a href="#" class="elv-g2-topnav__logo" aria-label="G2 - Business Software Reviews">
+                <img src="../../../assets/logos/g2-logo-rorange.svg" alt="">
+              </a>
+            </div>
+
+            <!-- Desktop Search -->
+            <div class="elv-g2-topnav__search">
+              <form class="elv-rounded-search js-search-form" role="search" action="#" method="get">
+                <div class="elv-rounded-search__icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="currentColor" d="M15.9375 17L10.9583 12.0208C10.5417 12.3264 10.0848 12.566 9.58767 12.7396C9.09056 12.9132 8.56158 13 8.00073 13C6.61135 13 5.43056 12.5139 4.45833 11.5417C3.48611 10.5694 3 9.38889 3 8C3 6.61111 3.48611 5.43056 4.45833 4.45833C5.43056 3.48611 6.61111 3 8 3C9.38889 3 10.5694 3.48611 11.5417 4.45833C12.5139 5.43056 13 6.61135 13 8.00073C13 8.56158 12.9132 9.09056 12.7396 9.58767C12.566 10.0848 12.3264 10.5417 12.0208 10.9583L17 15.9375L15.9375 17ZM8 11.5C8.97222 11.5 9.79861 11.1597 10.4792 10.4792C11.1597 9.79861 11.5 8.97222 11.5 8C11.5 7.02778 11.1597 6.20139 10.4792 5.52083C9.79861 4.84028 8.97222 4.5 8 4.5C7.02778 4.5 6.20139 4.84028 5.52083 5.52083C4.84028 6.20139 4.5 7.02778 4.5 8C4.5 8.97222 4.84028 9.79861 5.52083 10.4792C6.20139 11.1597 7.02778 11.5 8 11.5Z"/>
+                  </svg>
+                </div>
+                <label for="desktop-search" class="elv-sr-only" style="display:none;">Search Software and Services</label>
+                <input id="desktop-search" type="text" class="elv-rounded-search__input js-search-input" placeholder="Search Software and Services" autocomplete="off">
+                <button type="button" class="elv-rounded-search__clear js-search-clear" aria-label="Clear search">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="currentColor" d="M10 18C8.90278 18 7.86806 17.7917 6.89583 17.375C5.92361 16.9583 5.07292 16.3854 4.34375 15.6562C3.61458 14.9271 3.04167 14.0764 2.625 13.1042C2.20833 12.1319 2 11.0972 2 10C2 8.88889 2.20833 7.85069 2.625 6.88542C3.04167 5.92014 3.61458 5.07292 4.34375 4.34375C5.07292 3.61458 5.92361 3.04167 6.89583 2.625C7.86806 2.20833 8.90278 2 10 2C11.1111 2 12.1493 2.20833 13.1146 2.625C14.0799 3.04167 14.9271 3.61458 15.6562 4.34375C16.3854 5.07292 16.9583 5.92014 17.375 6.88542C17.7917 7.85069 18 8.88889 18 10C18 11.0972 17.7917 12.1319 17.375 13.1042C16.9583 14.0764 16.3854 14.9271 15.6562 15.6562C14.9271 16.3854 14.0799 16.9583 13.1146 17.375C12.1493 17.7917 11.1111 18 10 18ZM10 16.5C11.8056 16.5 13.3403 15.8681 14.6042 14.6042C15.8681 13.3403 16.5 11.8056 16.5 10C16.5 8.19444 15.8681 6.65972 14.6042 5.39583C13.3403 4.13194 11.8056 3.5 10 3.5C8.19444 3.5 6.65972 4.13194 5.39583 5.39583C4.13194 6.65972 3.5 8.19444 3.5 10C3.5 11.8056 4.13194 13.3403 5.39583 14.6042C6.65972 15.8681 8.19444 16.5 10 16.5ZM7.0625 14L10 11.0625L12.9375 14L14 12.9375L11.0625 10L14 7.0625L12.9375 6L10 8.9375L7.0625 6L6 7.0625L8.9375 10L6 12.9375L7.0625 14Z"/>
+                  </svg>
+                </button>
+              </form>
+            </div>
+
+            <!-- Desktop Nav List -->
+            <ul class="elv-g2-topnav__nav" role="menubar" aria-label="G2 Top Navigation Menu">
+              <!-- Software Mega Menu Trigger -->
+              <li class="elv-g2-topnav__nav-li elv-g2-topnav__nav-li--hoverable" role="none">
+                <button class="elv-g2-topnav__link" role="menuitem" aria-haspopup="true" aria-expanded="false">
+                  Software
+                  <span class="elv-g2-topnav__link-icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M10 13.0625L5 8.0625L6.0625 7L10 10.9375L13.9375 7L15 8.0625L10 13.0625Z"/></svg>
+                  </span>
+                </button>
+                <!-- Mega menu panel: requires dropdown_menu component (Phase 3.3) -->
+              </li>
+              
+              <!-- Regular Link -->
+              <li class="elv-g2-topnav__nav-li" role="none">
+                <a href="#" class="elv-g2-topnav__link" role="menuitem">AI Agents</a>
+              </li>
+              
+              <!-- Services Mega Menu Trigger (XXL only) -->
+              <li class="elv-g2-topnav__nav-li elv-g2-topnav__nav-li--hoverable elv-show-xxlarge" role="none">
+                <button class="elv-g2-topnav__link" role="menuitem" aria-haspopup="true" aria-expanded="false">
+                  Services
+                  <span class="elv-g2-topnav__link-icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M10 13.0625L5 8.0625L6.0625 7L10 10.9375L13.9375 7L15 8.0625L10 13.0625Z"/></svg>
+                  </span>
+                </button>
+                <!-- Mega menu panel: requires dropdown_menu component (Phase 3.3) -->
+              </li>
+              
+              <!-- Vendor Dropdown Trigger (XXL only) -->
+              <li class="elv-g2-topnav__nav-li elv-g2-topnav__nav-li--hoverable elv-show-xxlarge" role="none">
+                <button class="elv-g2-topnav__link" role="menuitem" aria-haspopup="true" aria-expanded="false">
+                  For Vendors
+                  <span class="elv-g2-topnav__link-icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M10 13.0625L5 8.0625L6.0625 7L10 10.9375L13.9375 7L15 8.0625L10 13.0625Z"/></svg>
+                  </span>
+                </button>
+                <!-- Vendor menu panel: requires dropdown_menu component -->
+              </li>
+              
+              <!-- Deals (XXL only) -->
+              <li class="elv-g2-topnav__nav-li elv-show-xxlarge" role="none">
+                <a href="#" class="elv-g2-topnav__link" role="menuitem">Deals</a>
+              </li>
+
+              <!-- Action Group -->
+              <div class="elv-g2-topnav__actions">
+                <a href="#" class="elv-g2-topnav__pin-desktop" aria-label="Research Boards">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M15 12L17 14V15.5H12.75V20.25L12 21L11.25 20.25V15.5H7V14L9 12V6.5H8V5H16V6.5H15V12Z"/></svg>
+                </a>
+                <a href="#" class="elv-g2-btn elv-g2-btn--purple">Leave a Review</a>
+                <a href="#" class="elv-g2-btn elv-g2-btn--purple elv-g2-btn--hollow">Join or Log In</a>
+              </div>
+            </ul>
+
+            <!-- Mobile Utilities (< 1000px) -->
+            <div class="elv-g2-topnav__mobile-utils">
+              <button class="elv-g2-topnav__icon-btn" aria-label="Research Boards">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M15 12L17 14V15.5H12.75V20.25L12 21L11.25 20.25V15.5H7V14L9 12V6.5H8V5H16V6.5H15V12Z"/></svg>
+              </button>
+              <button class="elv-g2-topnav__icon-btn elv-g2-topnav__hamburger js-mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M3 14.5V13H17V14.5H3ZM3 10.75V9.25H17V10.75H3ZM3 7V5.5H17V7H3Z"/></svg>
+              </button>
+            </div>
+          </div>
+          
+
+        </header>
+<div class="page-content">
+  <p class="variant-label">Simple Variant</p>
+</div>
+        <header class="elv-g2-topnav elv-g2-topnav--simple">
+          <div class="elv-g2-topnav__inner">
+            <!-- Logo -->
+            <div class="elv-g2-topnav__item elv-g2-topnav__item--logo">
+              <a href="#" class="elv-g2-topnav__logo" aria-label="G2 - Business Software Reviews">
+                <img src="../../../assets/logos/g2-logo-rorange.svg" alt="">
+              </a>
+            </div>
+            <!-- Optional continue CTA -->
+            <div class="elv-g2-topnav__item">
+              <a href="#" class="elv-g2-btn elv-g2-btn--purple elv-g2-btn--hollow">Exit Flow</a>
+            </div>
+          </div>
+        </header>
+<div class="page-content">
+  <p class="variant-label" style="margin-top: 24px;">Mobile drawer — click the hamburger above or this button</p>
+  <button class="elv-g2-btn elv-g2-btn--purple js-mobile-menu-toggle" style="margin-bottom: 16px;">Open Mobile Drawer</button>
+</div>
+
+<!-- Mobile Off-Canvas Drawer (Injected outside normal flow) -->
+<div class="elv-g2-offcanvas-overlay js-mobile-menu-overlay"></div>
+<aside class="elv-g2-offcanvas js-mobile-menu" aria-label="Mobile Navigation">
+  <ul class="elv-g2-mobile-menu">
+    <li class="elv-g2-mobile-menu__item" style="margin-top: 8px;">
+      <a href="#" class="elv-g2-mobile-menu__link">Home</a>
+    </li>
+    <li class="elv-g2-mobile-menu__item">
+      <a href="#" class="elv-g2-mobile-menu__link">Write a Review</a>
+    </li>
+
+    <li class="elv-g2-mobile-menu__header">Browse</li>
+    <li class="elv-g2-mobile-menu__item elv-g2-mobile-menu__indented">
+      <a href="#" class="elv-g2-mobile-menu__link">
+        Top Categories
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M7 5L12 10L7 15"/></svg>
+      </a>
+    </li>
+    <li class="elv-g2-mobile-menu__item elv-g2-mobile-menu__indented">
+      <a href="#" class="elv-g2-mobile-menu__link">All Categories</a>
+    </li>
+    <li class="elv-g2-mobile-menu__item elv-g2-mobile-menu__indented">
+      <a href="#" class="elv-g2-mobile-menu__link">Software Categories</a>
+    </li>
+    <li class="elv-g2-mobile-menu__item elv-g2-mobile-menu__indented">
+      <a href="#" class="elv-g2-mobile-menu__link">AI Agents</a>
+    </li>
+    <li class="elv-g2-mobile-menu__item elv-g2-mobile-menu__indented">
+      <a href="#" class="elv-g2-mobile-menu__link">Service Categories</a>
+    </li>
+    <li class="elv-g2-mobile-menu__item elv-g2-mobile-menu__indented">
+      <a href="#" class="elv-g2-mobile-menu__link">Compare Software</a>
+    </li>
+    <li class="elv-g2-mobile-menu__item elv-g2-mobile-menu__indented">
+      <a href="#" class="elv-g2-mobile-menu__link">Deals</a>
+    </li>
+
+    <li class="elv-g2-mobile-menu__header">My Profile</li>
+    <li class="elv-g2-mobile-menu__item">
+      <div class="elv-g2-mobile-menu__btn-wrap">
+        <a href="#" class="elv-g2-btn elv-g2-btn--purple elv-g2-btn--hollow" style="width: 100%;">Join or Log In</a>
+      </div>
+    </li>
+
+    <li class="elv-g2-mobile-menu__header">G2 for Business</li>
+  </ul>
+
+  <a href="#" class="elv-g2-mobile-menu__close js-mobile-menu-close">Close Menu</a>
+</aside>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Mobile menu toggling
+    const overlays = document.querySelectorAll('.js-mobile-menu-overlay');
+    const drawers = document.querySelectorAll('.js-mobile-menu');
+    const toggleBtns = document.querySelectorAll('.js-mobile-menu-toggle');
+    const closeBtns = document.querySelectorAll('.js-mobile-menu-close');
+
+    function toggleMenu(forceClose = false) {
+      const isOpen = drawers[0] && drawers[0].classList.contains('is-open');
+      const action = forceClose || isOpen ? 'remove' : 'add';
+      
+      drawers.forEach(d => d.classList[action]('is-open'));
+      overlays.forEach(o => o.classList[action]('is-open'));
+      
+      toggleBtns.forEach(btn => {
+        btn.classList[action]('is-active');
+        btn.setAttribute('aria-expanded', action === 'add' ? 'true' : 'false');
+      });
+      
+      if (action === 'add') {
+        document.body.style.overflow = 'hidden'; // Dim page and block scroll
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+
+    toggleBtns.forEach(btn => btn.addEventListener('click', () => toggleMenu()));
+    closeBtns.forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); toggleMenu(true); }));
+    overlays.forEach(overlay => overlay.addEventListener('click', () => toggleMenu(true)));
+
+    // Search input clear logic
+    const searchForms = document.querySelectorAll('.js-search-form');
+    searchForms.forEach(form => {
+      const input = form.querySelector('.js-search-input');
+      const clearBtn = form.querySelector('.js-search-clear');
+      
+      if (input && clearBtn) {
+        input.addEventListener('input', () => {
+          if (input.value.length > 0) {
+            clearBtn.classList.add('is-visible');
+          } else {
+            clearBtn.classList.remove('is-visible');
+          }
+        });
+        
+        clearBtn.addEventListener('click', () => {
+          input.value = '';
+          clearBtn.classList.remove('is-visible');
+          input.focus();
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

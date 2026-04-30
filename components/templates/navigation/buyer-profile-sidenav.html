@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyer Profile Sidebar Navigation</title>
+  <link rel="stylesheet" href="../../../tokens/elevate.css">
+  <link rel="stylesheet" href="../../elevate.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+  <style>
+    body {
+      font-family: var(--font-sans);
+      padding: 0;
+      margin: 0;
+      background: var(--bg-neutral-5);
+    }
+    .page-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 28px;
+    }
+    @media (max-width: 749px) {
+      .profile-grid { grid-template-columns: 1fr; }
+    }
+    .variant-divider {
+      border-top: 1px solid var(--border-light);
+      margin: 40px 0 24px;
+    }
+    .variant-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-nonessential);
+      margin: 0 0 16px;
+    }
+
+    /* Desktop Sidebar Variant A */
+    .elv-buyer-sidebar {
+      background-color: var(--bg-neutral-0);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-2); /* shadow-md equivalent */
+      padding: 24px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .elv-buyer-divider {
+      border-top: 1px solid var(--border-light); /* midnight-20 */
+      margin: 8px 0;
+    }
+
+    .elv-buyer-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .elv-buyer-nav__item {
+      position: relative;
+    }
+
+    .elv-buyer-nav__link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-default);
+      font-size: 16px;
+      font-weight: 400;
+      padding: 6px 0;
+      border-radius: 24px;
+      transition: background-color 150ms ease, color 150ms ease;
+    }
+
+    .elv-buyer-nav__link:hover {
+      background-color: var(--bg-neutral-5);
+    }
+
+    .elv-buyer-nav__link--active {
+      background-color: var(--palette-purple-10);
+      color: var(--palette-purple-100);
+      font-weight: 600;
+    }
+
+    .elv-buyer-nav__link--active:hover {
+      background-color: var(--palette-purple-10);
+    }
+
+    .elv-buyer-nav__content {
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      width: 100%;
+    }
+
+    .elv-buyer-nav__icon {
+      font-size: 24px;
+      margin-right: 4px;
+      color: var(--text-subtle);
+    }
+
+    .elv-buyer-nav__link--active .elv-buyer-nav__icon {
+      color: var(--palette-purple-100);
+    }
+
+    /* "New" Badge */
+    .elv-buyer-new-badge {
+      background-color: var(--palette-purple-100);
+      color: white;
+      font-size: 12px;
+      line-height: 1;
+      padding: 6px;
+      border-radius: 12px;
+      position: absolute;
+      top: -6px;
+      left: 20px;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    /* Mobile Nav */
+    .elv-buyer-mobile {
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      background-color: white;
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .elv-buyer-mobile__icon-col {
+      width: 48px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-subtle);
+      flex-shrink: 0;
+    }
+
+    .elv-buyer-mobile__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex-grow: 1;
+    }
+
+    .elv-buyer-mobile__item {
+      height: 0;
+      overflow: hidden;
+    }
+
+    .elv-buyer-mobile__item.is-active {
+      height: 42px;
+      overflow: visible;
+    }
+
+    .elv-buyer-mobile--expanded .elv-buyer-mobile__item {
+      height: 42px;
+    }
+
+    .elv-buyer-mobile__link {
+      display: flex;
+      align-items: center;
+      padding: 12px 24px;
+      text-decoration: none;
+      color: var(--text-default);
+      font-size: 16px;
+      box-sizing: border-box;
+      height: 100%;
+      transition: background-color 150ms ease;
+    }
+
+    .elv-buyer-mobile__link:hover,
+    .elv-buyer-mobile__item.is-active .elv-buyer-mobile__link {
+      background-color: rgba(44, 152, 187, 0.07);
+    }
+
+    .elv-buyer-mobile__item.is-active .elv-buyer-mobile__link {
+      font-weight: 600;
+      color: var(--text-default);
+      cursor: default;
+    }
+
+    /* Pill Navbar (Second-level nav) */
+    .elv-tab-navbar {
+      background-color: var(--palette-purple-5);
+      border-radius: 24px;
+      padding: 8px;
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+
+    .elv-tab-navbar__btn {
+      background-color: transparent;
+      border: none;
+      border-radius: 24px;
+      padding: 4px 12px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-default);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 150ms ease;
+    }
+
+    .elv-tab-navbar__btn:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    .elv-tab-navbar__btn--active {
+      background-color: white;
+      font-weight: 600;
+      box-shadow: var(--shadow-1);
+    }
+
+    .elv-tab-navbar__btn--active:hover {
+      background-color: white;
+    }
+
+    /* Demo Layouts */
+    .demo-layout {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      background: var(--bg-neutral-5);
+      padding: 24px;
+      border-radius: var(--radius-md);
+    }
+    
+    .demo-content-area {
+      flex: 1;
+      min-width: 300px;
+      background: white;
+      padding: 24px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-1);
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-shell">
+  <p class="variant-label">Own Profile — Full Sidebar (10 tabs)</p>
+  <div class="profile-grid">
+        <div class="elv-buyer-sidebar">
+          <ul class="elv-buyer-nav" aria-label="Profile sections">
+            <li class="elv-buyer-nav__item">
+              <a href="#activity" class="elv-buyer-nav__link">
+                <span class="elv-buyer-nav__content">
+                  <span class="material-symbols-outlined elv-buyer-nav__icon">dashboard</span>
+                  Activity Center
+                </span>
+              </a>
+            </li>
+            <li class="elv-buyer-nav__item">
+              <a href="#profile" class="elv-buyer-nav__link">
+                <span class="elv-buyer-nav__content">
+                  <span class="material-symbols-outlined elv-buyer-nav__icon">person</span>
+                  Profile Details
+                </span>
+              </a>
+            </li>
+            
+            <li class="elv-buyer-divider"></li>
+            
+            <li class="elv-buyer-nav__item">
+              <a href="#reviews" class="elv-buyer-nav__link elv-buyer-nav__link--active" aria-current="page">
+                <span class="elv-buyer-nav__content">
+                  <span class="material-symbols-outlined elv-buyer-nav__icon">star_rate</span>
+                  Reviews
+                </span>
+              </a>
+            </li>
+            <li class="elv-buyer-nav__item">
+              <a href="#products" class="elv-buyer-nav__link">
+                <span class="elv-buyer-nav__content">
+                  <span class="material-symbols-outlined elv-buyer-nav__icon">laptop</span>
+                  Products
+                </span>
+              </a>
+            </li>
+            <li class="elv-buyer-nav__item">
+              <a href="#qa" class="elv-buyer-nav__link">
+                <span class="elv-buyer-nav__content">
+                  <span class="material-symbols-outlined elv-buyer-nav__icon">forum</span>
+                  Q&A
+                </span>
+              </a>
+            </li>
+            <li class="elv-buyer-nav__item">
+              <span class="elv-buyer-new-badge">New</span>
+              <a href="#lists" class="elv-buyer-nav__link">
+                <span class="elv-buyer-nav__content">
+                  <span class="material-symbols-outlined elv-buyer-nav__icon">push_pin</span>
+                  My Lists
+                </span>
+              </a>
+            </li>
+            
+            <li class="elv-buyer-divider"></li>
+
+            <li class="elv-buyer-nav__item">
+              <a href="#achievements" class="elv-buyer-nav__link">
+                <span class="elv-buyer-nav__content">
+                  <span class="material-symbols-outlined elv-buyer-nav__icon">military_tech</span>
+                  Achievements
+                </span>
+              </a>
+            </li>
+            <li class="elv-buyer-nav__item">
+              <a href="#rewards" class="elv-buyer-nav__link">
+                <span class="elv-buyer-nav__content">
+                  <span class="material-symbols-outlined elv-buyer-nav__icon">payments</span>
+                  My Rewards
+                </span>
+              </a>
+            </li>
+            <li class="elv-buyer-nav__item">
+              <a href="#notifications" class="elv-buyer-nav__link">
+                <span class="elv-buyer-nav__content">
+                  <span class="material-symbols-outlined elv-buyer-nav__icon">notifications</span>
+                  Notifications
+                </span>
+              </a>
+            </li>
+            <li class="elv-buyer-nav__item">
+              <a href="#settings" class="elv-buyer-nav__link">
+                <span class="elv-buyer-nav__content">
+                  <span class="material-symbols-outlined elv-buyer-nav__icon">settings</span>
+                  Settings
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Content Area with Pill Navbar -->
+        <div class="demo-content-area">
+          <h3 class="elv-text-2xl elv-font-semibold elv-mb-2">Reviews</h3>
+          
+          <!-- Pill Navbar (Parent-tab children) -->
+          <nav class="elv-tab-navbar" aria-label="Reviews sub-navigation">
+            <a href="#my-reviews" class="elv-tab-navbar__btn elv-tab-navbar__btn--active" aria-current="page">My Reviews</a>
+            <a href="#saved-reviews" class="elv-tab-navbar__btn">Saved Reviews</a>
+            <a href="#my-drafts" class="elv-tab-navbar__btn">My Drafts</a>
+          </nav>
+
+          <p class="elv-text-sm elv-text-subtle">
+            Select a sub-tab above to view different types of reviews. The sidebar highlights the parent "Reviews" section.
+          </p>
+        </div>
+
+  </div>
+
+  <div class="variant-divider"></div>
+  <p class="variant-label">Public Profile — Limited Sidebar (5 tabs)</p>
+  <div class="profile-grid">
+      <div class="elv-buyer-sidebar">
+        <ul class="elv-buyer-nav" aria-label="Profile sections">
+          <li class="elv-buyer-nav__item">
+            <a href="#profile" class="elv-buyer-nav__link elv-buyer-nav__link--active" aria-current="page">
+              <span class="elv-buyer-nav__content">
+                <span class="material-symbols-outlined elv-buyer-nav__icon">person</span>
+                Profile Details
+              </span>
+            </a>
+          </li>
+          
+          <li class="elv-buyer-divider"></li>
+          
+          <li class="elv-buyer-nav__item">
+            <a href="#reviews" class="elv-buyer-nav__link">
+              <span class="elv-buyer-nav__content">
+                <span class="material-symbols-outlined elv-buyer-nav__icon">star_rate</span>
+                Reviews
+              </span>
+            </a>
+          </li>
+          <li class="elv-buyer-nav__item">
+            <a href="#products-used" class="elv-buyer-nav__link">
+              <span class="elv-buyer-nav__content">
+                <span class="material-symbols-outlined elv-buyer-nav__icon">laptop</span>
+                Products Used
+              </span>
+            </a>
+          </li>
+          <li class="elv-buyer-nav__item">
+            <a href="#qa" class="elv-buyer-nav__link">
+              <span class="elv-buyer-nav__content">
+                <span class="material-symbols-outlined elv-buyer-nav__icon">forum</span>
+                Community Q&A
+              </span>
+            </a>
+          </li>
+          
+          <li class="elv-buyer-divider"></li>
+
+          <li class="elv-buyer-nav__item">
+            <a href="#achievements" class="elv-buyer-nav__link">
+              <span class="elv-buyer-nav__content">
+                <span class="material-symbols-outlined elv-buyer-nav__icon">military_tech</span>
+                Achievements
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div></div>
+  </div>
+
+  <div class="variant-divider"></div>
+  <p class="variant-label">Mobile — Collapsed</p>
+      <div class="elv-buyer-mobile" id="mobile-nav-collapsed">
+        <div class="elv-buyer-mobile__icon-col js-expand-nav">
+          <span class="material-symbols-outlined">menu</span>
+        </div>
+        <ul class="elv-buyer-mobile__list">
+          <li class="elv-buyer-mobile__item is-active">
+            <a href="#activity" class="elv-buyer-mobile__link">Activity Center</a>
+          </li>
+          <li class="elv-buyer-mobile__item">
+            <a href="#profile" class="elv-buyer-mobile__link">Profile Details</a>
+          </li>
+          <li class="elv-buyer-mobile__item">
+            <a href="#reviews" class="elv-buyer-mobile__link">Reviews</a>
+          </li>
+        </ul>
+      </div>
+
+  <p class="variant-label" style="margin-top: 24px;">Mobile — Expanded</p>
+      <div class="elv-buyer-mobile elv-buyer-mobile--expanded" id="mobile-nav-expanded">
+        <div class="elv-buyer-mobile__icon-col js-expand-nav">
+          <span class="material-symbols-outlined">menu</span>
+        </div>
+        <ul class="elv-buyer-mobile__list">
+          <li class="elv-buyer-mobile__item is-active">
+            <a href="#activity" class="elv-buyer-mobile__link">Activity Center</a>
+          </li>
+          <li class="elv-buyer-mobile__item">
+            <a href="#profile" class="elv-buyer-mobile__link">Profile Details</a>
+          </li>
+          <li class="elv-buyer-mobile__item">
+            <a href="#reviews" class="elv-buyer-mobile__link">Reviews</a>
+          </li>
+          <li class="elv-buyer-mobile__item">
+            <a href="#products" class="elv-buyer-mobile__link">Products</a>
+          </li>
+        </ul>
+      </div>
+
+</div>
+
+<script>
+  // Simple toggle script for demo purposes
+  document.querySelectorAll('.js-expand-nav').forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      const container = e.target.closest('.elv-buyer-mobile');
+      container.classList.toggle('elv-buyer-mobile--expanded');
+    });
+  });
+  
+  document.querySelectorAll('.elv-buyer-mobile__item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      if(item.classList.contains('is-active')){
+        const container = e.target.closest('.elv-buyer-mobile');
+        container.classList.toggle('elv-buyer-mobile--expanded');
+        e.preventDefault();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

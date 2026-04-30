@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teams Portal Sidenav Component</title>
+  <link rel="stylesheet" href="../../../tokens/elevate.css">
+  <link rel="stylesheet" href="../../elevate.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <style>
+    :root {
+      /* Missing navy tokens inferred from audit for Teams Portal */
+      --bg-navy-100: #1a1a2e; /* Dark navy/midnight */
+      --bg-navy-90: #2a2a3e;  /* Lighter navy shade for active/hover */
+    }
+
+    body {
+      font-family: var(--font-sans);
+      padding: 0;
+      margin: 0;
+      background: var(--bg-neutral-5);
+      color: var(--text-default);
+      overflow: hidden;
+    }
+
+    pre {
+      background: var(--bg-neutral-10);
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+      font-size: 13px;
+      color: var(--text-default);
+    }
+
+    /* Teams Portal Shell Styles */
+    .teams-shell {
+      display: flex;
+      flex-direction: column;
+      height: 600px; /* fixed height for demo */
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Headnav */
+    .teams-headnav {
+      height: 72px;
+      background: white;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .teams-headnav__left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .teams-headnav__back {
+      color: var(--text-subtle);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    
+    .teams-headnav__back:hover {
+      color: var(--text-default);
+    }
+
+    .teams-headnav__logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: var(--font-bold);
+      color: var(--text-default);
+      font-size: 20px;
+      text-decoration: none;
+    }
+    
+    .teams-headnav__logo img {
+      height: 32px;
+      width: 32px;
+    }
+
+    /* Sidenav Layout */
+    .teams-body {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .teams-sidenav {
+      width: 240px;
+      background: var(--bg-navy-100);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      flex-shrink: 0;
+      /* If it were fixed on a real page:
+         position: fixed;
+         top: 72px;
+         bottom: 0;
+      */
+    }
+
+    .teams-sidenav__list {
+      display: flex;
+      flex-direction: column;
+      padding: 12px 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .teams-sidenav__item {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 16px;
+      color: var(--text-inverted);
+      text-decoration: none;
+      transition: background-color 150ms ease;
+      cursor: pointer;
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+    }
+
+    .teams-sidenav__item:hover {
+      background: var(--bg-navy-90);
+    }
+
+    .teams-sidenav__item--active {
+      background: var(--bg-navy-90);
+      font-weight: var(--font-semibold);
+    }
+
+    .teams-sidenav__icon {
+      font-size: 24px; /* lg size */
+      color: var(--text-inverted);
+    }
+
+    .teams-section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.5);
+      padding: 16px 24px 8px 24px;
+      font-weight: var(--font-semibold);
+      margin: 0;
+    }
+
+    /* Content Area for Demo */
+    .teams-content {
+      flex: 1;
+      background: var(--bg-neutral-5);
+      padding: 32px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+
+<div class="teams-shell" style="height: 100vh;">
+        <!-- Headnav -->
+        <header class="teams-headnav">
+          <div class="teams-headnav__left">
+            <a href="#" class="teams-headnav__back" aria-label="Go back">
+              <span class="material-symbols-outlined">arrow_back</span>
+            </a>
+            <a href="#" class="teams-headnav__logo">
+              <img src="../../../assets/logos/g2-logo-rorange.svg" alt="G2"> MyG2
+            </a>
+          </div>
+        </header>
+
+        <!-- Body with Sidenav & Content -->
+        <div class="teams-body">
+          <nav class="teams-sidenav" aria-label="Teams Portal Navigation">
+            <h3 class="teams-section-title">Teams</h3>
+            <ul class="teams-sidenav__list">
+              <li>
+                <a href="#users" class="teams-sidenav__item teams-sidenav__item--active" aria-current="page">
+                  <span class="material-symbols-outlined teams-sidenav__icon">account_circle</span>
+                  Users
+                </a>
+              </li>
+              <li>
+                <a href="#groups" class="teams-sidenav__item">
+                  <span class="material-symbols-outlined teams-sidenav__icon">group</span>
+                  Groups
+                </a>
+              </li>
+              <li>
+                <a href="#products" class="teams-sidenav__item">
+                  <span class="material-symbols-outlined teams-sidenav__icon">sell</span>
+                  Products
+                </a>
+              </li>
+              <li>
+                <a href="#sso" class="teams-sidenav__item">
+                  <span class="material-symbols-outlined teams-sidenav__icon">key</span>
+                  SSO
+                </a>
+              </li>
+            </ul>
+            
+            <h3 class="teams-section-title">Developers</h3>
+            <ul class="teams-sidenav__list">
+              <li>
+                <a href="#oauth-apps" class="teams-sidenav__item">
+                  <span class="material-symbols-outlined teams-sidenav__icon">apps</span>
+                  OAuth Apps
+                </a>
+              </li>
+              <li>
+                <a href="#resources" class="teams-sidenav__item">
+                  <span class="material-symbols-outlined teams-sidenav__icon">description</span>
+                  Resources
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <main class="teams-content">
+            <h2 style="margin-top: 0; font-size: 24px; font-weight: 600;">Users</h2>
+            <p style="color: var(--text-subtle); font-size: 14px;">Manage team members, roles, and access permissions.</p>
+          </main>
+        </div>
+      </div>
+
+</body>
+</html>

@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My G2 Vendor Admin Shell</title>
+  <link rel="stylesheet" href="../../../tokens/elevate.css">
+  <link rel="stylesheet" href="../../elevate.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0" />
+  <style>
+    :root {
+      --vendor-shell-bg: #f5f5f6;
+      --vendor-shell-headnav-bg: #fefefe;
+      --vendor-shell-headnav-border: #cacaca;
+      --vendor-shell-sidebar-bg: #062846;
+      --vendor-shell-sidebar-hover: rgba(255, 255, 255, 0.15);
+      --vendor-shell-sidebar-border: rgba(255, 255, 255, 0.2);
+      --vendor-shell-sidebar-width-collapsed: 72px;
+      --vendor-shell-sidebar-width-expanded: 240px;
+      --vendor-shell-headnav-height: 60px;
+      --vendor-shell-row-height: 48px;
+      --vendor-shell-transition: 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+      --vendor-shell-shadow: 3px 5px 9px 6px rgba(0, 0, 0, 0.1);
+      --vendor-shell-midnight-5: #f4f4f5;
+      --vendor-shell-midnight-10: #ebebed;
+      --vendor-shell-midnight-15: #dfdfe2;
+      --vendor-shell-icon-border: #dfdee1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: var(--font-sans);
+      background: var(--vendor-shell-bg);
+      color: var(--text-default);
+    }
+
+    button,
+    input,
+    a {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      border: 0;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      user-select: none;
+    }
+
+    .vendor-shell {
+      --vendor-shell-sidebar-width: var(--vendor-shell-sidebar-width-collapsed);
+      min-height: 100vh;
+      background: var(--vendor-shell-bg);
+    }
+
+    .vendor-shell.is-expanded {
+      --vendor-shell-sidebar-width: var(--vendor-shell-sidebar-width-expanded);
+    }
+
+    .vendor-shell__sidenav-column {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--vendor-shell-sidebar-width);
+      height: 100vh;
+      background: var(--vendor-shell-sidebar-bg);
+      transition: width var(--vendor-shell-transition);
+      z-index: 199;
+    }
+
+    .vendor-shell__sidenav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--vendor-shell-sidebar-width);
+      height: 100vh;
+      background: var(--vendor-shell-sidebar-bg);
+      transition: width var(--vendor-shell-transition);
+      z-index: 200;
+      overflow: hidden;
+      box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .vendor-shell__sidenav-scroll {
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      overscroll-behavior: contain;
+      scrollbar-color: rgba(202, 202, 202, 0.8) var(--vendor-shell-sidebar-bg);
+      scrollbar-width: thin;
+    }
+
+    .vendor-shell__sidenav-scroll::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .vendor-shell__sidenav-scroll::-webkit-scrollbar-thumb {
+      background-color: rgba(202, 202, 202, 0.8);
+      border: 2px solid var(--vendor-shell-sidebar-bg);
+      border-radius: 6px;
+    }
+
+    .vendor-shell__sidenav-scroll::-webkit-scrollbar-track {
+      background-color: var(--vendor-shell-sidebar-bg);
+    }
+
+    .vendor-shell__logo-row {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: var(--vendor-shell-headnav-height);
+      padding: 0 0 0 6px;
+      background: var(--vendor-shell-sidebar-bg);
+      border-bottom: 1px solid var(--vendor-shell-sidebar-border);
+    }
+
+    .vendor-shell.is-expanded .vendor-shell__logo-row {
+      justify-content: space-between;
+      padding: 0 12px 0 16px;
+    }
+
+    .vendor-shell__logo-group {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .vendor-shell__logo-collapsed {
+      position: relative;
+      height: 60px;
+      width: 30px;
+      overflow: hidden;
+      margin-left: 6px;
+      transition: opacity var(--vendor-shell-transition);
+    }
+
+    .vendor-shell__logo-collapsed img {
+      position: absolute;
+      top: 14px;
+      right: 0;
+      width: 95px;
+      height: 40px;
+      min-width: 95px;
+    }
+
+    .vendor-shell.is-expanded .vendor-shell__logo-collapsed {
+      opacity: 0;
+      width: 0;
+      pointer-events: none;
+    }
+
+    .vendor-shell__logo-expanded {
+      height: 60px;
+      width: 0;
+      overflow: hidden;
+      opacity: 0;
+      position: relative;
+      transition: opacity var(--vendor-shell-transition), width var(--vendor-shell-transition);
+    }
+
+    .vendor-shell__logo-expanded img {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 95px;
+      height: 40px;
+      min-width: 95px;
+    }
+
+    .vendor-shell.is-expanded .vendor-shell__logo-expanded {
+      opacity: 1;
+      width: 140px;
+    }
+
+    .vendor-shell__toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      color: #ffffff;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--vendor-shell-transition), background-color 150ms ease;
+      flex: 0 0 auto;
+    }
+
+    .vendor-shell__toggle:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .vendor-shell__toggle-icon {
+      width: 12px;
+      height: 12px;
+      transform: rotate(90deg);
+      transition: transform var(--vendor-shell-transition);
+    }
+
+    .vendor-shell.is-expanded .vendor-shell__toggle-icon {
+      transform: rotate(-90deg);
+    }
+
+    .vendor-shell__nav {
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100% - var(--vendor-shell-headnav-height));
+      padding: 0;
+    }
+
+    .vendor-shell__nav-item {
+      position: relative;
+      border-bottom: 1px solid var(--vendor-shell-sidebar-border);
+    }
+
+    .vendor-shell__nav-item:last-child {
+      margin-top: auto;
+      border-bottom: 0;
+    }
+
+    .vendor-shell__nav-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: var(--vendor-shell-row-height);
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    .vendor-shell__nav-item:hover {
+      background: var(--vendor-shell-sidebar-hover);
+      border-bottom-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .vendor-shell__nav-item.is-active {
+      background: var(--vendor-shell-sidebar-hover);
+      border-bottom-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .vendor-shell__nav-item.is-open {
+      background: var(--vendor-shell-sidebar-hover);
+    }
+
+    .vendor-shell__nav-item.is-open > .vendor-shell__nav-link {
+      background: rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .vendor-shell__nav-icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: var(--vendor-shell-row-height);
+      color: #ffffff;
+    }
+
+    .vendor-shell__nav-icon svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+
+    .vendor-shell__nav-label-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: var(--vendor-shell-row-height);
+      padding: 0 18px 0 72px;
+      gap: 12px;
+    }
+
+    .vendor-shell__nav-label {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity var(--vendor-shell-transition), transform var(--vendor-shell-transition);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .vendor-shell.is-expanded .vendor-shell__nav-label {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .vendor-shell__nav-item--external {
+      margin-top: auto;
+      border-top: 1px solid var(--vendor-shell-sidebar-border);
+      border-bottom: 0 !important;
+    }
+
+    .vendor-shell__nav-item--external .vendor-shell__nav-link {
+      height: var(--vendor-shell-row-height);
+    }
+
+    .vendor-shell__nav-item--external .vendor-shell__nav-label {
+      font-weight: 400;
+    }
+
+
+
+    .vendor-shell__submenu {
+      max-height: 0;
+      overflow: hidden;
+      background: transparent;
+      transition: max-height var(--vendor-shell-transition);
+    }
+
+    .vendor-shell.is-expanded .vendor-shell__nav-item.is-open .vendor-shell__submenu {
+      max-height: 600px;
+    }
+
+    .vendor-shell__submenu-link {
+      display: flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 6px 18px 6px 72px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 18px;
+      transition: background-color 150ms ease, color 150ms ease;
+    }
+
+    .vendor-shell__submenu-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .vendor-shell__submenu-header {
+      color: #62788b;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 12px 0 6px 0;
+      margin: 4px 18px 0 72px;
+      border-bottom: 1px solid #62788b;
+    }
+
+    .vendor-shell__headnav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: calc(100% - var(--vendor-shell-sidebar-width-collapsed));
+      height: var(--vendor-shell-headnav-height);
+      background: var(--vendor-shell-headnav-bg);
+      border-bottom: 1px solid var(--vendor-shell-headnav-border);
+      transform: translateX(var(--vendor-shell-sidebar-width-collapsed));
+      transition: transform var(--vendor-shell-transition), width var(--vendor-shell-transition);
+      z-index: 102;
+      will-change: transform;
+    }
+
+    .vendor-shell.is-expanded .vendor-shell__headnav {
+      width: calc(100% - var(--vendor-shell-sidebar-width-expanded));
+      transform: translateX(var(--vendor-shell-sidebar-width-expanded));
+    }
+
+    .vendor-shell__headnav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      padding-right: 24px;
+    }
+
+    .vendor-shell__headnav-left,
+    .vendor-shell__headnav-right {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      height: 100%;
+    }
+
+    .vendor-shell__product-switcher {
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      border-right: 1px solid var(--vendor-shell-headnav-border);
+      flex: 0 1 auto;
+      min-width: 0;
+    }
+
+    .vendor-shell__product-switcher-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      height: 100%;
+      min-width: 0;
+      padding: 12px 24px;
+      color: var(--text-default);
+      transition: background-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .vendor-shell__product-switcher-btn:hover {
+      background: var(--vendor-shell-midnight-5);
+      box-shadow: var(--vendor-shell-shadow);
+    }
+
+    .vendor-shell__product-mark {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    .vendor-shell__product-mark img {
+      width: 32px;
+      height: 32px;
+      display: block;
+    }
+
+    .vendor-shell__product-name {
+      font-size: 15px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .vendor-shell__product-caret {
+      color: var(--text-nonessential);
+      font-size: 20px;
+      flex: 0 0 auto;
+    }
+
+    .vendor-shell__search {
+      margin-left: 24px;
+      margin-right: 18px;
+      width: min(320px, 32vw);
+      min-width: 220px;
+    }
+
+    .vendor-shell__rounded-search {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 40px;
+      background: #ffffff;
+      border: 1px solid var(--vendor-shell-headnav-border);
+      border-radius: 18px;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .vendor-shell__rounded-search:focus-within {
+      box-shadow: 0 0 0 1px #ffffff;
+      outline: 4px solid var(--border-focus);
+      outline-offset: 1px;
+    }
+
+    .vendor-shell__rounded-search-icon {
+      position: absolute;
+      left: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-default);
+      pointer-events: none;
+    }
+
+    .vendor-shell__rounded-search-icon svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+
+    .vendor-shell__rounded-search-icon .material-symbols-outlined {
+      font-size: 20px;
+    }
+
+    .vendor-shell__rounded-search-input {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: transparent;
+      color: #252530;
+      padding: 0 36px 0 40px;
+      border-radius: 18px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .vendor-shell__rounded-search-input::placeholder {
+      color: #6f6d78;
+    }
+
+    .vendor-shell__rounded-search-clear {
+      position: absolute;
+      right: 8px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      color: #6f6d78;
+    }
+
+    .vendor-shell__rounded-search-clear:hover {
+      background: var(--vendor-shell-midnight-10);
+    }
+
+    .vendor-shell__rounded-search-clear.is-visible {
+      display: inline-flex;
+    }
+
+    .vendor-shell__actions {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .vendor-shell__icon-item {
+      position: relative;
+      margin-right: 8px;
+      flex: 0 0 auto;
+    }
+
+    .vendor-shell__icon-item:last-child {
+      margin-right: 0;
+    }
+
+    .vendor-shell__icon-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      color: #252530;
+      transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+    }
+
+    .vendor-shell__icon-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .vendor-shell__icon-btn--invite {
+      border: 1px solid var(--bg-neutral-20);
+      border-radius: 20px;
+      background: var(--bg-neutral-10);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      color: var(--text-primary);
+    }
+
+    .vendor-shell__icon-btn--invite:hover {
+      background: var(--bg-primary-20);
+    }
+
+    .vendor-shell__icon-btn--support:hover,
+    .vendor-shell__icon-btn--avatar:hover {
+      background: var(--vendor-shell-midnight-10);
+    }
+
+    .vendor-shell__icon-btn--support {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .vendor-shell__icon-btn--support svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .vendor-shell__icon-btn .material-symbols-outlined {
+      font-size: 22px;
+    }
+
+    .vendor-shell__icon-btn svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+
+    .vendor-shell__score-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: conic-gradient(#062846 0 73%, rgba(6, 40, 70, 0.18) 73% 100%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px;
+      transition: transform 150ms ease;
+    }
+
+    .vendor-shell__score-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .vendor-shell__score-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #062846;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .vendor-shell__avatar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: #f3f2f7;
+      color: #252530;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .vendor-shell__dropdown-panel {
+      display: none;
+      position: absolute;
+      top: calc(100% + 18px);
+      right: 0;
+      background: #ffffff;
+      border: 1px solid var(--vendor-shell-headnav-border);
+      border-radius: 8px;
+      box-shadow: var(--vendor-shell-shadow);
+      min-height: 24px;
+    }
+
+    .vendor-shell__dropdown-panel--product {
+      left: 0;
+      right: auto;
+      width: 428px;
+    }
+
+    .vendor-shell__dropdown-panel--report-card {
+      right: -240px;
+      width: 380px;
+    }
+
+    .vendor-shell__dropdown-panel--support {
+      right: -105px;
+      width: 177px;
+    }
+
+    .vendor-shell__dropdown-panel--user {
+      right: 0;
+      width: 160px;
+    }
+
+    .vendor-shell__content {
+      position: relative;
+      height: calc(100vh - var(--vendor-shell-headnav-height));
+      min-height: calc(100vh - var(--vendor-shell-headnav-height));
+      margin-top: var(--vendor-shell-headnav-height);
+      margin-left: var(--vendor-shell-sidebar-width-collapsed);
+      padding: 32px;
+      background: var(--vendor-shell-bg);
+      transition: margin-left var(--vendor-shell-transition);
+      overflow: auto;
+    }
+
+    .vendor-shell.is-expanded .vendor-shell__content {
+      margin-left: var(--vendor-shell-sidebar-width-expanded);
+    }
+
+    .vendor-shell__content-inner {
+      max-width: 1200px;
+    }
+
+    .vendor-shell__title {
+      margin: 0;
+      color: #252530;
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .vendor-shell__subtitle {
+      margin: 12px 0 0;
+      color: #505059;
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 560px;
+    }
+
+
+
+    .vendor-shell__sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 1180px) {
+      .vendor-shell__search {
+        width: min(260px, 25vw);
+        min-width: 180px;
+      }
+
+      .vendor-shell__product-name {
+        max-width: 170px;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .vendor-shell__headnav-inner {
+        padding-right: 12px;
+      }
+
+      .vendor-shell__product-switcher-btn {
+        padding-right: 16px;
+        padding-left: 18px;
+      }
+
+      .vendor-shell__search {
+        margin-left: 12px;
+        margin-right: 12px;
+        min-width: 0;
+        width: 180px;
+      }
+
+      .vendor-shell__content {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .vendor-shell__search {
+        display: none;
+      }
+
+      .vendor-shell__product-name {
+        max-width: 120px;
+      }
+
+      .vendor-shell__headnav {
+        width: calc(100% - 72px);
+      }
+
+      .vendor-shell.is-expanded .vendor-shell__headnav {
+        width: calc(100% - 240px);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .vendor-shell__icon-item--optional {
+        display: none;
+      }
+
+      .vendor-shell__content {
+        padding: 20px;
+      }
+
+      .vendor-shell__title {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="vendor-shell" id="vendorShell">
+    <div class="vendor-shell__sidenav-column" aria-hidden="true"></div>
+
+    <nav class="vendor-shell__sidenav" aria-label="Vendor admin navigation">
+      <div class="vendor-shell__sidenav-scroll">
+        <div class="vendor-shell__logo-row">
+          <div class="vendor-shell__logo-group">
+            <a href="#" class="vendor-shell__logo-collapsed" aria-label="myG2 home">
+              <img src="../../../assets/logos/myg2-logo-white.svg" alt="G2">
+            </a>
+            <a href="#" class="vendor-shell__logo-expanded" aria-label="myG2 home">
+              <img src="../../../assets/logos/myg2-logo-white.svg" alt="myG2">
+            </a>
+          </div>
+
+          <button class="vendor-shell__toggle" id="vendorShellToggle" type="button" aria-label="Expand sidebar" aria-expanded="false">
+            <svg class="vendor-shell__toggle-icon" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" width="12" height="12" aria-hidden="true"><path d="M10.001 8.015V3.957L5.017.915l-5.016 3v4l5-3z" fill="currentColor"/></svg>
+          </button>
+        </div>
+
+        <div class="vendor-shell__nav">
+          <div class="vendor-shell__nav-item is-active">
+            <a class="vendor-shell__nav-link" href="#" aria-current="page">
+              <span class="vendor-shell__nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24"><path fill="currentColor" d="M256 142.7l156 128.6V476h-79.9V312h-152v164H100V271.2l156-128.5m0-46.7L64 254.3V480c0 17.7 14.3 32 32 32h120.1V348h80v164H416c17.7 0 32-14.3 32-32V254.3L256 96z"/><path fill="currentColor" d="M491.5 210.6L448 174.8V32h-96v63.7l-96-79.1-235.5 194c-7.7 6.3-8.8 17.7-2.4 25.3s17.7 8.8 25.3 2.4L256 63.2l212.5 175.2c3.4 2.8 7.4 4.1 11.4 4.1 5.2 0 10.3-2.2 13.9-6.5 6.4-7.7 5.3-19.1-2.3-25.4zM391.4 71.4h17.1v70.8l-17.1-14.1V71.4z"/></svg></span>
+              <span class="vendor-shell__nav-label-wrap">
+                <span class="vendor-shell__nav-label">Home</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="vendor-shell__nav-item" data-has-children>
+            <a class="vendor-shell__nav-link" href="#">
+              <span class="vendor-shell__nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24"><path fill="currentColor" d="M55.93 433C25.09 433 0 408.1 0 377.53V55.46C0 24.87 25.09 0 55.93 0H357.2c30.85 0 55.94 24.87 55.94 55.46a18.29 18.29 0 0 1-36.57 0 19.15 19.15 0 0 0-19.37-18.89H55.93a19.15 19.15 0 0 0-19.36 18.89v322.07a19.14 19.14 0 0 0 19.36 18.87 18.29 18.29 0 0 1 0 36.57ZM512 456.28V131.79c0-30.72-26.12-55.72-58.23-55.72H134.29c-32.11 0-58.24 25-58.24 55.72v324.49c0 30.72 26.13 55.72 58.24 55.72h319.48c32.11 0 58.23-25 58.23-55.72Zm-58.23-343.64c11.75 0 21.66 8.77 21.66 19.15v324.49c0 10.38-9.91 19.15-21.66 19.15H134.29c-11.75 0-21.67-8.77-21.67-19.15V131.79c0-10.38 9.92-19.15 21.67-19.15Zm-32.45 252.14A18.28 18.28 0 0 0 403 346.49H185a18.29 18.29 0 1 0 0 36.57h218a18.28 18.28 0 0 0 18.32-18.28Zm0 49.17A18.28 18.28 0 0 0 403 395.66H185a18.29 18.29 0 1 0 0 36.57h218A18.28 18.28 0 0 0 421.32 414ZM320.77 304V186.5a18.29 18.29 0 0 0-18.29-18.29H185a18.29 18.29 0 0 0-18.29 18.29V304A18.29 18.29 0 0 0 185 322.26h117.48A18.29 18.29 0 0 0 320.77 304ZM203.3 204.79h80.9v80.9h-80.9Zm0 26.26a18.28 18.28 0 0 0-18.3-18.28H94.34a18.29 18.29 0 1 0 0 36.57H185a18.28 18.28 0 0 0 18.3-18.29Zm308.7 0a18.28 18.28 0 0 0-18.29-18.28H302.48a18.29 18.29 0 0 0 0 36.57h191.23A18.29 18.29 0 0 0 512 231.05Z"/></svg></span>
+              <span class="vendor-shell__nav-label-wrap">
+                <span class="vendor-shell__nav-label">Product Profile</span>
+              </span>
+            </a>
+            <div class="vendor-shell__submenu" aria-hidden="true">
+              <a class="vendor-shell__submenu-link" href="#">Product Information</a>
+              <a class="vendor-shell__submenu-link" href="#">Packages &amp; Pricing</a>
+              <a class="vendor-shell__submenu-link" href="#">Features</a>
+              <a class="vendor-shell__submenu-link" href="#">Discussions</a>
+              <a class="vendor-shell__submenu-link" href="#">AI Sales Agent</a>
+              <a class="vendor-shell__submenu-link" href="#">Expertise</a>
+              <a class="vendor-shell__submenu-link" href="#">G2 Deals</a>
+              <a class="vendor-shell__submenu-link" href="#">Downloads</a>
+              <a class="vendor-shell__submenu-link" href="#">Interactive Demo</a>
+              <a class="vendor-shell__submenu-link" href="#">Integrations</a>
+              <div class="vendor-shell__submenu-header">Media Gallery</div>
+              <a class="vendor-shell__submenu-link" href="#">Screenshots</a>
+              <a class="vendor-shell__submenu-link" href="#">Videos</a>
+            </div>
+          </div>
+
+          <div class="vendor-shell__nav-item" data-has-children>
+            <a class="vendor-shell__nav-link" href="#">
+              <span class="vendor-shell__nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24"><path fill="currentColor" d="M107.43 512a18.29 18.29 0 0 1-18.29-18.29v-102H60.63C27.2 391.69 0 363.24 0 328.29V63.41C0 28.45 27.2 0 60.63 0h390.73C484.8 0 512 28.45 512 63.41v264.88c0 34.95-27.2 63.4-60.64 63.4h-201.5L119.57 507.38a18.23 18.23 0 0 1-12.14 4.62ZM60.63 36.57c-13.27 0-24.06 12-24.06 26.84v264.88c0 14.79 10.79 26.83 24.06 26.83h46.8a18.27 18.27 0 0 1 18.28 18.28V453l105.06-93.29a18.27 18.27 0 0 1 12.14-4.61h208.45c13.27 0 24.07-12 24.07-26.83V63.41c0-14.8-10.8-26.84-24.07-26.84Zm338 236.43H113.36a18.29 18.29 0 1 1 0-36.58h285.27a18.29 18.29 0 0 1 0 36.58Zm0-59H113.36a18.29 18.29 0 1 1 0-36.57h285.27a18.29 18.29 0 0 1 0 36.57Zm0-59H113.36a18.29 18.29 0 1 1 0-36.57h285.27a18.29 18.29 0 0 1 0 36.57Z"/></svg></span>
+              <span class="vendor-shell__nav-label-wrap">
+                <span class="vendor-shell__nav-label">Reviews</span>
+              </span>
+            </a>
+            <div class="vendor-shell__submenu" aria-hidden="true">
+              <div class="vendor-shell__submenu-header">Review Performance</div>
+              <a class="vendor-shell__submenu-link" href="#">Review Activity</a>
+              <a class="vendor-shell__submenu-link" href="#">Review Campaigns</a>
+              <div class="vendor-shell__submenu-header">Get Reviews</div>
+              <a class="vendor-shell__submenu-link" href="#">Generate Reviews from your Site</a>
+              <a class="vendor-shell__submenu-link" href="#">Review Campaigns</a>
+              <a class="vendor-shell__submenu-link" href="#">In-App Reviews</a>
+              <a class="vendor-shell__submenu-link" href="#">Multi-Product Campaigns</a>
+              <a class="vendor-shell__submenu-link" href="#">AI Assisted Review Collection</a>
+              <div class="vendor-shell__submenu-header">Review Tools</div>
+              <a class="vendor-shell__submenu-link" href="#">Respond to Reviewers</a>
+              <a class="vendor-shell__submenu-link" href="#">References from Reviews</a>
+              <a class="vendor-shell__submenu-link" href="#">Add Custom Questions</a>
+            </div>
+          </div>
+
+          <div class="vendor-shell__nav-item" data-has-children>
+            <a class="vendor-shell__nav-link" href="#">
+              <span class="vendor-shell__nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24"><path fill="currentColor" d="M18.87 512A18.29 18.29 0 0 1 .59 493.74L0 18.31A18.28 18.28 0 0 1 18.27 0a18.29 18.29 0 0 1 18.3 18.26l.57 457.15 456.56-.5a18.29 18.29 0 0 1 0 36.57L18.89 512Zm350.74-74.6a18.25 18.25 0 0 1-14.34-6.94l-80.72-102.12-78.37 74.72a18.23 18.23 0 0 1-14.57 4.94L76.32 396.69a18.28 18.28 0 0 1 3.89-36.36l96.86 10.41L263.84 288a18.28 18.28 0 0 1 27 1.89l77.91 98.57 109.68-156.9a18.28 18.28 0 1 1 30 21L384.59 429.6a18.26 18.26 0 0 1-14.45 7.79ZM186.68 312.88a18.36 18.36 0 0 1-7.84-1.76L70.27 259.64a18.29 18.29 0 0 1 15.68-33L183.7 273l87.76-76.41a18.31 18.31 0 0 1 21.18-2l81 47 106.82-105.33a18.29 18.29 0 1 1 25.68 26.05l-116.77 115a18.31 18.31 0 0 1-22 2.8l-81.75-47.41-86.93 75.68a18.24 18.24 0 0 1-12.01 4.5Z"/></svg></span>
+              <span class="vendor-shell__nav-label-wrap">
+                <span class="vendor-shell__nav-label">Buyer Activity</span>
+              </span>
+            </a>
+            <div class="vendor-shell__submenu" aria-hidden="true">
+              <a class="vendor-shell__submenu-link" href="#">Track Your Prospects</a>
+              <a class="vendor-shell__submenu-link" href="#">Profile Visitors</a>
+              <div class="vendor-shell__submenu-header">Buyer Intent</div>
+              <a class="vendor-shell__submenu-link" href="#">Your Signals</a>
+              <a class="vendor-shell__submenu-link" href="#">Notifications</a>
+              <div class="vendor-shell__submenu-header">Leads</div>
+              <a class="vendor-shell__submenu-link" href="#">Leads Activity</a>
+              <a class="vendor-shell__submenu-link" href="#">Lead Form</a>
+              <a class="vendor-shell__submenu-link" href="#">Lead Emails</a>
+              <a class="vendor-shell__submenu-link" href="#">CTA Settings</a>
+            </div>
+          </div>
+
+          <div class="vendor-shell__nav-item" data-has-children>
+            <a class="vendor-shell__nav-link" href="#">
+              <span class="vendor-shell__nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24"><path fill="currentColor" d="m109.31 406.47c-6.53 0-12.66-4.02-15.03-10.51L44.07 258.65c-3.03-8.3 1.23-17.49 9.53-20.52 8.3-3.04 17.49 1.23 20.52 9.53l50.21 137.31c3.03 8.3-1.23 17.49-9.53 20.52-1.81.66-3.67.98-5.49.98Z"/><path fill="currentColor" d="m98.84 407.21c-37.5 0-72.14-23.57-85.3-59.56-7.19-19.66-7.35-41.35-.45-61.08 6.81-19.44 20.13-36.13 37.52-47 .46-.29.93-.55 1.41-.79 91.25-44.9 158.38-100.94 198.63-140.05 43.73-42.49 66.1-74.77 66.32-75.09 3.6-5.23 9.95-7.85 16.19-6.65 6.24 1.19 11.18 5.95 12.6 12.14.97 4.22.19 8.7-2.16 12.33-4.55 7.02-7.89 26.93-3.59 61.73 4.14 33.48 14.53 74.09 29.26 114.36 14.73 40.28 33 78.02 51.44 106.28 19.17 29.38 34.56 42.43 42.56 44.85 6.75 2.04 11.37 8.26 11.37 15.31 0 4.99-2.33 9.71-6.3 12.73-3.97 3.03-9.13 4.03-13.94 2.7-.36-.1-38.27-10.33-99.1-14.58-55.98-3.92-143.43-3.42-242.12 21.14-.52.13-1.05.23-1.59.31-4.27.61-8.53.91-12.75.91Zm-31.9-140.09c-22.93 14.74-32.74 43.86-23.34 69.54 9.39 25.68 35.67 41.6 62.69 38.06 102.84-25.48 193.9-25.89 252.26-21.73 17.59 1.25 33.31 2.97 46.87 4.8-3.79-5.06-7.62-10.56-11.49-16.49-20.02-30.67-38.93-69.67-54.7-112.78-15.77-43.1-26.47-85.09-30.96-121.43-.87-7.04-1.49-13.72-1.86-20.04-9.18 10.15-20.08 21.6-32.71 33.91-41.9 40.82-111.74 99.26-206.75 146.14Z"/><path fill="currentColor" d="m368.16 273.98c-6.22 0-12.1-3.65-14.7-9.67-4.95-11.48-9.73-23.51-14.22-35.76-4.46-12.19-8.57-24.48-12.22-36.53-2.46-8.12 1.85-16.75 9.83-19.66l19.63-7.17c13.43-4.92 27.98-4.31 40.96 1.72 12.98 6.03 22.84 16.75 27.76 30.2 10.13 27.75-4.19 58.58-31.93 68.73l-19.62 7.17c-1.81.66-3.66.98-5.49.98Zm-5.96-76.82c2.23 6.78 4.6 13.6 7.08 20.38 2.5 6.81 5.09 13.55 7.75 20.16l5.24-1.92c11.17-4.09 16.94-16.5 12.86-27.68-1.98-5.42-5.95-9.74-11.18-12.17-5.23-2.43-11.09-2.67-16.5-.69l-5.26 1.92Z"/><path fill="currentColor" d="m464.88 401.11c-18.73 0-39.62-15.8-62.29-47.15-22.82-31.57-45.33-76.11-63.37-125.42-18.03-49.31-29.58-97.87-32.5-136.72-3.5-46.52 5.62-74.09 27.11-81.94 21.49-7.86 46.24 7.32 73.57 45.12 22.82 31.57 45.33 76.11 63.37 125.43 18.03 49.31 29.58 97.87 32.5 136.72 3.5 46.52-5.61 74.09-27.1 81.95-3.67 1.34-7.43 2.01-11.29 2.01ZM345.13 39.91c-.13 0-.25.01-.35.03-2.04 1.15-9.27 13.5-5.92 52.32 3.07 35.54 13.87 80.04 30.42 125.28 16.55 45.25 37.01 86.22 57.59 115.35 22.49 31.83 35.97 36.58 38.35 36.13 2.03-1.15 9.26-13.49 5.91-52.3-3.07-35.55-13.87-80.05-30.42-125.31-16.55-45.26-37.01-86.22-57.6-115.36-21.56-30.51-34.84-36.15-38-36.15Z"/><path fill="currentColor" d="m233.37 504.06c-18.19 0-35.32-11.22-41.93-29.26l-33.59-91.85c-1.64-4.48-1.19-9.46 1.22-13.58s6.53-6.95 11.24-7.71c19.98-3.26 39.95-5.78 59.35-7.49 7.21-.64 13.95 3.64 16.43 10.44l29.1 79.55c8.43 23.1-3.48 48.75-26.56 57.19-5.03 1.84-10.19 2.71-15.26 2.71Zm-38.74-113.71 26.86 73.45c2.38 6.51 9.63 9.88 16.15 7.5 6.51-2.38 9.87-9.63 7.49-16.15l-24.85-67.92c-8.48.89-17.04 1.93-25.65 3.13Z"/></svg></span>
+              <span class="vendor-shell__nav-label-wrap">
+                <span class="vendor-shell__nav-label">G2 Advertising</span>
+              </span>
+            </a>
+            <div class="vendor-shell__submenu" aria-hidden="true">
+              <a class="vendor-shell__submenu-link" href="#">Manage Ads</a>
+              <a class="vendor-shell__submenu-link" href="#">PPC Analytics</a>
+            </div>
+          </div>
+
+          <div class="vendor-shell__nav-item" data-has-children>
+            <a class="vendor-shell__nav-link" href="#">
+              <span class="vendor-shell__nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24"><path fill="currentColor" d="M256 512a18.21 18.21 0 0 1-9.07-2.42L9.22 373.75A18.28 18.28 0 0 1 27.36 342L256 472.65 484.64 342a18.28 18.28 0 0 1 18.14 31.75L265.07 509.58A18.24 18.24 0 0 1 256 512Zm0-101.89a18.2 18.2 0 0 1-9.07-2.41L9.22 271.87a18.28 18.28 0 1 1 18.14-31.74L256 370.77l228.64-130.64a18.28 18.28 0 0 1 18.14 31.74L265.07 407.7a18.23 18.23 0 0 1-9.07 2.41Zm0-101.87a18.2 18.2 0 0 1-9.07-2.41L9.22 170a18.28 18.28 0 0 1 0-31.75L246.93 2.42a18.24 18.24 0 0 1 18.14 0l237.71 135.82a18.29 18.29 0 0 1 0 31.75L265.07 305.83a18.23 18.23 0 0 1-9.07 2.41ZM55.15 154.12 256 268.89l200.85-114.77L256 39.35Z"/></svg></span>
+              <span class="vendor-shell__nav-label-wrap">
+                <span class="vendor-shell__nav-label">Marketing Content</span>
+              </span>
+            </a>
+            <div class="vendor-shell__submenu" aria-hidden="true">
+              <a class="vendor-shell__submenu-link" href="#">Report Library</a>
+              <a class="vendor-shell__submenu-link" href="#">Content Studio</a>
+              <a class="vendor-shell__submenu-link" href="#">G2 Badges</a>
+              <a class="vendor-shell__submenu-link" href="#">Grant Permission</a>
+              <a class="vendor-shell__submenu-link" href="#">Documents</a>
+              <a class="vendor-shell__submenu-link" href="#">Reference Pages</a>
+              <a class="vendor-shell__submenu-link" href="#">Crowd Quotes</a>
+              <div class="vendor-shell__submenu-header">Widgets</div>
+              <a class="vendor-shell__submenu-link" href="#">Grid&reg; Widget</a>
+              <a class="vendor-shell__submenu-link" href="#">Star Rating Widget</a>
+              <a class="vendor-shell__submenu-link" href="#">Testimonials</a>
+              <a class="vendor-shell__submenu-link" href="#">Review Snapshot Widget</a>
+            </div>
+          </div>
+
+          <div class="vendor-shell__nav-item" data-has-children>
+            <a class="vendor-shell__nav-link" href="#">
+              <span class="vendor-shell__nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24"><path fill="currentColor" d="M493.71 512h-75.07a18.28 18.28 0 0 1-18.28-18.29v-19.24H111.64v19.24A18.28 18.28 0 0 1 93.36 512H18.29A18.29 18.29 0 0 1 0 493.71v-75.06a18.28 18.28 0 0 1 18.29-18.28h19.25V111.64H18.29A18.28 18.28 0 0 1 0 93.36V18.29A18.29 18.29 0 0 1 18.29 0h75.07a18.28 18.28 0 0 1 18.28 18.29v19.25h288.72V18.29A18.28 18.28 0 0 1 418.64 0h75.07A18.29 18.29 0 0 1 512 18.29v75.07a18.28 18.28 0 0 1-18.29 18.28h-19.25v288.73h19.25A18.28 18.28 0 0 1 512 418.65v75.06A18.29 18.29 0 0 1 493.71 512Zm-56.78-36.57h38.5v-38.49h-38.5Zm-400.36 0h38.5v-38.49h-38.5Zm75.07-37.53h288.72v-19.25a18.27 18.27 0 0 1 18.28-18.28h19.25V111.64h-19.25a18.27 18.27 0 0 1-18.28-18.28V74.11H111.64v19.25a18.27 18.27 0 0 1-18.28 18.28H74.11v288.73h19.25a18.27 18.27 0 0 1 18.28 18.28ZM436.93 75.07h38.5v-38.5h-38.5Zm-400.36 0h38.5v-38.5h-38.5Zm313 323.39a18.28 18.28 0 0 1-18.28-18.29V172.56a18.29 18.29 0 0 1 36.57 0v207.61a18.29 18.29 0 0 1-18.29 18.29Zm-62.09 0a18.28 18.28 0 0 1-18.28-18.29V270.92a18.29 18.29 0 1 1 36.57 0v109.25a18.29 18.29 0 0 1-18.29 18.29Zm-62.09 0a18.28 18.28 0 0 1-18.28-18.29V225a18.29 18.29 0 1 1 36.57 0v155.17a18.29 18.29 0 0 1-18.29 18.29Zm-62.07 0A18.28 18.28 0 0 1 145 380.17V131.84a18.29 18.29 0 1 1 36.57 0v248.33a18.29 18.29 0 0 1-18.25 18.29Z"/></svg></span>
+              <span class="vendor-shell__nav-label-wrap">
+                <span class="vendor-shell__nav-label">Analytics</span>
+              </span>
+            </a>
+            <div class="vendor-shell__submenu" aria-hidden="true">
+              <a class="vendor-shell__submenu-link" href="#">G2 Profile Activity</a>
+              <a class="vendor-shell__submenu-link" href="#">Competitors</a>
+              <a class="vendor-shell__submenu-link" href="#">Insight Reports</a>
+              <a class="vendor-shell__submenu-link" href="#">AI Search Visibility</a>
+            </div>
+          </div>
+
+          <div class="vendor-shell__nav-item" data-has-children>
+            <a class="vendor-shell__nav-link" href="#">
+              <span class="vendor-shell__nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24"><path fill="currentColor" d="M256 511.86a31.35 31.35 0 0 1-22.39-9.26L178.93 448c-14.54-14.53-22.29-16.21-26.86-16.21-9.89 0-15.27 8-24.28 27.16-5 10.63-10.63 22.57-19.25 32.2l-2.54 2.6c-23.31 23.27-64.25 23.4-87.81-.1a62.27 62.27 0 0 1 0-87.95l2.11-2c10.06-9 21.89-14.59 32.34-19.53 15.54-7.31 25.63-12.7 27.23-21.9 1.38-7.86-3.57-16.92-16-29.39L9.21 278.23a31.8 31.8 0 0 1 0-44.78l53.23-53.22c.45-.45.93-.88 1.43-1.29 12.75-13.13 17.34-21.85 16-29.51-1.57-9.18-11.66-14.56-26.87-21.72-10.75-5.09-22.68-10.71-32.25-19.32l-2.32-2.16a62.3 62.3 0 0 1-.23-88.14c23.59-23.55 64.39-23.5 87.93 0l2.08 2.22c9 10 14.61 21.95 19.59 32.53C136.82 72 142.18 80 152.07 80c4.54 0 12.23-1.65 26.59-15.93l55-54.94c11.85-11.91 32.87-11.93 44.76 0l54.66 54.65C347.59 78.29 355.34 80 359.91 80c9.89 0 15.25-8 24.29-27.15 4.94-10.54 10.55-22.49 19.23-32.17l2.68-2.81c23-23 64.18-23.27 87.68.23a62.14 62.14 0 0 1 0 87.94c-.45.49-1.29 1.27-2.18 2.07-9.89 8.88-21.77 14.5-32.25 19.45-15.52 7.28-25.61 12.65-27.21 21.9-1.38 7.86 3.53 16.91 15.94 29.33l54.72 54.71a31.82 31.82 0 0 1 0 44.76l-55.16 54.87c-11.46 11.4-29.36 26.56-52.36 26.56-34.71 0-48.89-30.13-57.37-48.13-4.11-8.74-8.34-17.74-13.43-23.4l-1.36-1.44c-9-8.93-26.11-9.32-35.89.38a25.6 25.6 0 0 0 0 36.18c6.71 6.07 15.66 10.29 24.32 14.37 17.11 8.07 42.57 20.07 47.55 48.65 4.64 26.73-12.25 47.43-25.36 60.68l-55.32 55.62a31.28 31.28 0 0 1-22.43 9.26Zm-3.55-35.05Zm7-.07ZM38.55 255.86 89.75 307c8.59 8.6 31.39 31.44 26.18 61.5-5 28.63-30.5 40.63-47.38 48.57-8.85 4.19-17.76 8.4-23.39 13.43-11.07 11-11.07 27.25-1.11 37.25 9.72 9.64 26.54 9.67 36.22 0 6.09-6.73 10.32-15.7 14.41-24.39 8.5-18.07 22.7-48.21 57.39-48.21 17.84 0 34.11 8.3 52.72 26.92L256 473.26l51.77-52.05c11.91-12 16.64-20.89 15.29-28.66-1.59-9.18-11.68-14.56-26.86-21.71-10.79-5.1-22.72-10.72-32.29-19.32l-2.12-2a62.36 62.36 0 0 1-.43-88.33c23.62-23.55 64.41-23.49 87.93 0l2.09 2.21c9 10 14.6 22 19.59 32.54 9 19.16 14.37 27.16 24.26 27.16 4.54 0 12.24-1.65 26.59-15.92l51.61-51.33-51.23-51.23c-8.59-8.58-31.38-31.4-26.13-61.48 5-28.67 30.54-40.65 47.43-48.57 8.82-4.17 17.73-8.38 23.36-13.42 5.91-5.86 8.57-12.28 8.57-19.11a25.37 25.37 0 0 0-7.5-18.04c-9.68-9.68-26.54-9.68-36.22 0-6.14 6.8-10.33 15.76-14.41 24.41-8.51 18.07-22.71 48.19-57.39 48.19-17.84 0-34.11-8.3-52.71-26.92L256 38.44 204.48 90c-11.5 11.43-29.41 26.59-52.39 26.59-34.71 0-48.89-30.12-57.38-48.13-4.1-8.78-8.33-17.78-13.42-23.46l-1.36-1.45C71 34.64 53.8 34.25 44 44a25.61 25.61 0 0 0 0 36.18c6.72 6.07 15.66 10.3 24.33 14.38 17.1 8.06 42.57 20.06 47.55 48.64 4.64 26.71-12.23 47.42-25.32 60.68l-.13.28a17.94 17.94 0 0 1-3.43 3.23Zm438.38 3.49Zm-441.84 0ZM252.52 35Zm7 0Z"/></svg></span>
+              <span class="vendor-shell__nav-label-wrap">
+                <span class="vendor-shell__nav-label">Integrations</span>
+              </span>
+            </a>
+            <div class="vendor-shell__submenu" aria-hidden="true">
+              <a class="vendor-shell__submenu-link" href="#">Integration Hub</a>
+              <a class="vendor-shell__submenu-link" href="#">Performance Analytics</a>
+              <a class="vendor-shell__submenu-link" href="#">API Tokens &amp; Apps</a>
+            </div>
+          </div>
+
+          <div class="vendor-shell__nav-item" data-has-children>
+            <a class="vendor-shell__nav-link" href="#">
+              <span class="vendor-shell__nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 5 35 35" width="24" height="24"><path d="M22.758 40.99l-.011-6.74 3.188-.005a5.773 5.773 0 0 0 5.763-5.782l-.004-3.381 1.623-.003a1.804 1.804 0 0 0 1.592-2.647l-3.229-6.116C31.666 7.844 24.788.987 16.316 1 7.844 1.013.987 7.892 1 16.364a15.299 15.299 0 0 0 5.336 11.6l.014 8.361m4.777-26.878l.021 14m11.983-11.723l.018 11.705m-4.009-6.154l.009 6.159m-4.014-8.744l.014 8.75" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="vendor-shell__nav-label-wrap">
+                <span class="vendor-shell__nav-label">Market Intelligence</span>
+              </span>
+            </a>
+            <div class="vendor-shell__submenu" aria-hidden="true">
+              <a class="vendor-shell__submenu-link" href="#">Category Overview</a>
+              <a class="vendor-shell__submenu-link" href="#">Traffic Analytics</a>
+              <a class="vendor-shell__submenu-link" href="#">Satisfaction</a>
+              <a class="vendor-shell__submenu-link" href="#">Win Loss</a>
+              <a class="vendor-shell__submenu-link" href="#">Pricing and Contracting</a>
+            </div>
+          </div>
+
+          <div class="vendor-shell__nav-item" data-has-children>
+            <a class="vendor-shell__nav-link" href="#">
+              <span class="vendor-shell__nav-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M42.818 15.19C44.826 18.3 45.994 22 46 25.98C46.017 37.02 37.077 45.98 26.031 46C14.985 46.02 6.017 37.08 6 26.04C5.983 15 14.923 6.04 25.968 6.02C30 6.02 33.754 7.2 36.897 9.25" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M38.5 25.99C38.51 32.89 32.92 38.49 26.02 38.5C19.12 38.51 13.51 32.93 13.5 26.03C13.49 19.13 19.08 13.53 25.98 13.52C32.88 13.51 38.49 19.09 38.5 25.99Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M31 26C31 28.76 28.77 31 26.01 31C23.25 31 21 28.78 21 26.02C21 23.26 23.23 21.02 25.99 21.01C28.75 21.01 31 23.24 31 26Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 26.01L38.02 13.96" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M38.02 13.96L42.62 15.19L45.98 11.82L41.38 10.59L40.14 6L36.78 9.37L38.02 13.96Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="vendor-shell__nav-label-wrap">
+                <span class="vendor-shell__nav-label">ROI</span>
+              </span>
+            </a>
+            <div class="vendor-shell__submenu" aria-hidden="true">
+              <a class="vendor-shell__submenu-link" href="#">Performance Analytics</a>
+            </div>
+          </div>
+
+          <div class="vendor-shell__nav-item" data-has-children>
+            <a class="vendor-shell__nav-link" href="#">
+              <span class="vendor-shell__nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24"><path fill="currentColor" d="M256 512C114.85 512 0 397.16 0 256S114.85 0 256 0s256 114.84 256 256-114.85 256-256 256Zm-134.35-86.18a216.24 216.24 0 0 0 267.08 1.27C375.14 364.66 319.17 319.53 255 319.53c-63.61 0-119.31 45.05-133.35 106.29Zm201.87-131.73a177.14 177.14 0 0 1 97.27 102.36A215.63 215.63 0 0 0 472.62 256c0-119.44-97.18-216.62-216.62-216.62S39.39 136.56 39.39 256a215.62 215.62 0 0 0 50.53 138.92 178.44 178.44 0 0 1 96.75-100.75 105.05 105.05 0 1 1 136.85-.08ZM255 148.82a65.66 65.66 0 1 0 65.67 65.66A65.73 65.73 0 0 0 255 148.82Z"/></svg></span>
+              <span class="vendor-shell__nav-label-wrap">
+                <span class="vendor-shell__nav-label">Account</span>
+              </span>
+            </a>
+            <div class="vendor-shell__submenu" aria-hidden="true">
+              <a class="vendor-shell__submenu-link" href="#">Subscription &amp; Packages</a>
+              <a class="vendor-shell__submenu-link" href="#">Admin Users</a>
+              <a class="vendor-shell__submenu-link" href="#">Single Sign On</a>
+              <a class="vendor-shell__submenu-link" href="#">Payments</a>
+              <a class="vendor-shell__submenu-link" href="#">Documentation</a>
+            </div>
+          </div>
+
+          <div class="vendor-shell__nav-item vendor-shell__nav-item--external">
+            <a class="vendor-shell__nav-link" href="#" target="_blank" rel="noreferrer noopener">
+              <span class="vendor-shell__nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="24" height="24"><path fill="currentColor" clip-rule="evenodd" d="M15 7V1.5H9.5l2.043 2.043L6 9.086V10.5h1.414l5.543-5.543L15 7zm-2 .5l-2 2v4H3v-8h4l2-2H1v12h12v-8z"/></svg></span>
+              <span class="vendor-shell__nav-label-wrap">
+                <span class="vendor-shell__nav-label">View product on G2.com</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <header class="vendor-shell__headnav">
+      <div class="vendor-shell__headnav-inner">
+        <div class="vendor-shell__headnav-left">
+          <div class="vendor-shell__product-switcher">
+            <button class="vendor-shell__product-switcher-btn" type="button" aria-haspopup="true" aria-expanded="false">
+              <span class="vendor-shell__product-mark" aria-hidden="true">
+                <img src="../../../assets/logos/example-product-logo.svg" alt="" width="24" height="24">
+              </span>
+              <span class="vendor-shell__product-name">Acme Inc.</span>
+              <span class="vendor-shell__product-caret material-symbols-outlined" aria-hidden="true">arrow_drop_down</span>
+            </button>
+            <div class="vendor-shell__dropdown-panel vendor-shell__dropdown-panel--product" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="vendor-shell__headnav-right">
+          <form class="vendor-shell__search js-search-form" role="search" action="#" method="get">
+            <label class="vendor-shell__sr-only" for="vendorQuickNav">Quick navigation</label>
+            <div class="vendor-shell__rounded-search">
+              <span class="vendor-shell__rounded-search-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M10 2a8 8 0 1 0 4.906 14.32l5.387 5.387 1.414-1.414-5.387-5.387A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z"/></svg>
+              </span>
+              <input id="vendorQuickNav" class="vendor-shell__rounded-search-input js-search-input" type="text" placeholder="Quick nav..." autocomplete="off">
+              <button class="vendor-shell__rounded-search-clear js-search-clear" type="button" aria-label="Clear search">
+                <span class="material-symbols-outlined">close</span>
+              </button>
+            </div>
+          </form>
+
+          <div class="vendor-shell__actions">
+            <div class="vendor-shell__icon-item vendor-shell__icon-item--optional">
+              <button class="vendor-shell__icon-btn vendor-shell__icon-btn--invite" type="button" aria-label="Invite teammate">
+                <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M14.75 11V9.25H13V7.75H14.75V6H16.25V7.75H18V9.25H16.25V11H14.75ZM8 10C7.16667 10 6.45833 9.70833 5.875 9.125C5.29167 8.54167 5 7.83333 5 7C5 6.16667 5.29167 5.45833 5.875 4.875C6.45833 4.29167 7.16667 4 8 4C8.83333 4 9.54167 4.29167 10.125 4.875C10.7083 5.45833 11 6.16667 11 7C11 7.83333 10.7083 8.54167 10.125 9.125C9.54167 9.70833 8.83333 10 8 10ZM2 16V14.0833C2 13.7253 2.08681 13.3962 2.26042 13.096C2.43403 12.7959 2.67361 12.5556 2.97917 12.375C3.74306 11.9306 4.54861 11.5903 5.39583 11.3542C6.24306 11.1181 7.11111 11 8 11C8.88889 11 9.75694 11.1181 10.6042 11.3542C11.4514 11.5903 12.2569 11.9306 13.0208 12.375C13.3264 12.5556 13.566 12.7959 13.7396 13.096C13.9132 13.3962 14 13.7253 14 14.0833V16H2Z"/></svg>
+              </button>
+            </div>
+
+            <div class="vendor-shell__icon-item vendor-shell__icon-item--optional">
+              <button class="vendor-shell__score-btn" type="button" aria-label="Report card score 73" aria-haspopup="true" aria-expanded="false">
+                <span class="vendor-shell__score-inner">73</span>
+              </button>
+              <div class="vendor-shell__dropdown-panel vendor-shell__dropdown-panel--report-card" aria-hidden="true"></div>
+            </div>
+
+            <div class="vendor-shell__icon-item vendor-shell__icon-item--optional">
+              <button class="vendor-shell__icon-btn vendor-shell__icon-btn--support" type="button" aria-label="Support" aria-haspopup="true" aria-expanded="false">
+                <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M10 15C10.2778 15 10.5139 14.9028 10.7083 14.7083C10.9028 14.5139 11 14.2778 11 14C11 13.7222 10.9028 13.4861 10.7083 13.2917C10.5139 13.0972 10.2778 13 10 13C9.72222 13 9.48611 13.0972 9.29167 13.2917C9.09722 13.4861 9 13.7222 9 14C9 14.2778 9.09722 14.5139 9.29167 14.7083C9.48611 14.9028 9.72222 15 10 15ZM9.25 11.8125H10.7708C10.7708 11.2986 10.816 10.934 10.9062 10.7188C10.9965 10.5035 11.2153 10.2292 11.5625 9.89583C12.0486 9.42361 12.3854 9.02083 12.5729 8.6875C12.7604 8.35417 12.8542 7.98611 12.8542 7.58333C12.8542 6.81944 12.5938 6.19792 12.0729 5.71875C11.5521 5.23958 10.8889 5 10.0833 5C9.375 5 8.76042 5.1875 8.23958 5.5625C7.71875 5.9375 7.35417 6.44444 7.14583 7.08333L8.5 7.64583C8.625 7.25694 8.82292 6.95486 9.09375 6.73958C9.36458 6.52431 9.68056 6.41667 10.0417 6.41667C10.4306 6.41667 10.75 6.52778 11 6.75C11.25 6.97222 11.375 7.26389 11.375 7.625C11.375 7.94444 11.2674 8.22917 11.0521 8.47917C10.8368 8.72917 10.5972 8.97222 10.3333 9.20833C9.84722 9.65278 9.54514 10.0174 9.42708 10.3021C9.30903 10.5868 9.25 11.0903 9.25 11.8125ZM10 18C8.90278 18 7.86806 17.7917 6.89583 17.375C5.92361 16.9583 5.07292 16.3854 4.34375 15.6562C3.61458 14.9271 3.04167 14.0764 2.625 13.1042C2.20833 12.1319 2 11.0972 2 10C2 8.88889 2.20833 7.85069 2.625 6.88542C3.04167 5.92014 3.61458 5.07292 4.34375 4.34375C5.07292 3.61458 5.92361 3.04167 6.89583 2.625C7.86806 2.20833 8.90278 2 10 2C11.1111 2 12.1493 2.20833 13.1146 2.625C14.0799 3.04167 14.9271 3.61458 15.6562 4.34375C16.3854 5.07292 16.9583 5.92014 17.375 6.88542C17.7917 7.85069 18 8.88889 18 10C18 11.0972 17.7917 12.1319 17.375 13.1042C16.9583 14.0764 16.3854 14.9271 15.6562 15.6562C14.9271 16.3854 14.0799 16.9583 13.1146 17.375C12.1493 17.7917 11.1111 18 10 18ZM10 16.5C11.8056 16.5 13.3403 15.8681 14.6042 14.6042C15.8681 13.3403 16.5 11.8056 16.5 10C16.5 8.19444 15.8681 6.65972 14.6042 5.39583C13.3403 4.13194 11.8056 3.5 10 3.5C8.19444 3.5 6.65972 4.13194 5.39583 5.39583C4.13194 6.65972 3.5 8.19444 3.5 10C3.5 11.8056 4.13194 13.3403 5.39583 14.6042C6.65972 15.8681 8.19444 16.5 10 16.5Z"/></svg>
+              </button>
+              <div class="vendor-shell__dropdown-panel vendor-shell__dropdown-panel--support" aria-hidden="true"></div>
+            </div>
+
+            <div class="vendor-shell__icon-item">
+              <button class="vendor-shell__icon-btn vendor-shell__icon-btn--avatar" type="button" aria-label="User menu" aria-haspopup="true" aria-expanded="false">
+                <span class="vendor-shell__avatar" aria-hidden="true">SC</span>
+              </button>
+              <div class="vendor-shell__dropdown-panel vendor-shell__dropdown-panel--user" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="vendor-shell__content">
+      <div class="vendor-shell__content-inner">
+        <h1 class="vendor-shell__title">Home</h1>
+        <p class="vendor-shell__subtitle">Welcome to your G2 seller dashboard</p>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const shell = document.getElementById('vendorShell');
+      const toggle = document.getElementById('vendorShellToggle');
+
+      if (shell && toggle) {
+        toggle.addEventListener('click', function () {
+          const isExpanded = shell.classList.toggle('is-expanded');
+          toggle.setAttribute('aria-expanded', String(isExpanded));
+          toggle.setAttribute('aria-label', isExpanded ? 'Collapse sidebar' : 'Expand sidebar');
+        });
+      }
+
+      const searchForms = document.querySelectorAll('.js-search-form');
+      searchForms.forEach(function (form) {
+        const input = form.querySelector('.js-search-input');
+        const clearBtn = form.querySelector('.js-search-clear');
+
+        if (!input || !clearBtn) {
+          return;
+        }
+
+        const syncClear = function () {
+          if (input.value.length > 0) {
+            clearBtn.classList.add('is-visible');
+          } else {
+            clearBtn.classList.remove('is-visible');
+          }
+        };
+
+        input.addEventListener('input', syncClear);
+        clearBtn.addEventListener('click', function () {
+          input.value = '';
+          clearBtn.classList.remove('is-visible');
+          input.focus();
+        });
+
+        syncClear();
+      });
+
+      // Nav item accordion — only one open at a time
+      document.querySelectorAll('[data-has-children] .vendor-shell__nav-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          var item = link.closest('.vendor-shell__nav-item');
+          var wasOpen = item.classList.contains('is-open');
+
+          // If collapsed, expand the sidebar first
+          if (!shell.classList.contains('is-expanded')) {
+            shell.classList.add('is-expanded');
+            toggle.setAttribute('aria-expanded', 'true');
+            toggle.setAttribute('aria-label', 'Collapse sidebar');
+          }
+
+          // Clear active from all items
+          document.querySelectorAll('.vendor-shell__nav-item.is-active').forEach(function (a) {
+            a.classList.remove('is-active');
+          });
+
+          // Close all others
+          document.querySelectorAll('.vendor-shell__nav-item.is-open').forEach(function (other) {
+            other.classList.remove('is-open');
+          });
+          // Toggle clicked (re-open if it wasn't already open)
+          if (!wasOpen) {
+            item.classList.add('is-open');
+          }
+        });
+      });
+
+      // Non-expandable items (Home, View product) — set active + close accordions
+      document.querySelectorAll('.vendor-shell__nav-item:not([data-has-children]) .vendor-shell__nav-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelectorAll('.vendor-shell__nav-item.is-active').forEach(function (a) {
+            a.classList.remove('is-active');
+          });
+          document.querySelectorAll('.vendor-shell__nav-item.is-open').forEach(function (o) {
+            o.classList.remove('is-open');
+          });
+          link.closest('.vendor-shell__nav-item').classList.add('is-active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
