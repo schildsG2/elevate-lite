@@ -1,0 +1,31 @@
+{
+  "name": "elevate-lite",
+  "version": "1.0.0",
+  "description": "Lightweight HTML component library using the G2 Elevate design system for rapid prototyping.",
+  "main": "index.js",
+  "scripts": {
+    "build": "postcss assets/elevate.css -o components/elevate.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schildsG2/elevate-lite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/schildsG2/elevate-lite/issues"
+  },
+  "homepage": "https://github.com/schildsG2/elevate-lite#readme",
+  "dependencies": {
+    "@g2crowd/elevate": "^0.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.13",
+    "postcss-cli": "^11.0.1",
+    "postcss-import": "^16.1.1",
+    "tailwindcss": "^3.4.19"
+  }
+}

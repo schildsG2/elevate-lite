@@ -1,0 +1,5 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import '@g2crowd/elevate/src/css/components.css';
+@import '@g2crowd/elevate/src/css/vendor/select2.css';
