@@ -31,7 +31,7 @@
     }
 
     /* Avatar Styles — from avatar/component.rb */
-    .elv-avatar {
+    .avatar {
       position: relative;
       display: flex;
       align-items: center;
@@ -41,28 +41,28 @@
     }
 
     /* Size Variants - using Elevate utilities */
-    .elv-avatar--xl {
+    .avatar--xl {
       border-radius: 20px; /* rounded-xl */
     }
 
-    .elv-avatar--lg {
+    .avatar--lg {
       border-radius: 9999px; /* rounded-full */
     }
 
-    .elv-avatar--md {
+    .avatar--md {
       border-radius: 9999px;
     }
 
-    .elv-avatar--sm {
+    .avatar--sm {
       border-radius: 9999px;
     }
 
-    .elv-avatar--xs {
+    .avatar--xs {
       border-radius: 9999px;
     }
 
     /* Image */
-    .elv-avatar__image {
+    .avatar__image {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -71,7 +71,7 @@
     }
 
     /* Initials */
-    .elv-avatar__initials {
+    .avatar__initials {
       position: relative;
       display: flex;
       align-items: center;
@@ -84,28 +84,28 @@
       border-radius: inherit;
     }
 
-    .elv-avatar--xl .elv-avatar__initials {
+    .avatar--xl .avatar__initials {
       font-size: 24px;
     }
 
-    .elv-avatar--lg .elv-avatar__initials {
+    .avatar--lg .avatar__initials {
       font-size: 18px;
     }
 
-    .elv-avatar--md .elv-avatar__initials {
+    .avatar--md .avatar__initials {
       font-size: 14px;
     }
 
-    .elv-avatar--sm .elv-avatar__initials {
+    .avatar--sm .avatar__initials {
       font-size: 12px;
     }
 
-    .elv-avatar--xs .elv-avatar__initials {
+    .avatar--xs .avatar__initials {
       font-size: 10px;
     }
 
     /* Placeholder */
-    .elv-avatar__placeholder {
+    .avatar__placeholder {
       position: relative;
       display: flex;
       align-items: center;
@@ -117,14 +117,14 @@
       border-radius: inherit;
     }
 
-    .elv-avatar__placeholder svg {
+    .avatar__placeholder svg {
       width: 60%;
       height: 60%;
       fill: currentColor;
     }
 
     /* Notification Badge */
-    .elv-avatar__notification {
+    .avatar__notification {
       position: absolute;
       top: 0;
       right: 0;
@@ -161,38 +161,38 @@
     </p>
     <div class="examples">
       <div>
-        <div class="elv-avatar elv-avatar--xl elv-size-21 elv-size-21">
-          <img src="https://i.pravatar.cc/150?img=1" alt="User" class="elv-avatar__image">
+        <div class="avatar avatar--xl elv-size-21 elv-size-21">
+          <img src="https://i.pravatar.cc/150?img=1" alt="User" class="avatar__image">
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">XL (84px)</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--lg elv-size-15 elv-size-15">
-          <img src="https://i.pravatar.cc/150?img=2" alt="User" class="elv-avatar__image">
+        <div class="avatar avatar--lg elv-size-15 elv-size-15">
+          <img src="https://i.pravatar.cc/150?img=2" alt="User" class="avatar__image">
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">LG (60px)</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--md elv-size-11 elv-size-11">
-          <img src="https://i.pravatar.cc/150?img=3" alt="User" class="elv-avatar__image">
+        <div class="avatar avatar--md elv-size-11 elv-size-11">
+          <img src="https://i.pravatar.cc/150?img=3" alt="User" class="avatar__image">
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">MD (44px)</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--sm elv-size-9 elv-size-9">
-          <img src="https://i.pravatar.cc/150?img=4" alt="User" class="elv-avatar__image">
+        <div class="avatar avatar--sm elv-size-9 elv-size-9">
+          <img src="https://i.pravatar.cc/150?img=4" alt="User" class="avatar__image">
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">SM (36px)</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--xs elv-size-7 elv-size-7">
-          <img src="https://i.pravatar.cc/150?img=5" alt="User" class="elv-avatar__image">
+        <div class="avatar avatar--xs elv-size-7 elv-size-7">
+          <img src="https://i.pravatar.cc/150?img=5" alt="User" class="avatar__image">
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">XS (28px)</p>
       </div>
     </div>
-    <pre><code>&lt;div class="elv-avatar elv-avatar--md elv-size-11 elv-size-11"&gt;
-  &lt;img src="user.jpg" alt="User name" class="elv-avatar__image"&gt;
+    <pre><code>&lt;div class="avatar avatar--md elv-size-11 elv-size-11"&gt;
+  &lt;img src="user.jpg" alt="User name" class="avatar__image"&gt;
 &lt;/div&gt;</code></pre>
   </div>
 
@@ -204,38 +204,38 @@
     </p>
     <div class="examples">
       <div>
-        <div class="elv-avatar elv-avatar--xl elv-size-21">
-          <div class="elv-avatar__initials">JD</div>
+        <div class="avatar avatar--xl elv-size-21">
+          <div class="avatar__initials">JD</div>
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">XL</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--lg elv-size-15">
-          <div class="elv-avatar__initials">AS</div>
+        <div class="avatar avatar--lg elv-size-15">
+          <div class="avatar__initials">AS</div>
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">LG</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--md elv-size-11">
-          <div class="elv-avatar__initials">MK</div>
+        <div class="avatar avatar--md elv-size-11">
+          <div class="avatar__initials">MK</div>
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">MD</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--sm elv-size-9">
-          <div class="elv-avatar__initials">TC</div>
+        <div class="avatar avatar--sm elv-size-9">
+          <div class="avatar__initials">TC</div>
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">SM</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--xs elv-size-7">
-          <div class="elv-avatar__initials">RP</div>
+        <div class="avatar avatar--xs elv-size-7">
+          <div class="avatar__initials">RP</div>
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">XS</p>
       </div>
     </div>
-    <pre><code>&lt;div class="elv-avatar elv-avatar--md elv-size-11"&gt;
-  &lt;div class="elv-avatar__initials"&gt;JD&lt;/div&gt;
+    <pre><code>&lt;div class="avatar avatar--md elv-size-11"&gt;
+  &lt;div class="avatar__initials"&gt;JD&lt;/div&gt;
 &lt;/div&gt;</code></pre>
   </div>
 
@@ -247,8 +247,8 @@
     </p>
     <div class="examples">
       <div>
-        <div class="elv-avatar elv-avatar--xl elv-size-21">
-          <div class="elv-avatar__placeholder">
+        <div class="avatar avatar--xl elv-size-21">
+          <div class="avatar__placeholder">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
             </svg>
@@ -257,8 +257,8 @@
         <p class="elv-text-xs elv-text-subtle elv-mt-1">XL</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--lg elv-size-15">
-          <div class="elv-avatar__placeholder">
+        <div class="avatar avatar--lg elv-size-15">
+          <div class="avatar__placeholder">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
             </svg>
@@ -267,8 +267,8 @@
         <p class="elv-text-xs elv-text-subtle elv-mt-1">LG</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--md elv-size-11">
-          <div class="elv-avatar__placeholder">
+        <div class="avatar avatar--md elv-size-11">
+          <div class="avatar__placeholder">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
             </svg>
@@ -277,8 +277,8 @@
         <p class="elv-text-xs elv-text-subtle elv-mt-1">MD</p>
       </div>
     </div>
-    <pre><code>&lt;div class="elv-avatar elv-avatar--md elv-size-11"&gt;
-  &lt;div class="elv-avatar__placeholder"&gt;
+    <pre><code>&lt;div class="avatar avatar--md elv-size-11"&gt;
+  &lt;div class="avatar__placeholder"&gt;
     &lt;svg&gt;...&lt;/svg&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -292,26 +292,26 @@
     </p>
     <div class="examples">
       <div>
-        <div class="elv-avatar elv-avatar--lg elv-size-15">
-          <img src="./assets/pictogram-anonymous-avatar-blue.svg" alt="Anonymous" class="elv-avatar__image">
+        <div class="avatar avatar--lg elv-size-15">
+          <img src="./assets/pictogram-anonymous-avatar-blue.svg" alt="Anonymous" class="avatar__image">
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">Blue</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--lg elv-size-15">
-          <img src="./assets/pictogram-anonymous-avatar-purple.svg" alt="Anonymous" class="elv-avatar__image">
+        <div class="avatar avatar--lg elv-size-15">
+          <img src="./assets/pictogram-anonymous-avatar-purple.svg" alt="Anonymous" class="avatar__image">
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">Purple</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--lg elv-size-15">
-          <img src="./assets/pictogram-anonymous-avatar-rorange.svg" alt="Anonymous" class="elv-avatar__image">
+        <div class="avatar avatar--lg elv-size-15">
+          <img src="./assets/pictogram-anonymous-avatar-rorange.svg" alt="Anonymous" class="avatar__image">
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">Rorange</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--lg elv-size-15">
-          <img src="./assets/pictogram-anonymous-avatar-teal.svg" alt="Anonymous" class="elv-avatar__image">
+        <div class="avatar avatar--lg elv-size-15">
+          <img src="./assets/pictogram-anonymous-avatar-teal.svg" alt="Anonymous" class="avatar__image">
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">Teal</p>
       </div>
@@ -319,8 +319,8 @@
     <p class="elv-text-xs elv-text-subtle elv-mb-2">
       <strong>Usage:</strong> Randomly assign one of the 4 colors to anonymous users for visual variety
     </p>
-    <pre><code>&lt;div class="elv-avatar elv-avatar--lg elv-size-15"&gt;
-  &lt;img src="pictogram-anonymous-avatar-blue.svg" alt="Anonymous" class="elv-avatar__image"&gt;
+    <pre><code>&lt;div class="avatar avatar--lg elv-size-15"&gt;
+  &lt;img src="pictogram-anonymous-avatar-blue.svg" alt="Anonymous" class="avatar__image"&gt;
 &lt;/div&gt;</code></pre>
   </div>
 
@@ -332,30 +332,30 @@
     </p>
     <div class="examples">
       <div>
-        <div class="elv-avatar elv-avatar--lg elv-size-15">
-          <img src="https://i.pravatar.cc/150?img=6" alt="User" class="elv-avatar__image">
-          <span class="elv-avatar__notification">3</span>
+        <div class="avatar avatar--lg elv-size-15">
+          <img src="https://i.pravatar.cc/150?img=6" alt="User" class="avatar__image">
+          <span class="avatar__notification">3</span>
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">With count</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--lg elv-size-15">
-          <div class="elv-avatar__initials">SC</div>
-          <span class="elv-avatar__notification">12</span>
+        <div class="avatar avatar--lg elv-size-15">
+          <div class="avatar__initials">SC</div>
+          <span class="avatar__notification">12</span>
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">Double digit</p>
       </div>
       <div>
-        <div class="elv-avatar elv-avatar--lg elv-size-15">
-          <img src="https://i.pravatar.cc/150?img=7" alt="User" class="elv-avatar__image">
-          <span class="elv-avatar__notification" style="min-width: 10px; width: 10px; height: 10px; padding: 0;"></span>
+        <div class="avatar avatar--lg elv-size-15">
+          <img src="https://i.pravatar.cc/150?img=7" alt="User" class="avatar__image">
+          <span class="avatar__notification" style="min-width: 10px; width: 10px; height: 10px; padding: 0;"></span>
         </div>
         <p class="elv-text-xs elv-text-subtle elv-mt-1">Dot only</p>
       </div>
     </div>
-    <pre><code>&lt;div class="elv-avatar elv-avatar--lg elv-size-15"&gt;
-  &lt;img src="user.jpg" alt="User" class="elv-avatar__image"&gt;
-  &lt;span class="elv-avatar__notification"&gt;3&lt;/span&gt;
+    <pre><code>&lt;div class="avatar avatar--lg elv-size-15"&gt;
+  &lt;img src="user.jpg" alt="User" class="avatar__image"&gt;
+  &lt;span class="avatar__notification"&gt;3&lt;/span&gt;
 &lt;/div&gt;</code></pre>
   </div>
 
@@ -371,8 +371,8 @@
       <h3 class="elv-text-sm elv-font-semibold elv-text-default elv-mb-3">Team Members</h3>
       <div class="elv-flex elv-flex-col elv-gap-3">
         <div class="elv-flex elv-items-center elv-gap-3">
-          <div class="elv-avatar elv-avatar--md elv-size-11">
-            <img src="https://i.pravatar.cc/150?img=8" alt="Jane Doe" class="elv-avatar__image">
+          <div class="avatar avatar--md elv-size-11">
+            <img src="https://i.pravatar.cc/150?img=8" alt="Jane Doe" class="avatar__image">
           </div>
           <div>
             <p class="elv-text-sm elv-font-semibold elv-text-default">Jane Doe</p>
@@ -380,8 +380,8 @@
           </div>
         </div>
         <div class="elv-flex elv-items-center elv-gap-3">
-          <div class="elv-avatar elv-avatar--md elv-size-11">
-            <div class="elv-avatar__initials">AS</div>
+          <div class="avatar avatar--md elv-size-11">
+            <div class="avatar__initials">AS</div>
           </div>
           <div>
             <p class="elv-text-sm elv-font-semibold elv-text-default">Alex Smith</p>
@@ -389,9 +389,9 @@
           </div>
         </div>
         <div class="elv-flex elv-items-center elv-gap-3">
-          <div class="elv-avatar elv-avatar--md elv-size-11">
-            <img src="https://i.pravatar.cc/150?img=9" alt="Mike Chen" class="elv-avatar__image">
-            <span class="elv-avatar__notification">2</span>
+          <div class="avatar avatar--md elv-size-11">
+            <img src="https://i.pravatar.cc/150?img=9" alt="Mike Chen" class="avatar__image">
+            <span class="avatar__notification">2</span>
           </div>
           <div>
             <p class="elv-text-sm elv-font-semibold elv-text-default">Mike Chen</p>
@@ -405,17 +405,17 @@
     <div class="elv-bg-neutral-0 elv-border elv-border-light elv-rounded-md elv-p-4" style="max-width: 500px;">
       <h3 class="elv-text-sm elv-font-semibold elv-text-default elv-mb-3">Assigned Team</h3>
       <div class="elv-flex elv-items-center">
-        <div class="elv-avatar elv-avatar--sm elv-size-9" style="margin-right: -8px;">
-          <img src="https://i.pravatar.cc/150?img=10" alt="User" class="elv-avatar__image">
+        <div class="avatar avatar--sm elv-size-9" style="margin-right: -8px;">
+          <img src="https://i.pravatar.cc/150?img=10" alt="User" class="avatar__image">
         </div>
-        <div class="elv-avatar elv-avatar--sm elv-size-9" style="margin-right: -8px;">
-          <div class="elv-avatar__initials">JK</div>
+        <div class="avatar avatar--sm elv-size-9" style="margin-right: -8px;">
+          <div class="avatar__initials">JK</div>
         </div>
-        <div class="elv-avatar elv-avatar--sm elv-size-9" style="margin-right: -8px;">
-          <img src="https://i.pravatar.cc/150?img=11" alt="User" class="elv-avatar__image">
+        <div class="avatar avatar--sm elv-size-9" style="margin-right: -8px;">
+          <img src="https://i.pravatar.cc/150?img=11" alt="User" class="avatar__image">
         </div>
-        <div class="elv-avatar elv-avatar--sm elv-size-9">
-          <div class="elv-avatar__placeholder">
+        <div class="avatar avatar--sm elv-size-9">
+          <div class="avatar__placeholder">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
             </svg>

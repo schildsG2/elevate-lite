@@ -31,19 +31,19 @@
     }
 
     /* Breadcrumbs Styles — from breadcrumbs/component.rb */
-    .elv-breadcrumbs {
+    .breadcrumbs {
       display: inline-flex;
       align-items: center;
       gap: 2px;
     }
 
-    .elv-breadcrumb-item {
+    .breadcrumbs__item {
       display: flex;
       align-items: center;
       gap: 2px;
     }
 
-    .elv-breadcrumb-link {
+    .breadcrumbs__link {
       color: var(--text-neutral-70); /* neutral-70 / N70 */
       text-decoration: none;
       font-size: 12px;
@@ -51,22 +51,22 @@
       transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .elv-breadcrumb-link:hover {
+    .breadcrumbs__link:hover {
       color: var(--text-default); /* text-default */
     }
 
-    .elv-breadcrumb-link:focus-visible {
+    .breadcrumbs__link:focus-visible {
       outline: 2px solid var(--text-primary);
       outline-offset: 2px;
       border-radius: 2px;
     }
 
-    .elv-breadcrumb-link--current {
+    .breadcrumbs__link--current {
       color: var(--text-default); /* neutral-100 / text-default - darkest/most prominent */
       pointer-events: none;
     }
 
-    .elv-breadcrumb-separator {
+    .breadcrumbs__separator {
       width: 20px;
       height: 20px;
       flex-shrink: 0;
@@ -91,41 +91,41 @@
     </p>
     <div class="examples">
       <nav aria-label="Breadcrumb">
-        <ol class="elv-breadcrumbs" role="list">
-          <li class="elv-breadcrumb-item">
-            <a href="#" class="elv-breadcrumb-link">Home</a>
-            <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ol class="breadcrumbs" role="list">
+          <li class="breadcrumbs__item">
+            <a href="#" class="breadcrumbs__link">Home</a>
+            <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
             </svg>
           </li>
-          <li class="elv-breadcrumb-item">
-            <a href="#" class="elv-breadcrumb-link">Categories</a>
-            <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <li class="breadcrumbs__item">
+            <a href="#" class="breadcrumbs__link">Categories</a>
+            <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
             </svg>
           </li>
-          <li class="elv-breadcrumb-item">
-            <span class="elv-breadcrumb-link elv-breadcrumb-link--current" aria-current="page">CRM Software</span>
+          <li class="breadcrumbs__item">
+            <span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page">CRM Software</span>
           </li>
         </ol>
       </nav>
     </div>
     <pre><code>&lt;nav aria-label="Breadcrumb"&gt;
-  &lt;ol class="elv-breadcrumbs" role="list"&gt;
-    &lt;li class="elv-breadcrumb-item"&gt;
-      &lt;a href="/" class="elv-breadcrumb-link"&gt;Home&lt;/a&gt;
-      &lt;svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none"&gt;
+  &lt;ol class="breadcrumbs" role="list"&gt;
+    &lt;li class="breadcrumbs__item"&gt;
+      &lt;a href="/" class="breadcrumbs__link"&gt;Home&lt;/a&gt;
+      &lt;svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none"&gt;
         &lt;path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/&gt;
       &lt;/svg&gt;
     &lt;/li&gt;
-    &lt;li class="elv-breadcrumb-item"&gt;
-      &lt;a href="/categories" class="elv-breadcrumb-link"&gt;Categories&lt;/a&gt;
-      &lt;svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none"&gt;
+    &lt;li class="breadcrumbs__item"&gt;
+      &lt;a href="/categories" class="breadcrumbs__link"&gt;Categories&lt;/a&gt;
+      &lt;svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none"&gt;
         &lt;path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/&gt;
       &lt;/svg&gt;
     &lt;/li&gt;
-    &lt;li class="elv-breadcrumb-item"&gt;
-      &lt;span class="elv-breadcrumb-link elv-breadcrumb-link--current" aria-current="page"&gt;
+    &lt;li class="breadcrumbs__item"&gt;
+      &lt;span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page"&gt;
         CRM Software
       &lt;/span&gt;
     &lt;/li&gt;
@@ -141,15 +141,15 @@
     </p>
     <div class="examples">
       <nav aria-label="Breadcrumb">
-        <ol class="elv-breadcrumbs" role="list">
-          <li class="elv-breadcrumb-item">
-            <a href="#" class="elv-breadcrumb-link">Products</a>
-            <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ol class="breadcrumbs" role="list">
+          <li class="breadcrumbs__item">
+            <a href="#" class="breadcrumbs__link">Products</a>
+            <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
             </svg>
           </li>
-          <li class="elv-breadcrumb-item">
-            <span class="elv-breadcrumb-link elv-breadcrumb-link--current" aria-current="page">Salesforce</span>
+          <li class="breadcrumbs__item">
+            <span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page">Salesforce</span>
           </li>
         </ol>
       </nav>
@@ -164,27 +164,27 @@
     </p>
     <div class="examples">
       <nav aria-label="Breadcrumb">
-        <ol class="elv-breadcrumbs" role="list">
-          <li class="elv-breadcrumb-item">
-            <a href="#" class="elv-breadcrumb-link">Home</a>
-            <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ol class="breadcrumbs" role="list">
+          <li class="breadcrumbs__item">
+            <a href="#" class="breadcrumbs__link">Home</a>
+            <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
             </svg>
           </li>
-          <li class="elv-breadcrumb-item">
-            <a href="#" class="elv-breadcrumb-link">Categories</a>
-            <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <li class="breadcrumbs__item">
+            <a href="#" class="breadcrumbs__link">Categories</a>
+            <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
             </svg>
           </li>
-          <li class="elv-breadcrumb-item">
-            <a href="#" class="elv-breadcrumb-link">CRM Software</a>
-            <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <li class="breadcrumbs__item">
+            <a href="#" class="breadcrumbs__link">CRM Software</a>
+            <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
             </svg>
           </li>
-          <li class="elv-breadcrumb-item">
-            <span class="elv-breadcrumb-link elv-breadcrumb-link--current" aria-current="page">Reviews</span>
+          <li class="breadcrumbs__item">
+            <span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page">Reviews</span>
           </li>
         </ol>
       </nav>
@@ -199,27 +199,27 @@
     </p>
     <div class="examples">
       <nav aria-label="Breadcrumb">
-        <ol class="elv-breadcrumbs" role="list" itemscope itemtype="https://schema.org/BreadcrumbList">
-          <li class="elv-breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="#" class="elv-breadcrumb-link" itemprop="item" itemtype="https://schema.org/Thing">
+        <ol class="breadcrumbs" role="list" itemscope itemtype="https://schema.org/BreadcrumbList">
+          <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="#" class="breadcrumbs__link" itemprop="item" itemtype="https://schema.org/Thing">
               <span itemprop="name">Home</span>
             </a>
             <meta itemprop="position" content="1" />
-            <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
             </svg>
           </li>
-          <li class="elv-breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="#" class="elv-breadcrumb-link" itemprop="item" itemtype="https://schema.org/Thing">
+          <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="#" class="breadcrumbs__link" itemprop="item" itemtype="https://schema.org/Thing">
               <span itemprop="name">Categories</span>
             </a>
             <meta itemprop="position" content="2" />
-            <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
             </svg>
           </li>
-          <li class="elv-breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span class="elv-breadcrumb-link elv-breadcrumb-link--current" aria-current="page" itemprop="item" itemtype="https://schema.org/Thing">
+          <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page" itemprop="item" itemtype="https://schema.org/Thing">
               <span itemprop="name">CRM Software</span>
             </span>
             <meta itemprop="position" content="3" />
@@ -227,7 +227,7 @@
         </ol>
       </nav>
     </div>
-    <pre><code>&lt;ol class="elv-breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList"&gt;
+    <pre><code>&lt;ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList"&gt;
   &lt;li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"&gt;
     &lt;a href="/" itemprop="item"&gt;
       &lt;span itemprop="name"&gt;Home&lt;/span&gt;
@@ -247,21 +247,21 @@
 
     <div class="elv-bg-neutral-0 elv-border elv-border-light elv-rounded-md elv-p-6" style="max-width: 800px;">
       <nav aria-label="Breadcrumb" class="elv-mb-4">
-        <ol class="elv-breadcrumbs" role="list">
-          <li class="elv-breadcrumb-item">
-            <a href="#" class="elv-breadcrumb-link">Home</a>
-            <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ol class="breadcrumbs" role="list">
+          <li class="breadcrumbs__item">
+            <a href="#" class="breadcrumbs__link">Home</a>
+            <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
             </svg>
           </li>
-          <li class="elv-breadcrumb-item">
-            <a href="#" class="elv-breadcrumb-link">Categories</a>
-            <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <li class="breadcrumbs__item">
+            <a href="#" class="breadcrumbs__link">Categories</a>
+            <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
             </svg>
           </li>
-          <li class="elv-breadcrumb-item">
-            <span class="elv-breadcrumb-link elv-breadcrumb-link--current" aria-current="page">CRM Software</span>
+          <li class="breadcrumbs__item">
+            <span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page">CRM Software</span>
           </li>
         </ol>
       </nav>

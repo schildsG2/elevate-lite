@@ -491,7 +491,7 @@
     }
 
     /* Avatar */
-    .elv-avatar {
+    .avatar {
       position: relative;
       display: flex;
       align-items: center;
@@ -499,28 +499,28 @@
       border: 2px solid white;
       overflow: hidden;
     }
-    .elv-avatar--lg {
+    .avatar--lg {
       width: 60px;
       height: 60px;
       border-radius: 9999px;
     }
-    .elv-avatar--md {
+    .avatar--md {
       width: 44px;
       height: 44px;
       border-radius: 9999px;
     }
-    .elv-avatar--sm {
+    .avatar--sm {
       width: 36px;
       height: 36px;
       border-radius: 9999px;
     }
-    .elv-avatar__image {
+    .avatar__image {
       width: 100%;
       height: 100%;
       object-fit: cover;
       border-radius: inherit;
     }
-    .elv-avatar__initials {
+    .avatar__initials {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -532,7 +532,7 @@
       font-size: 14px;
       border-radius: inherit;
     }
-    .elv-avatar--sm .elv-avatar__initials {
+    .avatar--sm .avatar__initials {
       font-size: 12px;
     }
 
@@ -637,31 +637,31 @@
     }
 
     /* Breadcrumbs */
-    .elv-breadcrumbs {
+    .breadcrumbs {
       display: inline-flex;
       align-items: center;
       gap: 2px;
     }
-    .elv-breadcrumb-item {
+    .breadcrumbs__item {
       display: flex;
       align-items: center;
       gap: 2px;
     }
-    .elv-breadcrumb-link {
+    .breadcrumbs__link {
       color: #4c4b53;
       text-decoration: none;
       font-size: 12px;
       line-height: 16px;
       transition: color 150ms ease;
     }
-    .elv-breadcrumb-link:hover {
+    .breadcrumbs__link:hover {
       color: #201f23;
     }
-    .elv-breadcrumb-link--current {
+    .breadcrumbs__link--current {
       color: #84838a;
       pointer-events: none;
     }
-    .elv-breadcrumb-separator {
+    .breadcrumbs__separator {
       width: 20px;
       height: 20px;
       flex-shrink: 0;
@@ -769,17 +769,17 @@
     }
 
     /* Tabs */
-    .elv-tab-group {
+    .tab-group {
       display: flex;
       flex-direction: column;
       gap: 0;
     }
-    .elv-tab-list {
+    .tab-list {
       display: flex;
       align-items: center;
       border-bottom: 1px solid #c7c6cd;
     }
-    .elv-tab {
+    .tab {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -799,27 +799,27 @@
       position: relative;
       white-space: nowrap;
     }
-    .elv-tab:hover {
+    .tab:hover {
       color: #5746b2;
       border-bottom: 2px solid #5746b2;
     }
-    .elv-tab[aria-selected="true"] {
+    .tab[aria-selected="true"] {
       color: #5746b2;
       border-bottom: 2px solid #5746b2;
     }
-    .elv-tab:focus {
+    .tab:focus {
       outline: 3px solid #c3bde5;
       outline-offset: -2px;
       z-index: 1;
     }
-    .elv-tab-panels {
+    .tab-panels {
       margin-top: 16px;
     }
-    .elv-tab-panel {
+    .tab-panel {
       display: none;
       animation: fadeIn 200ms ease;
     }
-    .elv-tab-panel[aria-hidden="false"] {
+    .tab-panel[aria-hidden="false"] {
       display: block;
     }
     @keyframes fadeIn {
@@ -985,56 +985,56 @@
     }
 
     /* Button Group */
-    .elv-button-group {
+    .button-group {
       display: flex;
       align-items: center;
     }
-    .elv-button-group--horizontal {
+    .button-group--horizontal {
       flex-direction: row;
       gap: 12px;
     }
-    .elv-button-group--vertical {
+    .button-group--vertical {
       flex-direction: column;
       gap: 12px;
       align-items: stretch;
     }
-    .elv-button-group--connected {
+    .button-group--connected {
       gap: 0;
     }
-    .elv-button-group--connected > .btn:not(:first-child):not(:last-child) {
+    .button-group--connected > .btn:not(:first-child):not(:last-child) {
       border-radius: 0;
     }
-    .elv-button-group--connected > .btn:first-child {
+    .button-group--connected > .btn:first-child {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
-    .elv-button-group--connected > .btn:last-child {
+    .button-group--connected > .btn:last-child {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
-    .elv-button-group--connected > .btn:not(:last-child) {
+    .button-group--connected > .btn:not(:last-child) {
       border-right-width: 0;
     }
-    .elv-button-group--connected.elv-button-group--vertical > .btn:first-child {
+    .button-group--connected.button-group--vertical > .btn:first-child {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       border-top-right-radius: 24px;
       border-top-left-radius: 24px;
     }
-    .elv-button-group--connected.elv-button-group--vertical > .btn:last-child {
+    .button-group--connected.button-group--vertical > .btn:last-child {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       border-bottom-left-radius: 24px;
       border-bottom-right-radius: 24px;
     }
-    .elv-button-group--connected.elv-button-group--vertical > .btn:not(:first-child):not(:last-child) {
+    .button-group--connected.button-group--vertical > .btn:not(:first-child):not(:last-child) {
       border-radius: 0;
     }
-    .elv-button-group--connected.elv-button-group--vertical > .btn:not(:last-child) {
+    .button-group--connected.button-group--vertical > .btn:not(:last-child) {
       border-right-width: 1.5px;
       border-bottom-width: 0;
     }
-    .elv-button-group--tight {
+    .button-group--tight {
       gap: 8px;
     }
 
@@ -2019,15 +2019,15 @@
 <header class="elv-bg-neutral-0 elv-border-b elv-border-light" style="border-bottom-width: 0.5px;">
   <div elv class="elv-max-w-7xl elv-w-full md:elv-w-5/6 elv-mx-auto elv-pt-12 elv-pb-8 elv-px-3">
     <nav aria-label="Breadcrumb" class="elv-mb-3">
-      <ol class="elv-breadcrumbs" role="list">
-        <li class="elv-breadcrumb-item">
-          <a href="../../index.html" class="elv-breadcrumb-link">Chicago Labs</a>
-          <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ol class="breadcrumbs" role="list">
+        <li class="breadcrumbs__item">
+          <a href="../../index.html" class="breadcrumbs__link">Chicago Labs</a>
+          <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"></path>
           </svg>
         </li>
-        <li class="elv-breadcrumb-item">
-          <span class="elv-breadcrumb-link elv-breadcrumb-link--current" aria-current="page">Elevate Components</span>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page">Elevate Components</span>
         </li>
       </ol>
     </nav>
@@ -2496,7 +2496,7 @@
     <div class="demo-grid">
       <div>
         <div class="demo-label">Horizontal (Default)</div>
-        <div class="elv-button-group elv-button-group--horizontal">
+        <div class="button-group button-group--horizontal">
           <button class="btn btn--primary btn--md">Save</button>
           <button class="btn btn--tertiary btn--md">Cancel</button>
         </div>
@@ -2504,7 +2504,7 @@
 
       <div>
         <div class="demo-label">Three Buttons</div>
-        <div class="elv-button-group elv-button-group--horizontal">
+        <div class="button-group button-group--horizontal">
           <button class="btn btn--primary btn--md">Save</button>
           <button class="btn btn--secondary btn--md">Save as draft</button>
           <button class="btn btn--tertiary btn--md">Cancel</button>
@@ -2513,7 +2513,7 @@
 
       <div>
         <div class="demo-label">Connected Style</div>
-        <div class="elv-button-group elv-button-group--horizontal elv-button-group--connected">
+        <div class="button-group button-group--horizontal button-group--connected">
           <button class="btn btn--secondary btn--md">Yes</button>
           <button class="btn btn--secondary btn--md">No</button>
           <button class="btn btn--secondary btn--md">Maybe</button>
@@ -2522,7 +2522,7 @@
 
       <div>
         <div class="demo-label">Vertical Stack</div>
-        <div class="elv-button-group elv-button-group--vertical">
+        <div class="button-group button-group--vertical">
           <button class="btn btn--primary btn--md">Primary action</button>
           <button class="btn btn--secondary btn--md">Secondary action</button>
           <button class="btn btn--tertiary btn--md">Cancel</button>
@@ -2531,7 +2531,7 @@
 
       <div>
         <div class="demo-label">Tight Spacing (8px)</div>
-        <div class="elv-button-group elv-button-group--horizontal elv-button-group--tight">
+        <div class="button-group button-group--horizontal button-group--tight">
           <button class="btn btn--secondary btn--sm">Edit</button>
           <button class="btn btn--secondary btn--sm">Delete</button>
           <button class="btn btn--secondary btn--sm">Share</button>
@@ -2953,14 +2953,14 @@
       <div>
         <div class="demo-label">Sizes (with images)</div>
         <div class="demo-row">
-          <div class="elv-avatar elv-avatar--lg">
-            <img src="https://i.pravatar.cc/150?img=1" alt="User" class="elv-avatar__image">
+          <div class="avatar avatar--lg">
+            <img src="https://i.pravatar.cc/150?img=1" alt="User" class="avatar__image">
           </div>
-          <div class="elv-avatar elv-avatar--md">
-            <img src="https://i.pravatar.cc/150?img=2" alt="User" class="elv-avatar__image">
+          <div class="avatar avatar--md">
+            <img src="https://i.pravatar.cc/150?img=2" alt="User" class="avatar__image">
           </div>
-          <div class="elv-avatar elv-avatar--sm">
-            <img src="https://i.pravatar.cc/150?img=3" alt="User" class="elv-avatar__image">
+          <div class="avatar avatar--sm">
+            <img src="https://i.pravatar.cc/150?img=3" alt="User" class="avatar__image">
           </div>
         </div>
       </div>
@@ -2968,14 +2968,14 @@
       <div>
         <div class="demo-label">Initials</div>
         <div class="demo-row">
-          <div class="elv-avatar elv-avatar--lg">
-            <div class="elv-avatar__initials">JD</div>
+          <div class="avatar avatar--lg">
+            <div class="avatar__initials">JD</div>
           </div>
-          <div class="elv-avatar elv-avatar--md">
-            <div class="elv-avatar__initials">AS</div>
+          <div class="avatar avatar--md">
+            <div class="avatar__initials">AS</div>
           </div>
-          <div class="elv-avatar elv-avatar--sm">
-            <div class="elv-avatar__initials">MK</div>
+          <div class="avatar avatar--sm">
+            <div class="avatar__initials">MK</div>
           </div>
         </div>
       </div>
@@ -2983,17 +2983,17 @@
       <div>
         <div class="demo-label">Anonymous Profiles</div>
         <div class="demo-row">
-          <div class="elv-avatar elv-avatar--md">
-            <img src="./templates/simple/assets/pictogram-anonymous-avatar-blue.svg" alt="Anonymous" class="elv-avatar__image">
+          <div class="avatar avatar--md">
+            <img src="./templates/simple/assets/pictogram-anonymous-avatar-blue.svg" alt="Anonymous" class="avatar__image">
           </div>
-          <div class="elv-avatar elv-avatar--md">
-            <img src="./templates/simple/assets/pictogram-anonymous-avatar-purple.svg" alt="Anonymous" class="elv-avatar__image">
+          <div class="avatar avatar--md">
+            <img src="./templates/simple/assets/pictogram-anonymous-avatar-purple.svg" alt="Anonymous" class="avatar__image">
           </div>
-          <div class="elv-avatar elv-avatar--md">
-            <img src="./templates/simple/assets/pictogram-anonymous-avatar-rorange.svg" alt="Anonymous" class="elv-avatar__image">
+          <div class="avatar avatar--md">
+            <img src="./templates/simple/assets/pictogram-anonymous-avatar-rorange.svg" alt="Anonymous" class="avatar__image">
           </div>
-          <div class="elv-avatar elv-avatar--md">
-            <img src="./templates/simple/assets/pictogram-anonymous-avatar-teal.svg" alt="Anonymous" class="elv-avatar__image">
+          <div class="avatar avatar--md">
+            <img src="./templates/simple/assets/pictogram-anonymous-avatar-teal.svg" alt="Anonymous" class="avatar__image">
           </div>
         </div>
       </div>
@@ -3002,8 +3002,8 @@
         <div class="demo-label">In Context</div>
         <div class="elv-bg-neutral-0 elv-border elv-border-light elv-rounded-md elv-p-3" style="max-width: 400px;">
           <div class="elv-flex elv-items-center elv-gap-3">
-            <div class="elv-avatar elv-avatar--md">
-              <img src="https://i.pravatar.cc/150?img=4" alt="Jane Doe" class="elv-avatar__image">
+            <div class="avatar avatar--md">
+              <img src="https://i.pravatar.cc/150?img=4" alt="Jane Doe" class="avatar__image">
             </div>
             <div>
               <p class="elv-text-sm elv-font-semibold elv-text-default">Jane Doe</p>
@@ -3147,21 +3147,21 @@
       <div>
         <div class="demo-label">Three Levels</div>
         <nav aria-label="Breadcrumb">
-          <ol class="elv-breadcrumbs" role="list">
-            <li class="elv-breadcrumb-item">
-              <a href="#" class="elv-breadcrumb-link">Home</a>
-              <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none">
+          <ol class="breadcrumbs" role="list">
+            <li class="breadcrumbs__item">
+              <a href="#" class="breadcrumbs__link">Home</a>
+              <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none">
                 <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
               </svg>
             </li>
-            <li class="elv-breadcrumb-item">
-              <a href="#" class="elv-breadcrumb-link">Categories</a>
-              <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none">
+            <li class="breadcrumbs__item">
+              <a href="#" class="breadcrumbs__link">Categories</a>
+              <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none">
                 <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
               </svg>
             </li>
-            <li class="elv-breadcrumb-item">
-              <span class="elv-breadcrumb-link elv-breadcrumb-link--current" aria-current="page">CRM Software</span>
+            <li class="breadcrumbs__item">
+              <span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page">CRM Software</span>
             </li>
           </ol>
         </nav>
@@ -3170,27 +3170,27 @@
       <div>
         <div class="demo-label">Four Levels</div>
         <nav aria-label="Breadcrumb">
-          <ol class="elv-breadcrumbs" role="list">
-            <li class="elv-breadcrumb-item">
-              <a href="#" class="elv-breadcrumb-link">Home</a>
-              <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none">
+          <ol class="breadcrumbs" role="list">
+            <li class="breadcrumbs__item">
+              <a href="#" class="breadcrumbs__link">Home</a>
+              <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none">
                 <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
               </svg>
             </li>
-            <li class="elv-breadcrumb-item">
-              <a href="#" class="elv-breadcrumb-link">Categories</a>
-              <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none">
+            <li class="breadcrumbs__item">
+              <a href="#" class="breadcrumbs__link">Categories</a>
+              <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none">
                 <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
               </svg>
             </li>
-            <li class="elv-breadcrumb-item">
-              <a href="#" class="elv-breadcrumb-link">CRM Software</a>
-              <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none">
+            <li class="breadcrumbs__item">
+              <a href="#" class="breadcrumbs__link">CRM Software</a>
+              <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none">
                 <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
               </svg>
             </li>
-            <li class="elv-breadcrumb-item">
-              <span class="elv-breadcrumb-link elv-breadcrumb-link--current" aria-current="page">Reviews</span>
+            <li class="breadcrumbs__item">
+              <span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page">Reviews</span>
             </li>
           </ol>
         </nav>
@@ -3523,44 +3523,44 @@
       <div>
         <div class="demo-label">Basic Tabs</div>
         <div style="max-width: 600px;">
-          <div class="elv-tab-group">
-            <div class="elv-tab-list" role="tablist" aria-label="Product information">
-              <button class="elv-tab" role="tab" aria-selected="true" aria-controls="demo-panel-1" id="demo-tab-1">
+          <div class="tab-group">
+            <div class="tab-list" role="tablist" aria-label="Product information">
+              <button class="tab" role="tab" aria-selected="true" aria-controls="demo-panel-1" id="demo-tab-1">
                 Overview
               </button>
-              <button class="elv-tab" role="tab" aria-selected="false" aria-controls="demo-panel-2" id="demo-tab-2" tabindex="-1">
+              <button class="tab" role="tab" aria-selected="false" aria-controls="demo-panel-2" id="demo-tab-2" tabindex="-1">
                 Features
               </button>
-              <button class="elv-tab" role="tab" aria-selected="false" aria-controls="demo-panel-3" id="demo-tab-3" tabindex="-1">
+              <button class="tab" role="tab" aria-selected="false" aria-controls="demo-panel-3" id="demo-tab-3" tabindex="-1">
                 Pricing
               </button>
-              <button class="elv-tab" role="tab" aria-selected="false" aria-controls="demo-panel-4" id="demo-tab-4" tabindex="-1">
+              <button class="tab" role="tab" aria-selected="false" aria-controls="demo-panel-4" id="demo-tab-4" tabindex="-1">
                 Reviews
               </button>
             </div>
-            <div class="elv-tab-panels">
-              <div class="elv-tab-panel" role="tabpanel" id="demo-panel-1" aria-labelledby="demo-tab-1" aria-hidden="false" tabindex="0">
+            <div class="tab-panels">
+              <div class="tab-panel" role="tabpanel" id="demo-panel-1" aria-labelledby="demo-tab-1" aria-hidden="false" tabindex="0">
                 <div class="elv-bg-neutral-5 elv-p-4 elv-rounded-sm">
                   <p class="elv-text-sm elv-text-default">
                     <strong>Overview:</strong> This product helps teams collaborate more effectively with real-time messaging, file sharing, and video calls.
                   </p>
                 </div>
               </div>
-              <div class="elv-tab-panel" role="tabpanel" id="demo-panel-2" aria-labelledby="demo-tab-2" aria-hidden="true" tabindex="0">
+              <div class="tab-panel" role="tabpanel" id="demo-panel-2" aria-labelledby="demo-tab-2" aria-hidden="true" tabindex="0">
                 <div class="elv-bg-neutral-5 elv-p-4 elv-rounded-sm">
                   <p class="elv-text-sm elv-text-default">
                     <strong>Features:</strong> Real-time chat, video conferencing, screen sharing, file storage, integrations with 100+ tools.
                   </p>
                 </div>
               </div>
-              <div class="elv-tab-panel" role="tabpanel" id="demo-panel-3" aria-labelledby="demo-tab-3" aria-hidden="true" tabindex="0">
+              <div class="tab-panel" role="tabpanel" id="demo-panel-3" aria-labelledby="demo-tab-3" aria-hidden="true" tabindex="0">
                 <div class="elv-bg-neutral-5 elv-p-4 elv-rounded-sm">
                   <p class="elv-text-sm elv-text-default">
                     <strong>Pricing:</strong> Free for up to 10 users. Pro plan starts at $8/user/month. Enterprise pricing available on request.
                   </p>
                 </div>
               </div>
-              <div class="elv-tab-panel" role="tabpanel" id="demo-panel-4" aria-labelledby="demo-tab-4" aria-hidden="true" tabindex="0">
+              <div class="tab-panel" role="tabpanel" id="demo-panel-4" aria-labelledby="demo-tab-4" aria-hidden="true" tabindex="0">
                 <div class="elv-bg-neutral-5 elv-p-4 elv-rounded-sm">
                   <p class="elv-text-sm elv-text-default">
                     <strong>Reviews:</strong> 4.5 out of 5 stars from 1,234 verified users. Customers love the ease of use and reliability.
@@ -5042,10 +5042,10 @@
 
   // Tab functionality
   function selectTab(tabButton) {
-    const tabList = tabButton.closest('.elv-tab-list');
-    const tabGroup = tabButton.closest('.elv-tab-group');
+    const tabList = tabButton.closest('.tab-list');
+    const tabGroup = tabButton.closest('.tab-group');
 
-    tabList.querySelectorAll('.elv-tab').forEach(tab => {
+    tabList.querySelectorAll('.tab').forEach(tab => {
       tab.setAttribute('aria-selected', 'false');
       tab.setAttribute('tabindex', '-1');
     });
@@ -5054,7 +5054,7 @@
     tabButton.removeAttribute('tabindex');
 
     const panelId = tabButton.getAttribute('aria-controls');
-    tabGroup.querySelectorAll('.elv-tab-panel').forEach(panel => {
+    tabGroup.querySelectorAll('.tab-panel').forEach(panel => {
       panel.setAttribute('aria-hidden', 'true');
     });
 
@@ -5065,17 +5065,17 @@
   }
 
   document.addEventListener('click', (e) => {
-    if (e.target.matches('.elv-tab')) {
+    if (e.target.matches('.tab')) {
       selectTab(e.target);
     }
   });
 
   document.addEventListener('keydown', (e) => {
-    const tab = e.target.closest('.elv-tab');
+    const tab = e.target.closest('.tab');
     if (!tab) return;
 
-    const tabList = tab.closest('.elv-tab-list');
-    const tabs = Array.from(tabList.querySelectorAll('.elv-tab'));
+    const tabList = tab.closest('.tab-list');
+    const tabs = Array.from(tabList.querySelectorAll('.tab'));
     const currentIndex = tabs.indexOf(tab);
 
     let nextTab = null;

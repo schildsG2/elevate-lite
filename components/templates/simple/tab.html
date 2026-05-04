@@ -31,27 +31,27 @@
     }
 
     /* Tab Styles — adapted from tab/component.rb */
-    .elv-tab-group {
+    .tab-group {
       display: flex;
       flex-direction: column;
       gap: 0;
     }
 
-    .elv-tab-list {
+    .tab-list {
       display: flex;
       align-items: center;
     }
 
-    .elv-tab-list--full-width {
+    .tab-list--full-width {
       border-bottom: 1px solid var(--border-medium); /* border-medium */
     }
 
-    .elv-tab-list--full-width .elv-tab {
+    .tab-list--full-width .tab {
       flex: 1;
       border-bottom: 1px solid transparent;
     }
 
-    .elv-tab {
+    .tab {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -71,40 +71,40 @@
       white-space: nowrap;
     }
 
-    .elv-tab:hover {
+    .tab:hover {
       color: var(--text-primary); /* text-primary */
       padding-bottom: 0;
       border-bottom: 2px solid var(--text-primary); /* border-primary */
     }
 
-    .elv-tab[aria-selected="true"] {
+    .tab[aria-selected="true"] {
       color: var(--text-primary); /* text-primary */
       padding-bottom: 0;
       border-bottom: 2px solid var(--text-primary); /* border-primary */
     }
 
-    .elv-tab:focus {
+    .tab:focus {
       outline: 2px solid var(--text-primary);
       outline-offset: -2px;
       z-index: 1;
     }
 
-    .elv-tab-icon {
+    .tab-icon {
       width: 16px;
       height: 16px;
       flex-shrink: 0;
     }
 
-    .elv-tab-panels {
+    .tab-panels {
       margin-top: 16px;
     }
 
-    .elv-tab-panel {
+    .tab-panel {
       display: none;
       animation: fadeIn 200ms ease;
     }
 
-    .elv-tab-panel[aria-hidden="false"] {
+    .tab-panel[aria-hidden="false"] {
       display: block;
     }
 
@@ -139,41 +139,41 @@
       Standard horizontal tab navigation with underline indicator
     </p>
     <div class="examples">
-      <div class="elv-tab-group" id="basic-tabs">
-        <div class="elv-tab-list" role="tablist" aria-label="Basic example">
-          <button class="elv-tab" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">
+      <div class="tab-group" id="basic-tabs">
+        <div class="tab-list" role="tablist" aria-label="Basic example">
+          <button class="tab" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">
             Overview
           </button>
-          <button class="elv-tab" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="-1">
+          <button class="tab" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="-1">
             Features
           </button>
-          <button class="elv-tab" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3" tabindex="-1">
+          <button class="tab" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3" tabindex="-1">
             Pricing
           </button>
-          <button class="elv-tab" role="tab" aria-selected="false" aria-controls="panel-4" id="tab-4" tabindex="-1">
+          <button class="tab" role="tab" aria-selected="false" aria-controls="panel-4" id="tab-4" tabindex="-1">
             Reviews
           </button>
         </div>
-        <div class="elv-tab-panels">
-          <div class="elv-tab-panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1" aria-hidden="false">
+        <div class="tab-panels">
+          <div class="tab-panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1" aria-hidden="false">
             <div class="demo-content">
               <h3 class="elv-text-base elv-font-semibold elv-mb-2">Overview</h3>
               <p class="elv-text-sm">This is the overview section with general information about the product.</p>
             </div>
           </div>
-          <div class="elv-tab-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" aria-hidden="true">
+          <div class="tab-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" aria-hidden="true">
             <div class="demo-content">
               <h3 class="elv-text-base elv-font-semibold elv-mb-2">Features</h3>
               <p class="elv-text-sm">Detailed feature list and capabilities of the product.</p>
             </div>
           </div>
-          <div class="elv-tab-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" aria-hidden="true">
+          <div class="tab-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" aria-hidden="true">
             <div class="demo-content">
               <h3 class="elv-text-base elv-font-semibold elv-mb-2">Pricing</h3>
               <p class="elv-text-sm">Pricing tiers and subscription options.</p>
             </div>
           </div>
-          <div class="elv-tab-panel" role="tabpanel" id="panel-4" aria-labelledby="tab-4" aria-hidden="true">
+          <div class="tab-panel" role="tabpanel" id="panel-4" aria-labelledby="tab-4" aria-hidden="true">
             <div class="demo-content">
               <h3 class="elv-text-base elv-font-semibold elv-mb-2">Reviews</h3>
               <p class="elv-text-sm">Customer reviews and ratings from verified users.</p>
@@ -182,23 +182,23 @@
         </div>
       </div>
     </div>
-    <pre><code>&lt;div class="elv-tab-group"&gt;
-  &lt;div class="elv-tab-list" role="tablist" aria-label="Product information"&gt;
-    &lt;button class="elv-tab" role="tab" aria-selected="true"
+    <pre><code>&lt;div class="tab-group"&gt;
+  &lt;div class="tab-list" role="tablist" aria-label="Product information"&gt;
+    &lt;button class="tab" role="tab" aria-selected="true"
             aria-controls="panel-1" id="tab-1"&gt;
       Overview
     &lt;/button&gt;
-    &lt;button class="elv-tab" role="tab" aria-selected="false"
+    &lt;button class="tab" role="tab" aria-selected="false"
             aria-controls="panel-2" id="tab-2" tabindex="-1"&gt;
       Features
     &lt;/button&gt;
   &lt;/div&gt;
-  &lt;div class="elv-tab-panels"&gt;
-    &lt;div class="elv-tab-panel" role="tabpanel"
+  &lt;div class="tab-panels"&gt;
+    &lt;div class="tab-panel" role="tabpanel"
          id="panel-1" aria-labelledby="tab-1" aria-hidden="false"&gt;
       Overview content...
     &lt;/div&gt;
-    &lt;div class="elv-tab-panel" role="tabpanel"
+    &lt;div class="tab-panel" role="tabpanel"
          id="panel-2" aria-labelledby="tab-2" aria-hidden="true"&gt;
       Features content...
     &lt;/div&gt;
@@ -213,41 +213,41 @@
       Icons provide visual recognition and scan-ability
     </p>
     <div class="examples">
-      <div class="elv-tab-group" id="icon-tabs">
-        <div class="elv-tab-list" role="tablist" aria-label="Settings navigation">
-          <button class="elv-tab" role="tab" aria-selected="true" aria-controls="icon-panel-1" id="icon-tab-1">
-            <svg class="elv-tab-icon" viewBox="0 0 16 16" fill="currentColor">
+      <div class="tab-group" id="icon-tabs">
+        <div class="tab-list" role="tablist" aria-label="Settings navigation">
+          <button class="tab" role="tab" aria-selected="true" aria-controls="icon-panel-1" id="icon-tab-1">
+            <svg class="tab-icon" viewBox="0 0 16 16" fill="currentColor">
               <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 1.5a7 7 0 0 0-7 7v.5h14v-.5a7 7 0 0 0-7-7z"/>
             </svg>
             Profile
           </button>
-          <button class="elv-tab" role="tab" aria-selected="false" aria-controls="icon-panel-2" id="icon-tab-2" tabindex="-1">
-            <svg class="elv-tab-icon" viewBox="0 0 16 16" fill="currentColor">
+          <button class="tab" role="tab" aria-selected="false" aria-controls="icon-panel-2" id="icon-tab-2" tabindex="-1">
+            <svg class="tab-icon" viewBox="0 0 16 16" fill="currentColor">
               <path d="M14 3.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 3.5v-2A1.5 1.5 0 0 1 1.5 0h11A1.5 1.5 0 0 1 14 1.5v2zm0 6a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 9.5v-2A1.5 1.5 0 0 1 1.5 6h11A1.5 1.5 0 0 1 14 7.5v2z"/>
             </svg>
             Security
           </button>
-          <button class="elv-tab" role="tab" aria-selected="false" aria-controls="icon-panel-3" id="icon-tab-3" tabindex="-1">
-            <svg class="elv-tab-icon" viewBox="0 0 16 16" fill="currentColor">
+          <button class="tab" role="tab" aria-selected="false" aria-controls="icon-panel-3" id="icon-tab-3" tabindex="-1">
+            <svg class="tab-icon" viewBox="0 0 16 16" fill="currentColor">
               <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zm1 11.5v1h-2v-1h2zm0-8v6h-2v-6h2z"/>
             </svg>
             Notifications
           </button>
         </div>
-        <div class="elv-tab-panels">
-          <div class="elv-tab-panel" role="tabpanel" id="icon-panel-1" aria-labelledby="icon-tab-1" aria-hidden="false">
+        <div class="tab-panels">
+          <div class="tab-panel" role="tabpanel" id="icon-panel-1" aria-labelledby="icon-tab-1" aria-hidden="false">
             <div class="demo-content">
               <h3 class="elv-text-base elv-font-semibold elv-mb-2">Profile Settings</h3>
               <p class="elv-text-sm">Update your personal information and preferences.</p>
             </div>
           </div>
-          <div class="elv-tab-panel" role="tabpanel" id="icon-panel-2" aria-labelledby="icon-tab-2" aria-hidden="true">
+          <div class="tab-panel" role="tabpanel" id="icon-panel-2" aria-labelledby="icon-tab-2" aria-hidden="true">
             <div class="demo-content">
               <h3 class="elv-text-base elv-font-semibold elv-mb-2">Security Settings</h3>
               <p class="elv-text-sm">Manage passwords, two-factor authentication, and sessions.</p>
             </div>
           </div>
-          <div class="elv-tab-panel" role="tabpanel" id="icon-panel-3" aria-labelledby="icon-tab-3" aria-hidden="true">
+          <div class="tab-panel" role="tabpanel" id="icon-panel-3" aria-labelledby="icon-tab-3" aria-hidden="true">
             <div class="demo-content">
               <h3 class="elv-text-base elv-font-semibold elv-mb-2">Notification Preferences</h3>
               <p class="elv-text-sm">Configure email and in-app notification settings.</p>
@@ -256,9 +256,9 @@
         </div>
       </div>
     </div>
-    <pre><code>&lt;button class="elv-tab" role="tab" aria-selected="true"
+    <pre><code>&lt;button class="tab" role="tab" aria-selected="true"
         aria-controls="panel-1" id="tab-1"&gt;
-  &lt;svg class="elv-tab-icon" viewBox="0 0 16 16" fill="currentColor"&gt;
+  &lt;svg class="tab-icon" viewBox="0 0 16 16" fill="currentColor"&gt;
     &lt;!-- icon path --&gt;
   &lt;/svg&gt;
   Profile
@@ -272,30 +272,30 @@
       Tabs stretch to fill available width
     </p>
     <div class="examples">
-      <div class="elv-tab-group" id="fullwidth-tabs">
-        <div class="elv-tab-list elv-tab-list--full-width" role="tablist" aria-label="View options">
-          <button class="elv-tab" role="tab" aria-selected="true" aria-controls="fw-panel-1" id="fw-tab-1">
+      <div class="tab-group" id="fullwidth-tabs">
+        <div class="tab-list tab-list--full-width" role="tablist" aria-label="View options">
+          <button class="tab" role="tab" aria-selected="true" aria-controls="fw-panel-1" id="fw-tab-1">
             Grid View
           </button>
-          <button class="elv-tab" role="tab" aria-selected="false" aria-controls="fw-panel-2" id="fw-tab-2" tabindex="-1">
+          <button class="tab" role="tab" aria-selected="false" aria-controls="fw-panel-2" id="fw-tab-2" tabindex="-1">
             List View
           </button>
-          <button class="elv-tab" role="tab" aria-selected="false" aria-controls="fw-panel-3" id="fw-tab-3" tabindex="-1">
+          <button class="tab" role="tab" aria-selected="false" aria-controls="fw-panel-3" id="fw-tab-3" tabindex="-1">
             Table View
           </button>
         </div>
-        <div class="elv-tab-panels">
-          <div class="elv-tab-panel" role="tabpanel" id="fw-panel-1" aria-labelledby="fw-tab-1" aria-hidden="false">
+        <div class="tab-panels">
+          <div class="tab-panel" role="tabpanel" id="fw-panel-1" aria-labelledby="fw-tab-1" aria-hidden="false">
             <div class="demo-content">
               <p class="elv-text-sm">Grid view with cards in a responsive grid layout.</p>
             </div>
           </div>
-          <div class="elv-tab-panel" role="tabpanel" id="fw-panel-2" aria-labelledby="fw-tab-2" aria-hidden="true">
+          <div class="tab-panel" role="tabpanel" id="fw-panel-2" aria-labelledby="fw-tab-2" aria-hidden="true">
             <div class="demo-content">
               <p class="elv-text-sm">List view with items stacked vertically.</p>
             </div>
           </div>
-          <div class="elv-tab-panel" role="tabpanel" id="fw-panel-3" aria-labelledby="fw-tab-3" aria-hidden="true">
+          <div class="tab-panel" role="tabpanel" id="fw-panel-3" aria-labelledby="fw-tab-3" aria-hidden="true">
             <div class="demo-content">
               <p class="elv-text-sm">Table view with columns and sortable headers.</p>
             </div>
@@ -303,10 +303,10 @@
         </div>
       </div>
     </div>
-    <pre><code>&lt;div class="elv-tab-list elv-tab-list--full-width" role="tablist"&gt;
-  &lt;button class="elv-tab" role="tab"&gt;Grid View&lt;/button&gt;
-  &lt;button class="elv-tab" role="tab"&gt;List View&lt;/button&gt;
-  &lt;button class="elv-tab" role="tab"&gt;Table View&lt;/button&gt;
+    <pre><code>&lt;div class="tab-list tab-list--full-width" role="tablist"&gt;
+  &lt;button class="tab" role="tab"&gt;Grid View&lt;/button&gt;
+  &lt;button class="tab" role="tab"&gt;List View&lt;/button&gt;
+  &lt;button class="tab" role="tab"&gt;Table View&lt;/button&gt;
 &lt;/div&gt;</code></pre>
   </div>
 
@@ -478,7 +478,7 @@
 
   // Initialize all tab groups on the page
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.elv-tab-group').forEach(group => {
+    document.querySelectorAll('.tab-group').forEach(group => {
       new TabGroup(group);
     });
   });
