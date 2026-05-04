@@ -3661,6 +3661,14 @@ html[dir='rtl']
   font-size: 1px;
   outline: none;
   cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+.elv-select .select2-search-choice-close:hover,
+.elv-select .select2-search-choice-close:visited,
+.elv-select .select2-search-choice-close:focus {
+  color: inherit;
+  text-decoration: none;
 }
 .elv-select .select2-search-choice-close::before,
 .elv-select .select2-search-choice-close::after {
