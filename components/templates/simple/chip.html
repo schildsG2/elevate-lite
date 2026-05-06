@@ -40,7 +40,7 @@
     }
 
     /* Chip Base Styles */
-    .elv-chip {
+    .chip {
       display: inline-flex;
       width: fit-content;
       align-items: center;
@@ -54,25 +54,25 @@
     }
 
     /* Hover State */
-    .elv-chip:hover {
+    .chip:hover {
       background: var(--bg-primary-30);
       color: var(--text-primary);
     }
 
     /* Selected State */
-    .elv-chip[data-selected="true"] {
+    .chip[data-selected="true"] {
       background: var(--bg-primary-20);
       color: var(--text-primary);
     }
 
     /* Dismissible hover when selected */
-    .elv-chip[data-kind="dismissible"][data-selected="true"]:hover {
+    .chip[data-kind="dismissible"][data-selected="true"]:hover {
       background: var(--bg-primary-30);
       color: var(--text-primary);
     }
 
     /* Size Variants */
-    .elv-chip--xs {
+    .chip--xs {
       height: 1rem;
       padding: 0.125rem;
       border-radius: var(--radius-xs);
@@ -80,7 +80,7 @@
       font-weight: var(--font-semibold);
     }
 
-    .elv-chip--sm {
+    .chip--sm {
       height: 1.5rem;
       padding: 0.125rem;
       border-radius: var(--radius-xs);
@@ -88,7 +88,7 @@
       font-weight: var(--font-semibold);
     }
 
-    .elv-chip--md {
+    .chip--md {
       height: 2rem;
       padding: 0.125rem 0.25rem;
       border-radius: var(--radius-sm);
@@ -97,31 +97,31 @@
     }
 
     /* Icon Styles */
-    .elv-chip__icon {
+    .chip__icon {
       color: var(--text-primary);
       transition: width 150ms cubic-bezier(0.4, 0, 0.2, 1);
       flex-shrink: 0;
     }
 
-    .elv-chip__icon--hidden {
+    .chip__icon--hidden {
       width: 0 !important;
       overflow: hidden;
     }
 
-    .elv-chip__icon--xs { width: 12px; height: 12px; }
-    .elv-chip__icon--sm { width: 16px; height: 16px; }
+    .chip__icon--xs { width: 12px; height: 12px; }
+    .chip__icon--sm { width: 16px; height: 16px; }
 
     /* Trailing icon (close) hover effect */
-    .elv-chip__icon--trailing {
+    .chip__icon--trailing {
       border-radius: var(--radius-2xs);
     }
-    .elv-chip__icon--trailing:hover {
+    .chip__icon--trailing:hover {
       background: var(--bg-primary-40);
       color: var(--text-default);
     }
 
     /* Label Styles */
-    .elv-chip__label {
+    .chip__label {
       padding: 0 0.125rem;
       color: inherit;
       white-space: nowrap;
@@ -130,7 +130,7 @@
     }
 
     /* Fade out animation for dismissible */
-    .elv-chip--dismissing {
+    .chip--dismissing {
       opacity: 0;
       transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -153,18 +153,18 @@
     <h2 class="elv-font-semibold elv-text-default">Basic (Single Select)</h2>
     <p class="elv-text-sm elv-text-subtle elv-mb-3">Click to toggle selection state. Base is neutral, hover shows purple preview, selected persists purple.</p>
     <div class="examples">
-      <button class="elv-chip elv-chip--xs" data-kind="single_select" data-selected="false" onclick="toggleChip(this)">
-        <span class="elv-chip__label">Extra Small</span>
+      <button class="chip chip--xs" data-kind="single_select" data-selected="false" onclick="toggleChip(this)">
+        <span class="chip__label">Extra Small</span>
       </button>
-      <button class="elv-chip elv-chip--sm" data-kind="single_select" data-selected="false" onclick="toggleChip(this)">
-        <span class="elv-chip__label">Small</span>
+      <button class="chip chip--sm" data-kind="single_select" data-selected="false" onclick="toggleChip(this)">
+        <span class="chip__label">Small</span>
       </button>
-      <button class="elv-chip elv-chip--md" data-kind="single_select" data-selected="true" onclick="toggleChip(this)">
-        <span class="elv-chip__label">Medium (Selected)</span>
+      <button class="chip chip--md" data-kind="single_select" data-selected="true" onclick="toggleChip(this)">
+        <span class="chip__label">Medium (Selected)</span>
       </button>
     </div>
-    <pre><code>&lt;button class="elv-chip elv-chip--md" data-kind="single_select" data-selected="false"&gt;
-  &lt;span class="elv-chip__label"&gt;Filter Name&lt;/span&gt;
+    <pre><code>&lt;button class="chip chip--md" data-kind="single_select" data-selected="false"&gt;
+  &lt;span class="chip__label"&gt;Filter Name&lt;/span&gt;
 &lt;/button&gt;</code></pre>
   </div>
 
@@ -173,30 +173,30 @@
     <h2 class="elv-font-semibold elv-text-default">Multiselect (with Check Icon)</h2>
     <p class="elv-text-sm elv-text-subtle elv-mb-3">Shows check icon when selected. Icon width animates from 0 to visible.</p>
     <div class="examples">
-      <button class="elv-chip elv-chip--xs" data-kind="multiselect" data-selected="false" onclick="toggleMultiselect(this)">
-        <svg class="elv-chip__icon elv-chip__icon--xs elv-chip__icon--hidden" viewBox="0 0 20 20" fill="currentColor">
+      <button class="chip chip--xs" data-kind="multiselect" data-selected="false" onclick="toggleMultiselect(this)">
+        <svg class="chip__icon chip__icon--xs chip__icon--hidden" viewBox="0 0 20 20" fill="currentColor">
           <path d="M8.10417 14.4375L4.0625 10.4167L5.125 9.33333L8.10417 12.3125L14.875 5.5625L15.9375 6.625L8.10417 14.4375Z"/>
         </svg>
-        <span class="elv-chip__label">Category</span>
+        <span class="chip__label">Category</span>
       </button>
-      <button class="elv-chip elv-chip--sm" data-kind="multiselect" data-selected="true" onclick="toggleMultiselect(this)">
-        <svg class="elv-chip__icon elv-chip__icon--xs" viewBox="0 0 20 20" fill="currentColor">
+      <button class="chip chip--sm" data-kind="multiselect" data-selected="true" onclick="toggleMultiselect(this)">
+        <svg class="chip__icon chip__icon--xs" viewBox="0 0 20 20" fill="currentColor">
           <path d="M8.10417 14.4375L4.0625 10.4167L5.125 9.33333L8.10417 12.3125L14.875 5.5625L15.9375 6.625L8.10417 14.4375Z"/>
         </svg>
-        <span class="elv-chip__label">Tag Name</span>
+        <span class="chip__label">Tag Name</span>
       </button>
-      <button class="elv-chip elv-chip--md" data-kind="multiselect" data-selected="false" onclick="toggleMultiselect(this)">
-        <svg class="elv-chip__icon elv-chip__icon--sm elv-chip__icon--hidden" viewBox="0 0 20 20" fill="currentColor">
+      <button class="chip chip--md" data-kind="multiselect" data-selected="false" onclick="toggleMultiselect(this)">
+        <svg class="chip__icon chip__icon--sm chip__icon--hidden" viewBox="0 0 20 20" fill="currentColor">
           <path d="M8.10417 14.4375L4.0625 10.4167L5.125 9.33333L8.10417 12.3125L14.875 5.5625L15.9375 6.625L8.10417 14.4375Z"/>
         </svg>
-        <span class="elv-chip__label">Feature Filter</span>
+        <span class="chip__label">Feature Filter</span>
       </button>
     </div>
-    <pre><code>&lt;button class="elv-chip elv-chip--md" data-kind="multiselect" data-selected="false"&gt;
-  &lt;svg class="elv-chip__icon elv-chip__icon--sm elv-chip__icon--hidden" viewBox="0 0 20 20" fill="currentColor"&gt;
+    <pre><code>&lt;button class="chip chip--md" data-kind="multiselect" data-selected="false"&gt;
+  &lt;svg class="chip__icon chip__icon--sm chip__icon--hidden" viewBox="0 0 20 20" fill="currentColor"&gt;
     &lt;path d="M8.10417 14.4375L4.0625 10.4167L5.125 9.33333L8.10417 12.3125L14.875 5.5625L15.9375 6.625L8.10417 14.4375Z"/&gt;
   &lt;/svg&gt;
-  &lt;span class="elv-chip__label"&gt;Filter Name&lt;/span&gt;
+  &lt;span class="chip__label"&gt;Filter Name&lt;/span&gt;
 &lt;/button&gt;</code></pre>
   </div>
 
@@ -205,28 +205,28 @@
     <h2 class="elv-font-semibold elv-text-default">Dismissible (with Close Icon)</h2>
     <p class="elv-text-sm elv-text-subtle elv-mb-3">Shows close icon for removal. Click anywhere to select, click close icon to dismiss. Fades out before removal.</p>
     <div class="examples">
-      <button class="elv-chip elv-chip--xs" data-kind="dismissible" data-selected="false" onclick="toggleDismissible(event, this)">
-        <span class="elv-chip__label">Tag</span>
-        <svg class="elv-chip__icon elv-chip__icon--xs elv-chip__icon--trailing" viewBox="0 0 20 20" fill="currentColor" onclick="dismissChip(event, this)">
+      <button class="chip chip--xs" data-kind="dismissible" data-selected="false" onclick="toggleDismissible(event, this)">
+        <span class="chip__label">Tag</span>
+        <svg class="chip__icon chip__icon--xs chip__icon--trailing" viewBox="0 0 20 20" fill="currentColor" onclick="dismissChip(event, this)">
           <path d="M6.0625 15L5 13.9375L8.9375 10L5 6.0625L6.0625 5L10 8.9375L13.9375 5L15 6.0625L11.0625 10L15 13.9375L13.9375 15L10 11.0625L6.0625 15Z"/>
         </svg>
       </button>
-      <button class="elv-chip elv-chip--sm" data-kind="dismissible" data-selected="true" onclick="toggleDismissible(event, this)">
-        <span class="elv-chip__label">Selected Tag</span>
-        <svg class="elv-chip__icon elv-chip__icon--xs elv-chip__icon--trailing" viewBox="0 0 20 20" fill="currentColor" onclick="dismissChip(event, this)">
+      <button class="chip chip--sm" data-kind="dismissible" data-selected="true" onclick="toggleDismissible(event, this)">
+        <span class="chip__label">Selected Tag</span>
+        <svg class="chip__icon chip__icon--xs chip__icon--trailing" viewBox="0 0 20 20" fill="currentColor" onclick="dismissChip(event, this)">
           <path d="M6.0625 15L5 13.9375L8.9375 10L5 6.0625L6.0625 5L10 8.9375L13.9375 5L15 6.0625L11.0625 10L15 13.9375L13.9375 15L10 11.0625L6.0625 15Z"/>
         </svg>
       </button>
-      <button class="elv-chip elv-chip--md" data-kind="dismissible" data-selected="false" onclick="toggleDismissible(event, this)">
-        <span class="elv-chip__label">Applied Filter</span>
-        <svg class="elv-chip__icon elv-chip__icon--sm elv-chip__icon--trailing" viewBox="0 0 20 20" fill="currentColor" onclick="dismissChip(event, this)">
+      <button class="chip chip--md" data-kind="dismissible" data-selected="false" onclick="toggleDismissible(event, this)">
+        <span class="chip__label">Applied Filter</span>
+        <svg class="chip__icon chip__icon--sm chip__icon--trailing" viewBox="0 0 20 20" fill="currentColor" onclick="dismissChip(event, this)">
           <path d="M6.0625 15L5 13.9375L8.9375 10L5 6.0625L6.0625 5L10 8.9375L13.9375 5L15 6.0625L11.0625 10L15 13.9375L13.9375 15L10 11.0625L6.0625 15Z"/>
         </svg>
       </button>
     </div>
-    <pre><code>&lt;button class="elv-chip elv-chip--md" data-kind="dismissible" data-selected="false"&gt;
-  &lt;span class="elv-chip__label"&gt;Tag Name&lt;/span&gt;
-  &lt;svg class="elv-chip__icon elv-chip__icon--sm elv-chip__icon--trailing" viewBox="0 0 20 20" fill="currentColor"&gt;
+    <pre><code>&lt;button class="chip chip--md" data-kind="dismissible" data-selected="false"&gt;
+  &lt;span class="chip__label"&gt;Tag Name&lt;/span&gt;
+  &lt;svg class="chip__icon chip__icon--sm chip__icon--trailing" viewBox="0 0 20 20" fill="currentColor"&gt;
     &lt;path d="M6.0625 15L5 13.9375L8.9375 10L5 6.0625L6.0625 5L10 8.9375L13.9375 5L15 6.0625L11.0625 10L15 13.9375L13.9375 15L10 11.0625L6.0625 15Z"/&gt;
   &lt;/svg&gt;
 &lt;/button&gt;</code></pre>
@@ -336,16 +336,16 @@
     const isSelected = chip.getAttribute('data-selected') === 'true';
     chip.setAttribute('data-selected', isSelected ? 'false' : 'true');
 
-    const icon = chip.querySelector('.elv-chip__icon');
+    const icon = chip.querySelector('.chip__icon');
     if (icon) {
-      icon.classList.toggle('elv-chip__icon--hidden');
+      icon.classList.toggle('chip__icon--hidden');
     }
   }
 
   // Dismissible: toggle selection (but don't dismiss on chip click)
   function toggleDismissible(event, chip) {
     // Don't toggle if clicking the close icon
-    if (event.target.closest('.elv-chip__icon--trailing')) {
+    if (event.target.closest('.chip__icon--trailing')) {
       return;
     }
 
@@ -357,8 +357,8 @@
   function dismissChip(event, icon) {
     event.stopPropagation(); // Prevent toggleDismissible from firing
 
-    const chip = icon.closest('.elv-chip');
-    chip.classList.add('elv-chip--dismissing');
+    const chip = icon.closest('.chip');
+    chip.classList.add('chip--dismissing');
 
     chip.addEventListener('transitionend', () => {
       chip.remove();

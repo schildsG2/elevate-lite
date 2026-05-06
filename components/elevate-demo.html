@@ -491,7 +491,7 @@
     }
 
     /* Avatar */
-    .elv-avatar {
+    .avatar {
       position: relative;
       display: flex;
       align-items: center;
@@ -499,28 +499,28 @@
       border: 2px solid white;
       overflow: hidden;
     }
-    .elv-avatar--lg {
+    .avatar--lg {
       width: 60px;
       height: 60px;
       border-radius: 9999px;
     }
-    .elv-avatar--md {
+    .avatar--md {
       width: 44px;
       height: 44px;
       border-radius: 9999px;
     }
-    .elv-avatar--sm {
+    .avatar--sm {
       width: 36px;
       height: 36px;
       border-radius: 9999px;
     }
-    .elv-avatar__image {
+    .avatar__image {
       width: 100%;
       height: 100%;
       object-fit: cover;
       border-radius: inherit;
     }
-    .elv-avatar__initials {
+    .avatar__initials {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -532,7 +532,7 @@
       font-size: 14px;
       border-radius: inherit;
     }
-    .elv-avatar--sm .elv-avatar__initials {
+    .avatar--sm .avatar__initials {
       font-size: 12px;
     }
 
@@ -637,31 +637,31 @@
     }
 
     /* Breadcrumbs */
-    .elv-breadcrumbs {
+    .breadcrumbs {
       display: inline-flex;
       align-items: center;
       gap: 2px;
     }
-    .elv-breadcrumb-item {
+    .breadcrumbs__item {
       display: flex;
       align-items: center;
       gap: 2px;
     }
-    .elv-breadcrumb-link {
+    .breadcrumbs__link {
       color: #4c4b53;
       text-decoration: none;
       font-size: 12px;
       line-height: 16px;
       transition: color 150ms ease;
     }
-    .elv-breadcrumb-link:hover {
+    .breadcrumbs__link:hover {
       color: #201f23;
     }
-    .elv-breadcrumb-link--current {
+    .breadcrumbs__link--current {
       color: #84838a;
       pointer-events: none;
     }
-    .elv-breadcrumb-separator {
+    .breadcrumbs__separator {
       width: 20px;
       height: 20px;
       flex-shrink: 0;
@@ -769,17 +769,17 @@
     }
 
     /* Tabs */
-    .elv-tab-group {
+    .tab-group {
       display: flex;
       flex-direction: column;
       gap: 0;
     }
-    .elv-tab-list {
+    .tab-list {
       display: flex;
       align-items: center;
       border-bottom: 1px solid #c7c6cd;
     }
-    .elv-tab {
+    .tab {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -799,27 +799,27 @@
       position: relative;
       white-space: nowrap;
     }
-    .elv-tab:hover {
+    .tab:hover {
       color: #5746b2;
       border-bottom: 2px solid #5746b2;
     }
-    .elv-tab[aria-selected="true"] {
+    .tab[aria-selected="true"] {
       color: #5746b2;
       border-bottom: 2px solid #5746b2;
     }
-    .elv-tab:focus {
+    .tab:focus {
       outline: 3px solid #c3bde5;
       outline-offset: -2px;
       z-index: 1;
     }
-    .elv-tab-panels {
+    .tab-panels {
       margin-top: 16px;
     }
-    .elv-tab-panel {
+    .tab-panel {
       display: none;
       animation: fadeIn 200ms ease;
     }
-    .elv-tab-panel[aria-hidden="false"] {
+    .tab-panel[aria-hidden="false"] {
       display: block;
     }
     @keyframes fadeIn {
@@ -985,56 +985,56 @@
     }
 
     /* Button Group */
-    .elv-button-group {
+    .button-group {
       display: flex;
       align-items: center;
     }
-    .elv-button-group--horizontal {
+    .button-group--horizontal {
       flex-direction: row;
       gap: 12px;
     }
-    .elv-button-group--vertical {
+    .button-group--vertical {
       flex-direction: column;
       gap: 12px;
       align-items: stretch;
     }
-    .elv-button-group--connected {
+    .button-group--connected {
       gap: 0;
     }
-    .elv-button-group--connected > .btn:not(:first-child):not(:last-child) {
+    .button-group--connected > .btn:not(:first-child):not(:last-child) {
       border-radius: 0;
     }
-    .elv-button-group--connected > .btn:first-child {
+    .button-group--connected > .btn:first-child {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
-    .elv-button-group--connected > .btn:last-child {
+    .button-group--connected > .btn:last-child {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
-    .elv-button-group--connected > .btn:not(:last-child) {
+    .button-group--connected > .btn:not(:last-child) {
       border-right-width: 0;
     }
-    .elv-button-group--connected.elv-button-group--vertical > .btn:first-child {
+    .button-group--connected.button-group--vertical > .btn:first-child {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       border-top-right-radius: 24px;
       border-top-left-radius: 24px;
     }
-    .elv-button-group--connected.elv-button-group--vertical > .btn:last-child {
+    .button-group--connected.button-group--vertical > .btn:last-child {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       border-bottom-left-radius: 24px;
       border-bottom-right-radius: 24px;
     }
-    .elv-button-group--connected.elv-button-group--vertical > .btn:not(:first-child):not(:last-child) {
+    .button-group--connected.button-group--vertical > .btn:not(:first-child):not(:last-child) {
       border-radius: 0;
     }
-    .elv-button-group--connected.elv-button-group--vertical > .btn:not(:last-child) {
+    .button-group--connected.button-group--vertical > .btn:not(:last-child) {
       border-right-width: 1.5px;
       border-bottom-width: 0;
     }
-    .elv-button-group--tight {
+    .button-group--tight {
       gap: 8px;
     }
 
@@ -2011,21 +2011,23 @@
       border-radius: 0 0 16px 16px;
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.js"></script>
 </head>
 <body>
 
 <header class="elv-bg-neutral-0 elv-border-b elv-border-light" style="border-bottom-width: 0.5px;">
   <div elv class="elv-max-w-7xl elv-w-full md:elv-w-5/6 elv-mx-auto elv-pt-12 elv-pb-8 elv-px-3">
     <nav aria-label="Breadcrumb" class="elv-mb-3">
-      <ol class="elv-breadcrumbs" role="list">
-        <li class="elv-breadcrumb-item">
-          <a href="../../index.html" class="elv-breadcrumb-link">Chicago Labs</a>
-          <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ol class="breadcrumbs" role="list">
+        <li class="breadcrumbs__item">
+          <a href="../../index.html" class="breadcrumbs__link">Chicago Labs</a>
+          <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"></path>
           </svg>
         </li>
-        <li class="elv-breadcrumb-item">
-          <span class="elv-breadcrumb-link elv-breadcrumb-link--current" aria-current="page">Elevate Components</span>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page">Elevate Components</span>
         </li>
       </ol>
     </nav>
@@ -2068,7 +2070,7 @@
       <a href="#tooltips" class="elv-index-nav__item">Tooltips</a>
       <a href="#alerts" class="elv-index-nav__item">Alerts & Messages</a>
       <a href="#form-inputs" class="elv-index-nav__item">Form Inputs</a>
-      <a href="#combobox" class="elv-index-nav__item">Combobox</a>
+      <a href="#enhanced-selects" class="elv-index-nav__item">Enhanced Selects</a>
       <a href="#backgrounds" class="elv-index-nav__item">Background Colors</a>
       <a href="#spacing" class="elv-index-nav__item">Spacing Scale</a>
 
@@ -2494,7 +2496,7 @@
     <div class="demo-grid">
       <div>
         <div class="demo-label">Horizontal (Default)</div>
-        <div class="elv-button-group elv-button-group--horizontal">
+        <div class="button-group button-group--horizontal">
           <button class="btn btn--primary btn--md">Save</button>
           <button class="btn btn--tertiary btn--md">Cancel</button>
         </div>
@@ -2502,7 +2504,7 @@
 
       <div>
         <div class="demo-label">Three Buttons</div>
-        <div class="elv-button-group elv-button-group--horizontal">
+        <div class="button-group button-group--horizontal">
           <button class="btn btn--primary btn--md">Save</button>
           <button class="btn btn--secondary btn--md">Save as draft</button>
           <button class="btn btn--tertiary btn--md">Cancel</button>
@@ -2511,7 +2513,7 @@
 
       <div>
         <div class="demo-label">Connected Style</div>
-        <div class="elv-button-group elv-button-group--horizontal elv-button-group--connected">
+        <div class="button-group button-group--horizontal button-group--connected">
           <button class="btn btn--secondary btn--md">Yes</button>
           <button class="btn btn--secondary btn--md">No</button>
           <button class="btn btn--secondary btn--md">Maybe</button>
@@ -2520,7 +2522,7 @@
 
       <div>
         <div class="demo-label">Vertical Stack</div>
-        <div class="elv-button-group elv-button-group--vertical">
+        <div class="button-group button-group--vertical">
           <button class="btn btn--primary btn--md">Primary action</button>
           <button class="btn btn--secondary btn--md">Secondary action</button>
           <button class="btn btn--tertiary btn--md">Cancel</button>
@@ -2529,7 +2531,7 @@
 
       <div>
         <div class="demo-label">Tight Spacing (8px)</div>
-        <div class="elv-button-group elv-button-group--horizontal elv-button-group--tight">
+        <div class="button-group button-group--horizontal button-group--tight">
           <button class="btn btn--secondary btn--sm">Edit</button>
           <button class="btn btn--secondary btn--sm">Delete</button>
           <button class="btn btn--secondary btn--sm">Share</button>
@@ -2951,14 +2953,14 @@
       <div>
         <div class="demo-label">Sizes (with images)</div>
         <div class="demo-row">
-          <div class="elv-avatar elv-avatar--lg">
-            <img src="https://i.pravatar.cc/150?img=1" alt="User" class="elv-avatar__image">
+          <div class="avatar avatar--lg">
+            <img src="https://i.pravatar.cc/150?img=1" alt="User" class="avatar__image">
           </div>
-          <div class="elv-avatar elv-avatar--md">
-            <img src="https://i.pravatar.cc/150?img=2" alt="User" class="elv-avatar__image">
+          <div class="avatar avatar--md">
+            <img src="https://i.pravatar.cc/150?img=2" alt="User" class="avatar__image">
           </div>
-          <div class="elv-avatar elv-avatar--sm">
-            <img src="https://i.pravatar.cc/150?img=3" alt="User" class="elv-avatar__image">
+          <div class="avatar avatar--sm">
+            <img src="https://i.pravatar.cc/150?img=3" alt="User" class="avatar__image">
           </div>
         </div>
       </div>
@@ -2966,14 +2968,14 @@
       <div>
         <div class="demo-label">Initials</div>
         <div class="demo-row">
-          <div class="elv-avatar elv-avatar--lg">
-            <div class="elv-avatar__initials">JD</div>
+          <div class="avatar avatar--lg">
+            <div class="avatar__initials">JD</div>
           </div>
-          <div class="elv-avatar elv-avatar--md">
-            <div class="elv-avatar__initials">AS</div>
+          <div class="avatar avatar--md">
+            <div class="avatar__initials">AS</div>
           </div>
-          <div class="elv-avatar elv-avatar--sm">
-            <div class="elv-avatar__initials">MK</div>
+          <div class="avatar avatar--sm">
+            <div class="avatar__initials">MK</div>
           </div>
         </div>
       </div>
@@ -2981,17 +2983,17 @@
       <div>
         <div class="demo-label">Anonymous Profiles</div>
         <div class="demo-row">
-          <div class="elv-avatar elv-avatar--md">
-            <img src="./templates/simple/assets/pictogram-anonymous-avatar-blue.svg" alt="Anonymous" class="elv-avatar__image">
+          <div class="avatar avatar--md">
+            <img src="./templates/simple/assets/pictogram-anonymous-avatar-blue.svg" alt="Anonymous" class="avatar__image">
           </div>
-          <div class="elv-avatar elv-avatar--md">
-            <img src="./templates/simple/assets/pictogram-anonymous-avatar-purple.svg" alt="Anonymous" class="elv-avatar__image">
+          <div class="avatar avatar--md">
+            <img src="./templates/simple/assets/pictogram-anonymous-avatar-purple.svg" alt="Anonymous" class="avatar__image">
           </div>
-          <div class="elv-avatar elv-avatar--md">
-            <img src="./templates/simple/assets/pictogram-anonymous-avatar-rorange.svg" alt="Anonymous" class="elv-avatar__image">
+          <div class="avatar avatar--md">
+            <img src="./templates/simple/assets/pictogram-anonymous-avatar-rorange.svg" alt="Anonymous" class="avatar__image">
           </div>
-          <div class="elv-avatar elv-avatar--md">
-            <img src="./templates/simple/assets/pictogram-anonymous-avatar-teal.svg" alt="Anonymous" class="elv-avatar__image">
+          <div class="avatar avatar--md">
+            <img src="./templates/simple/assets/pictogram-anonymous-avatar-teal.svg" alt="Anonymous" class="avatar__image">
           </div>
         </div>
       </div>
@@ -3000,8 +3002,8 @@
         <div class="demo-label">In Context</div>
         <div class="elv-bg-neutral-0 elv-border elv-border-light elv-rounded-md elv-p-3" style="max-width: 400px;">
           <div class="elv-flex elv-items-center elv-gap-3">
-            <div class="elv-avatar elv-avatar--md">
-              <img src="https://i.pravatar.cc/150?img=4" alt="Jane Doe" class="elv-avatar__image">
+            <div class="avatar avatar--md">
+              <img src="https://i.pravatar.cc/150?img=4" alt="Jane Doe" class="avatar__image">
             </div>
             <div>
               <p class="elv-text-sm elv-font-semibold elv-text-default">Jane Doe</p>
@@ -3145,21 +3147,21 @@
       <div>
         <div class="demo-label">Three Levels</div>
         <nav aria-label="Breadcrumb">
-          <ol class="elv-breadcrumbs" role="list">
-            <li class="elv-breadcrumb-item">
-              <a href="#" class="elv-breadcrumb-link">Home</a>
-              <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none">
+          <ol class="breadcrumbs" role="list">
+            <li class="breadcrumbs__item">
+              <a href="#" class="breadcrumbs__link">Home</a>
+              <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none">
                 <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
               </svg>
             </li>
-            <li class="elv-breadcrumb-item">
-              <a href="#" class="elv-breadcrumb-link">Categories</a>
-              <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none">
+            <li class="breadcrumbs__item">
+              <a href="#" class="breadcrumbs__link">Categories</a>
+              <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none">
                 <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
               </svg>
             </li>
-            <li class="elv-breadcrumb-item">
-              <span class="elv-breadcrumb-link elv-breadcrumb-link--current" aria-current="page">CRM Software</span>
+            <li class="breadcrumbs__item">
+              <span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page">CRM Software</span>
             </li>
           </ol>
         </nav>
@@ -3168,27 +3170,27 @@
       <div>
         <div class="demo-label">Four Levels</div>
         <nav aria-label="Breadcrumb">
-          <ol class="elv-breadcrumbs" role="list">
-            <li class="elv-breadcrumb-item">
-              <a href="#" class="elv-breadcrumb-link">Home</a>
-              <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none">
+          <ol class="breadcrumbs" role="list">
+            <li class="breadcrumbs__item">
+              <a href="#" class="breadcrumbs__link">Home</a>
+              <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none">
                 <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
               </svg>
             </li>
-            <li class="elv-breadcrumb-item">
-              <a href="#" class="elv-breadcrumb-link">Categories</a>
-              <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none">
+            <li class="breadcrumbs__item">
+              <a href="#" class="breadcrumbs__link">Categories</a>
+              <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none">
                 <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
               </svg>
             </li>
-            <li class="elv-breadcrumb-item">
-              <a href="#" class="elv-breadcrumb-link">CRM Software</a>
-              <svg class="elv-breadcrumb-separator" viewBox="0 0 20 20" fill="none">
+            <li class="breadcrumbs__item">
+              <a href="#" class="breadcrumbs__link">CRM Software</a>
+              <svg class="breadcrumbs__separator" viewBox="0 0 20 20" fill="none">
                 <path d="M10.875 10L6.9375 6.0625L8 5L13 10L8 15L6.9375 13.9375L10.875 10Z"/>
               </svg>
             </li>
-            <li class="elv-breadcrumb-item">
-              <span class="elv-breadcrumb-link elv-breadcrumb-link--current" aria-current="page">Reviews</span>
+            <li class="breadcrumbs__item">
+              <span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page">Reviews</span>
             </li>
           </ol>
         </nav>
@@ -3521,44 +3523,44 @@
       <div>
         <div class="demo-label">Basic Tabs</div>
         <div style="max-width: 600px;">
-          <div class="elv-tab-group">
-            <div class="elv-tab-list" role="tablist" aria-label="Product information">
-              <button class="elv-tab" role="tab" aria-selected="true" aria-controls="demo-panel-1" id="demo-tab-1">
+          <div class="tab-group">
+            <div class="tab-list" role="tablist" aria-label="Product information">
+              <button class="tab" role="tab" aria-selected="true" aria-controls="demo-panel-1" id="demo-tab-1">
                 Overview
               </button>
-              <button class="elv-tab" role="tab" aria-selected="false" aria-controls="demo-panel-2" id="demo-tab-2" tabindex="-1">
+              <button class="tab" role="tab" aria-selected="false" aria-controls="demo-panel-2" id="demo-tab-2" tabindex="-1">
                 Features
               </button>
-              <button class="elv-tab" role="tab" aria-selected="false" aria-controls="demo-panel-3" id="demo-tab-3" tabindex="-1">
+              <button class="tab" role="tab" aria-selected="false" aria-controls="demo-panel-3" id="demo-tab-3" tabindex="-1">
                 Pricing
               </button>
-              <button class="elv-tab" role="tab" aria-selected="false" aria-controls="demo-panel-4" id="demo-tab-4" tabindex="-1">
+              <button class="tab" role="tab" aria-selected="false" aria-controls="demo-panel-4" id="demo-tab-4" tabindex="-1">
                 Reviews
               </button>
             </div>
-            <div class="elv-tab-panels">
-              <div class="elv-tab-panel" role="tabpanel" id="demo-panel-1" aria-labelledby="demo-tab-1" aria-hidden="false" tabindex="0">
+            <div class="tab-panels">
+              <div class="tab-panel" role="tabpanel" id="demo-panel-1" aria-labelledby="demo-tab-1" aria-hidden="false" tabindex="0">
                 <div class="elv-bg-neutral-5 elv-p-4 elv-rounded-sm">
                   <p class="elv-text-sm elv-text-default">
                     <strong>Overview:</strong> This product helps teams collaborate more effectively with real-time messaging, file sharing, and video calls.
                   </p>
                 </div>
               </div>
-              <div class="elv-tab-panel" role="tabpanel" id="demo-panel-2" aria-labelledby="demo-tab-2" aria-hidden="true" tabindex="0">
+              <div class="tab-panel" role="tabpanel" id="demo-panel-2" aria-labelledby="demo-tab-2" aria-hidden="true" tabindex="0">
                 <div class="elv-bg-neutral-5 elv-p-4 elv-rounded-sm">
                   <p class="elv-text-sm elv-text-default">
                     <strong>Features:</strong> Real-time chat, video conferencing, screen sharing, file storage, integrations with 100+ tools.
                   </p>
                 </div>
               </div>
-              <div class="elv-tab-panel" role="tabpanel" id="demo-panel-3" aria-labelledby="demo-tab-3" aria-hidden="true" tabindex="0">
+              <div class="tab-panel" role="tabpanel" id="demo-panel-3" aria-labelledby="demo-tab-3" aria-hidden="true" tabindex="0">
                 <div class="elv-bg-neutral-5 elv-p-4 elv-rounded-sm">
                   <p class="elv-text-sm elv-text-default">
                     <strong>Pricing:</strong> Free for up to 10 users. Pro plan starts at $8/user/month. Enterprise pricing available on request.
                   </p>
                 </div>
               </div>
-              <div class="elv-tab-panel" role="tabpanel" id="demo-panel-4" aria-labelledby="demo-tab-4" aria-hidden="true" tabindex="0">
+              <div class="tab-panel" role="tabpanel" id="demo-panel-4" aria-labelledby="demo-tab-4" aria-hidden="true" tabindex="0">
                 <div class="elv-bg-neutral-5 elv-p-4 elv-rounded-sm">
                   <p class="elv-text-sm elv-text-default">
                     <strong>Reviews:</strong> 4.5 out of 5 stars from 1,234 verified users. Customers love the ease of use and reliability.
@@ -4601,379 +4603,81 @@
 
   <hr class="elv-border-t elv-border-light elv-my-12">
 
-  <!-- Combobox -->
-  <div id="combobox" class="demo-section">
-    <h2 class="elv-text-2xl elv-font-bold elv-text-default elv-mb-6">Combobox</h2>
+  <!-- Enhanced Selects -->
+  <div id="enhanced-selects" class="demo-section">
+    <h2 class="elv-text-2xl elv-font-bold elv-text-default elv-mb-6">Enhanced Selects</h2>
     <p class="elv-text-sm elv-text-subtle elv-mb-6">
-      Multi-select input with search and autocomplete. Displays selected items as chips with remove buttons.
+      Searchable single and multi-select powered by Select2 with Elevate vendor theme.
       <a href="./templates/forms/combobox.html" class="elv-text-link">View detailed docs →</a>
     </p>
 
     <div class="demo-grid">
-      <!-- Default Empty State -->
       <div>
-        <div class="demo-label">Default (Empty)</div>
-        <div class="elv-combobox" data-combobox="demo-combobox-1">
-          <label class="elv-input-label" for="demo-combobox-1">
-            Select Tags <span class="elv-required">*</span>
-          </label>
-
-          <div class="elv-combobox__container">
-            <div class="elv-combobox__input-area">
-              <div class="elv-combobox__chips" role="list"></div>
-              <input
-                type="text"
-                class="elv-combobox__search"
-                id="demo-combobox-1"
-                placeholder="Search or select..."
-                autocomplete="off"
-                role="combobox"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-controls="demo-combobox-1-listbox"
-                aria-autocomplete="list"
-              />
-            </div>
-
-            <div class="elv-combobox__controls">
-              <button type="button" class="elv-combobox__clear-btn" aria-label="Clear all" hidden>
-                <span class="material-symbols-outlined">cancel</span>
-              </button>
-              <button type="button" class="elv-combobox__toggle" aria-label="Toggle dropdown">
-                <span class="material-symbols-outlined">expand_more</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="elv-combobox__dropdown" id="demo-combobox-1-listbox" role="listbox" hidden>
-            <ul class="elv-combobox__options" role="presentation"></ul>
-            <div class="elv-combobox__no-results" hidden>No results found</div>
-          </div>
-
-          <select name="tags[]" multiple hidden aria-hidden="true">
-            <option value="1">Ruby</option>
-            <option value="2">Rails</option>
-            <option value="3">JavaScript</option>
-            <option value="4">TypeScript</option>
-            <option value="5">Python</option>
-            <option value="6">Go</option>
-            <option value="7">Rust</option>
-          </select>
-
-          <p class="elv-input-helper">Select multiple programming languages</p>
-        </div>
+        <div class="demo-label">Single Select</div>
+        <select class="elv-select elv-select--md" id="demo-select2-single" style="width: 100%;">
+          <option></option>
+          <option>Engineering</option>
+          <option>Design</option>
+          <option>Product</option>
+          <option>Marketing</option>
+          <option>Sales</option>
+        </select>
       </div>
 
-      <!-- Pre-selected Values -->
       <div>
-        <div class="demo-label">With Pre-selected Values</div>
-        <div class="elv-combobox" data-combobox="demo-combobox-2">
-          <label class="elv-input-label" for="demo-combobox-2">
-            Selected Technologies
-          </label>
-
-          <div class="elv-combobox__container">
-            <div class="elv-combobox__input-area">
-              <div class="elv-combobox__chips" role="list">
-                <div class="elv-combobox__chip" role="listitem">
-                  <span>Design</span>
-                  <button type="button" class="elv-combobox__chip-remove" aria-label="Remove Design">
-                    <span class="material-symbols-outlined">close</span>
-                  </button>
-                </div>
-                <div class="elv-combobox__chip" role="listitem">
-                  <span>Development</span>
-                  <button type="button" class="elv-combobox__chip-remove" aria-label="Remove Development">
-                    <span class="material-symbols-outlined">close</span>
-                  </button>
-                </div>
-                <div class="elv-combobox__chip" role="listitem">
-                  <span>Marketing</span>
-                  <button type="button" class="elv-combobox__chip-remove" aria-label="Remove Marketing">
-                    <span class="material-symbols-outlined">close</span>
-                  </button>
-                </div>
-              </div>
-              <input
-                type="text"
-                class="elv-combobox__search"
-                id="demo-combobox-2"
-                placeholder="Add more..."
-                autocomplete="off"
-                role="combobox"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-controls="demo-combobox-2-listbox"
-                aria-autocomplete="list"
-              />
-            </div>
-
-            <div class="elv-combobox__controls">
-              <button type="button" class="elv-combobox__clear-btn" aria-label="Clear all">
-                <span class="material-symbols-outlined">cancel</span>
-              </button>
-              <button type="button" class="elv-combobox__toggle" aria-label="Toggle dropdown">
-                <span class="material-symbols-outlined">expand_more</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="elv-combobox__dropdown" id="demo-combobox-2-listbox" role="listbox" hidden>
-            <ul class="elv-combobox__options" role="presentation"></ul>
-          </div>
-
-          <select name="categories[]" multiple hidden aria-hidden="true">
-            <option value="1" selected>Design</option>
-            <option value="2" selected>Development</option>
-            <option value="3" selected>Marketing</option>
-            <option value="4">Sales</option>
-            <option value="5">Support</option>
-          </select>
-        </div>
+        <div class="demo-label">Multi Select</div>
+        <select class="elv-select elv-select--md" id="demo-select2-multi" multiple style="width: 100%;">
+          <option>Ruby</option>
+          <option>JavaScript</option>
+          <option>Python</option>
+          <option>TypeScript</option>
+          <option>Go</option>
+          <option>Rust</option>
+        </select>
       </div>
 
-      <!-- Small Size -->
       <div>
-        <div class="demo-label">Small (32px)</div>
-        <div class="elv-combobox elv-combobox--sm" data-combobox="demo-combobox-3">
-          <label class="elv-input-label" for="demo-combobox-3">
-            Tags
-          </label>
-
-          <div class="elv-combobox__container">
-            <div class="elv-combobox__input-area">
-              <div class="elv-combobox__chips" role="list">
-                <div class="elv-combobox__chip" role="listitem">
-                  <span>Tag 1</span>
-                  <button type="button" class="elv-combobox__chip-remove" aria-label="Remove Tag 1">
-                    <span class="material-symbols-outlined">close</span>
-                  </button>
-                </div>
-              </div>
-              <input
-                type="text"
-                class="elv-combobox__search"
-                id="demo-combobox-3"
-                placeholder="Add tags..."
-                autocomplete="off"
-                role="combobox"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-              />
-            </div>
-
-            <div class="elv-combobox__controls">
-              <button type="button" class="elv-combobox__clear-btn" aria-label="Clear all">
-                <span class="material-symbols-outlined">cancel</span>
-              </button>
-              <button type="button" class="elv-combobox__toggle" aria-label="Toggle dropdown">
-                <span class="material-symbols-outlined">expand_more</span>
-              </button>
-            </div>
-          </div>
-
-          <select name="sm-tags[]" multiple hidden aria-hidden="true">
-            <option value="1" selected>Tag 1</option>
-            <option value="2">Tag 2</option>
-            <option value="3">Tag 3</option>
-          </select>
-        </div>
+        <div class="demo-label">Small</div>
+        <select class="elv-select elv-select--sm" id="demo-select2-sm" style="width: 100%;">
+          <option></option>
+          <option>Q1 2025</option>
+          <option>Q2 2025</option>
+          <option>Q3 2025</option>
+          <option>Q4 2025</option>
+        </select>
       </div>
 
-      <!-- Medium Size (Default) -->
       <div>
-        <div class="demo-label">Medium (40px - Default)</div>
-        <div class="elv-combobox" data-combobox="demo-combobox-4">
-          <label class="elv-input-label" for="demo-combobox-4">
-            Categories
-          </label>
-
-          <div class="elv-combobox__container">
-            <div class="elv-combobox__input-area">
-              <div class="elv-combobox__chips" role="list">
-                <div class="elv-combobox__chip" role="listitem">
-                  <span>Product</span>
-                  <button type="button" class="elv-combobox__chip-remove" aria-label="Remove Product">
-                    <span class="material-symbols-outlined">close</span>
-                  </button>
-                </div>
-              </div>
-              <input
-                type="text"
-                class="elv-combobox__search"
-                id="demo-combobox-4"
-                placeholder="Add more..."
-                autocomplete="off"
-                role="combobox"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-              />
-            </div>
-
-            <div class="elv-combobox__controls">
-              <button type="button" class="elv-combobox__clear-btn" aria-label="Clear all">
-                <span class="material-symbols-outlined">cancel</span>
-              </button>
-              <button type="button" class="elv-combobox__toggle" aria-label="Toggle dropdown">
-                <span class="material-symbols-outlined">expand_more</span>
-              </button>
-            </div>
-          </div>
-
-          <select name="md-categories[]" multiple hidden aria-hidden="true">
-            <option value="1" selected>Product</option>
-            <option value="2">Engineering</option>
-            <option value="3">Finance</option>
-          </select>
-        </div>
+        <div class="demo-label">Large</div>
+        <select class="elv-select elv-select--lg" id="demo-select2-lg" style="width: 100%;">
+          <option></option>
+          <option>United States</option>
+          <option>Canada</option>
+          <option>United Kingdom</option>
+        </select>
       </div>
 
-      <!-- Large Size -->
       <div>
-        <div class="demo-label">Large (48px)</div>
-        <div class="elv-combobox elv-combobox--lg" data-combobox="demo-combobox-5">
-          <label class="elv-input-label" for="demo-combobox-5">
-            Departments
-          </label>
-
-          <div class="elv-combobox__container">
-            <div class="elv-combobox__input-area">
-              <div class="elv-combobox__chips" role="list">
-                <div class="elv-combobox__chip" role="listitem">
-                  <span>Sales</span>
-                  <button type="button" class="elv-combobox__chip-remove" aria-label="Remove Sales">
-                    <span class="material-symbols-outlined">close</span>
-                  </button>
-                </div>
-              </div>
-              <input
-                type="text"
-                class="elv-combobox__search"
-                id="demo-combobox-5"
-                placeholder="Add more..."
-                autocomplete="off"
-                role="combobox"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-              />
-            </div>
-
-            <div class="elv-combobox__controls">
-              <button type="button" class="elv-combobox__clear-btn" aria-label="Clear all">
-                <span class="material-symbols-outlined">cancel</span>
-              </button>
-              <button type="button" class="elv-combobox__toggle" aria-label="Toggle dropdown">
-                <span class="material-symbols-outlined">expand_more</span>
-              </button>
-            </div>
-          </div>
-
-          <select name="lg-departments[]" multiple hidden aria-hidden="true">
-            <option value="1" selected>Sales</option>
-            <option value="2">Marketing</option>
-            <option value="3">Operations</option>
-          </select>
-        </div>
+        <div class="demo-label">Multi Select (Small)</div>
+        <select class="elv-select elv-select--sm" id="demo-select2-multi-sm" multiple style="width: 100%;">
+          <option selected>Tag A</option>
+          <option selected>Tag B</option>
+          <option>Tag C</option>
+          <option>Tag D</option>
+        </select>
       </div>
 
-      <!-- Error State -->
       <div>
-        <div class="demo-label">Error State</div>
-        <div class="elv-combobox elv-combobox--error" data-combobox="demo-combobox-6">
-          <label class="elv-input-label" for="demo-combobox-6">
-            Required Tags <span class="elv-required">*</span>
-          </label>
-
-          <div class="elv-combobox__container">
-            <div class="elv-combobox__input-area">
-              <div class="elv-combobox__chips" role="list"></div>
-              <input
-                type="text"
-                class="elv-combobox__search"
-                id="demo-combobox-6"
-                placeholder="Search or select..."
-                autocomplete="off"
-                role="combobox"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-invalid="true"
-                aria-describedby="error-message-combobox-6"
-              />
-            </div>
-
-            <div class="elv-combobox__controls">
-              <button type="button" class="elv-combobox__clear-btn" aria-label="Clear all" hidden>
-                <span class="material-symbols-outlined">cancel</span>
-              </button>
-              <button type="button" class="elv-combobox__toggle" aria-label="Toggle dropdown">
-                <span class="material-symbols-outlined">expand_more</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="elv-combobox__dropdown" role="listbox" hidden>
-            <ul class="elv-combobox__options" role="presentation"></ul>
-          </div>
-
-          <select name="error-tags[]" multiple hidden aria-hidden="true">
-            <option value="1">Ruby</option>
-            <option value="2">JavaScript</option>
-            <option value="3">Python</option>
-          </select>
-
-          <p id="error-message-combobox-6" class="elv-input-error" role="alert">Please select at least one tag</p>
-        </div>
-      </div>
-
-      <!-- Disabled State -->
-      <div>
-        <div class="demo-label">Disabled State</div>
-        <div class="elv-combobox elv-combobox--disabled" data-combobox="demo-combobox-7">
-          <label class="elv-input-label" for="demo-combobox-7">
-            Disabled Combobox
-          </label>
-
-          <div class="elv-combobox__container">
-            <div class="elv-combobox__input-area">
-              <div class="elv-combobox__chips" role="list">
-                <div class="elv-combobox__chip" role="listitem">
-                  <span>Ruby</span>
-                  <button type="button" class="elv-combobox__chip-remove" aria-label="Remove Ruby" disabled>
-                    <span class="material-symbols-outlined">close</span>
-                  </button>
-                </div>
-              </div>
-              <input
-                type="text"
-                class="elv-combobox__search"
-                id="demo-combobox-7"
-                placeholder="Disabled..."
-                autocomplete="off"
-                role="combobox"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                disabled
-              />
-            </div>
-
-            <div class="elv-combobox__controls">
-              <button type="button" class="elv-combobox__clear-btn" aria-label="Clear all" disabled>
-                <span class="material-symbols-outlined">cancel</span>
-              </button>
-              <button type="button" class="elv-combobox__toggle" aria-label="Toggle dropdown" disabled>
-                <span class="material-symbols-outlined">expand_more</span>
-              </button>
-            </div>
-          </div>
-
-          <select name="disabled-tags[]" multiple hidden aria-hidden="true" disabled>
-            <option value="1" selected>Ruby</option>
-          </select>
-        </div>
+        <div class="demo-label">No Search</div>
+        <select class="elv-select elv-select--md" id="demo-select2-nosearch" data-no-search style="width: 100%;">
+          <option></option>
+          <option>Active</option>
+          <option>Inactive</option>
+          <option>Pending</option>
+        </select>
       </div>
     </div>
   </div>
-
   <hr class="elv-border-t elv-border-light elv-my-12">
 
   <!-- Backgrounds -->
@@ -5338,10 +5042,10 @@
 
   // Tab functionality
   function selectTab(tabButton) {
-    const tabList = tabButton.closest('.elv-tab-list');
-    const tabGroup = tabButton.closest('.elv-tab-group');
+    const tabList = tabButton.closest('.tab-list');
+    const tabGroup = tabButton.closest('.tab-group');
 
-    tabList.querySelectorAll('.elv-tab').forEach(tab => {
+    tabList.querySelectorAll('.tab').forEach(tab => {
       tab.setAttribute('aria-selected', 'false');
       tab.setAttribute('tabindex', '-1');
     });
@@ -5350,7 +5054,7 @@
     tabButton.removeAttribute('tabindex');
 
     const panelId = tabButton.getAttribute('aria-controls');
-    tabGroup.querySelectorAll('.elv-tab-panel').forEach(panel => {
+    tabGroup.querySelectorAll('.tab-panel').forEach(panel => {
       panel.setAttribute('aria-hidden', 'true');
     });
 
@@ -5361,17 +5065,17 @@
   }
 
   document.addEventListener('click', (e) => {
-    if (e.target.matches('.elv-tab')) {
+    if (e.target.matches('.tab')) {
       selectTab(e.target);
     }
   });
 
   document.addEventListener('keydown', (e) => {
-    const tab = e.target.closest('.elv-tab');
+    const tab = e.target.closest('.tab');
     if (!tab) return;
 
-    const tabList = tab.closest('.elv-tab-list');
-    const tabs = Array.from(tabList.querySelectorAll('.elv-tab'));
+    const tabList = tab.closest('.tab-list');
+    const tabs = Array.from(tabList.querySelectorAll('.tab'));
     const currentIndex = tabs.indexOf(tab);
 
     let nextTab = null;
@@ -5792,375 +5496,32 @@
     new DatePicker(demoDatePicker);
   }
 
-  /**
-   * ElevateCombobox - Multi-select combobox component
-   * Provides search, filtering, chip management, and keyboard navigation
-   */
-  class ElevateCombobox {
-    constructor(element) {
-      this.element = element;
-      this.container = element.querySelector('.elv-combobox__container');
-      this.searchInput = element.querySelector('.elv-combobox__search');
-      this.chipsContainer = element.querySelector('.elv-combobox__chips');
-      this.dropdown = element.querySelector('.elv-combobox__dropdown');
-      this.optionsList = element.querySelector('.elv-combobox__options');
-      this.noResultsMsg = element.querySelector('.elv-combobox__no-results');
-      this.clearBtn = element.querySelector('.elv-combobox__clear-btn');
-      this.toggleBtn = element.querySelector('.elv-combobox__toggle');
-      this.select = element.querySelector('select[multiple]');
+  window.addEventListener('load', function() {
+    function elvClasses(el) {
+      var mods = $.map(el.attr('class').split(' '), function(c) {
+        return c.indexOf('elv-select--') === 0 ? c : null;
+      });
+      return 'elv-select ' + mods.join(' ');
+    }
 
-      // State management
-      this.state = {
-        selectedValues: new Set(),
-        allOptions: [],
-        filteredOptions: [],
-        highlightedIndex: -1,
-        isOpen: false
+    $('select.elv-select').each(function() {
+      var $el = $(this);
+      var opts = {
+        width: 'resolve',
+        placeholder: 'Select...',
+        allowClear: !$el.prop('multiple'),
+        containerCssClass: elvClasses($el),
+        dropdownCssClass: 'elv-select-drop'
       };
 
-      // Check if disabled
-      this.isDisabled = this.searchInput && this.searchInput.disabled;
-
-      if (!this.isDisabled) {
-        this.init();
-      }
-    }
-
-    init() {
-      this.parseOptions();
-      this.bindEvents();
-      this.renderChips();
-      this.renderDropdown();
-      this.updateClearButton();
-    }
-
-    parseOptions() {
-      if (!this.select) return;
-
-      const options = Array.from(this.select.options);
-      this.state.allOptions = options.map(opt => ({
-        value: opt.value,
-        label: opt.textContent.trim(),
-        selected: opt.selected
-      }));
-
-      this.state.selectedValues = new Set(
-        this.state.allOptions
-          .filter(opt => opt.selected)
-          .map(opt => opt.value)
-      );
-
-      this.state.filteredOptions = [...this.state.allOptions];
-    }
-
-    bindEvents() {
-      if (this.searchInput) {
-        this.searchInput.addEventListener('input', (e) => this.handleSearch(e));
-        this.searchInput.addEventListener('keydown', (e) => this.handleKeyboard(e));
-        this.searchInput.addEventListener('focus', () => this.open());
+      if ($el.data('no-search') !== undefined) {
+        opts.minimumResultsForSearch = -1;
       }
 
-      if (this.toggleBtn) {
-        this.toggleBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.toggle();
-        });
-      }
-
-      if (this.clearBtn) {
-        this.clearBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.clearAll();
-        });
-      }
-
-      document.addEventListener('click', (e) => {
-        if (!this.element.contains(e.target)) {
-          this.close();
-        }
-      });
-    }
-
-    handleSearch(e) {
-      const query = e.target.value.toLowerCase().trim();
-
-      if (query === '') {
-        this.state.filteredOptions = [...this.state.allOptions];
-      } else {
-        this.state.filteredOptions = this.state.allOptions.filter(opt =>
-          opt.label.toLowerCase().includes(query)
-        );
-      }
-
-      this.state.highlightedIndex = -1;
-      this.renderDropdown();
-
-      if (!this.state.isOpen) {
-        this.open();
-      }
-    }
-
-    handleKeyboard(e) {
-      switch (e.key) {
-        case 'ArrowDown':
-          e.preventDefault();
-          if (!this.state.isOpen) {
-            this.open();
-          }
-          this.highlightNext();
-          break;
-
-        case 'ArrowUp':
-          e.preventDefault();
-          if (!this.state.isOpen) {
-            this.open();
-          }
-          this.highlightPrevious();
-          break;
-
-        case 'Enter':
-          e.preventDefault();
-          if (this.state.isOpen && this.state.highlightedIndex >= 0) {
-            const option = this.state.filteredOptions[this.state.highlightedIndex];
-            if (option) {
-              this.toggleOption(option.value);
-            }
-          }
-          break;
-
-        case 'Escape':
-          e.preventDefault();
-          this.close();
-          if (this.searchInput) {
-            this.searchInput.value = '';
-            this.state.filteredOptions = [...this.state.allOptions];
-          }
-          break;
-
-        case 'Backspace':
-          if (this.searchInput && this.searchInput.value === '' && this.state.selectedValues.size > 0) {
-            const lastValue = Array.from(this.state.selectedValues).pop();
-            this.deselectOption(lastValue);
-          }
-          break;
-      }
-    }
-
-    highlightNext() {
-      if (this.state.filteredOptions.length === 0) return;
-
-      this.state.highlightedIndex =
-        (this.state.highlightedIndex + 1) % this.state.filteredOptions.length;
-      this.renderDropdown();
-      this.scrollToHighlighted();
-    }
-
-    highlightPrevious() {
-      if (this.state.filteredOptions.length === 0) return;
-
-      this.state.highlightedIndex =
-        this.state.highlightedIndex <= 0
-          ? this.state.filteredOptions.length - 1
-          : this.state.highlightedIndex - 1;
-      this.renderDropdown();
-      this.scrollToHighlighted();
-    }
-
-    scrollToHighlighted() {
-      if (!this.optionsList) return;
-
-      const highlightedEl = this.optionsList.querySelector('.elv-combobox__option--focused');
-      if (highlightedEl) {
-        highlightedEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-      }
-    }
-
-    selectOption(value) {
-      this.state.selectedValues.add(value);
-      this.updateSelect();
-      this.renderChips();
-      this.renderDropdown();
-      this.updateClearButton();
-      this.updateARIA();
-
-      if (this.searchInput) {
-        this.searchInput.placeholder = this.state.selectedValues.size > 0
-          ? 'Add more...'
-          : 'Search or select...';
-      }
-    }
-
-    deselectOption(value) {
-      this.state.selectedValues.delete(value);
-      this.updateSelect();
-      this.renderChips();
-      this.renderDropdown();
-      this.updateClearButton();
-      this.updateARIA();
-
-      if (this.searchInput) {
-        this.searchInput.placeholder = this.state.selectedValues.size > 0
-          ? 'Add more...'
-          : 'Search or select...';
-      }
-    }
-
-    toggleOption(value) {
-      if (this.state.selectedValues.has(value)) {
-        this.deselectOption(value);
-      } else {
-        this.selectOption(value);
-      }
-    }
-
-    clearAll() {
-      this.state.selectedValues.clear();
-      this.updateSelect();
-      this.renderChips();
-      this.renderDropdown();
-      this.updateClearButton();
-      this.updateARIA();
-
-      if (this.searchInput) {
-        this.searchInput.value = '';
-        this.searchInput.placeholder = 'Search or select...';
-        this.state.filteredOptions = [...this.state.allOptions];
-      }
-
-      this.close();
-    }
-
-    renderChips() {
-      if (!this.chipsContainer) return;
-
-      this.chipsContainer.innerHTML = '';
-
-      this.state.selectedValues.forEach(value => {
-        const option = this.state.allOptions.find(opt => opt.value === value);
-        if (!option) return;
-
-        const chip = document.createElement('div');
-        chip.className = 'elv-combobox__chip';
-        chip.setAttribute('role', 'listitem');
-        chip.setAttribute('data-value', value);
-
-        const text = document.createElement('span');
-        text.className = 'elv-combobox__chip-text';
-        text.textContent = option.label;
-
-        const removeBtn = document.createElement('button');
-        removeBtn.className = 'elv-combobox__chip-remove';
-        removeBtn.type = 'button';
-        removeBtn.setAttribute('aria-label', `Remove ${option.label}`);
-        removeBtn.innerHTML = '<span class="material-symbols-outlined">close</span>';
-
-        removeBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          this.deselectOption(value);
-        });
-
-        chip.appendChild(text);
-        chip.appendChild(removeBtn);
-        this.chipsContainer.appendChild(chip);
-      });
-    }
-
-    renderDropdown() {
-      if (!this.optionsList) return;
-
-      this.optionsList.innerHTML = '';
-
-      if (this.state.filteredOptions.length === 0) {
-        if (this.noResultsMsg) {
-          this.noResultsMsg.hidden = false;
-        }
-        return;
-      }
-
-      if (this.noResultsMsg) {
-        this.noResultsMsg.hidden = true;
-      }
-
-      this.state.filteredOptions.forEach((option, index) => {
-        const li = document.createElement('li');
-        li.className = 'elv-combobox__option';
-        li.setAttribute('role', 'option');
-        li.setAttribute('data-value', option.value);
-        li.textContent = option.label;
-
-        const isSelected = this.state.selectedValues.has(option.value);
-        li.setAttribute('aria-selected', isSelected.toString());
-
-        if (index === this.state.highlightedIndex) {
-          li.classList.add('elv-combobox__option--focused');
-        }
-
-        li.addEventListener('click', (e) => {
-          e.stopPropagation();
-          this.toggleOption(option.value);
-          if (this.searchInput) {
-            this.searchInput.focus();
-          }
-        });
-
-        this.optionsList.appendChild(li);
-      });
-    }
-
-    updateSelect() {
-      if (!this.select) return;
-
-      Array.from(this.select.options).forEach(opt => {
-        opt.selected = this.state.selectedValues.has(opt.value);
-      });
-    }
-
-    updateClearButton() {
-      if (!this.clearBtn) return;
-
-      this.clearBtn.hidden = this.state.selectedValues.size === 0;
-    }
-
-    updateARIA() {
-      if (this.searchInput) {
-        this.searchInput.setAttribute('aria-expanded', this.state.isOpen.toString());
-      }
-    }
-
-    open() {
-      if (this.isDisabled) return;
-
-      this.state.isOpen = true;
-      if (this.dropdown) {
-        this.dropdown.hidden = false;
-      }
-      this.updateARIA();
-    }
-
-    close() {
-      this.state.isOpen = false;
-      this.state.highlightedIndex = -1;
-      if (this.dropdown) {
-        this.dropdown.hidden = true;
-      }
-      this.updateARIA();
-    }
-
-    toggle() {
-      if (this.state.isOpen) {
-        this.close();
-      } else {
-        this.open();
-      }
-    }
-  }
-
-  // Auto-initialize all comboboxes on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[data-combobox]').forEach(element => {
-      new ElevateCombobox(element);
+      $el.select2(opts);
     });
   });
+
 </script>
 
 <!-- Slide-Out Panel Demos -->

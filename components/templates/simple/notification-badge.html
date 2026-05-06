@@ -32,7 +32,7 @@
     }
 
     /* Notification Badge Styles — from notification_badge/component.rb */
-    .elv-notification-badge {
+    .notification-badge {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -45,42 +45,42 @@
     }
 
     /* Priority variants */
-    .elv-notification-badge--top {
+    .notification-badge--top {
       background: var(--bg-brand); /* bg-brand */
       color: var(--bg-neutral-0); /* text-inverted */
     }
 
-    .elv-notification-badge--mid {
+    .notification-badge--mid {
       background: var(--text-primary); /* bg-primary */
       color: var(--bg-neutral-0); /* text-inverted */
     }
 
-    .elv-notification-badge--low {
+    .notification-badge--low {
       color: var(--text-subtle); /* text-subtle */
     }
 
     /* Display modes: with/without number */
-    .elv-notification-badge--with-count {
+    .notification-badge--with-count {
       min-width: 16px;
       height: 16px;
       width: fit-content;
       padding: 4px;
     }
 
-    .elv-notification-badge--dot {
+    .notification-badge--dot {
       width: 4px;
       height: 4px;
       padding: 0;
     }
 
     /* Low priority with count has special background */
-    .elv-notification-badge--low.elv-notification-badge--with-count {
+    .notification-badge--low.notification-badge--with-count {
       background: rgba(87, 70, 178, 0.2); /* bg-primary-20 */
       border: 1px solid rgba(87, 70, 178, 0.6); /* border-primary-60 */
     }
 
     /* Low priority dot has different background */
-    .elv-notification-badge--low.elv-notification-badge--dot {
+    .notification-badge--low.notification-badge--dot {
       background: rgba(87, 70, 178, 0.6); /* bg-primary-60 */
     }
 
@@ -102,7 +102,7 @@
       background: var(--bg-neutral-5);
     }
 
-    .nav-icon .elv-notification-badge {
+    .nav-icon .notification-badge {
       position: absolute;
       top: -4px;
       right: -4px;
@@ -152,26 +152,26 @@
     </p>
     <div class="examples">
       <div class="example-row">
-        <span class="elv-notification-badge elv-notification-badge--top elv-notification-badge--with-count">3</span>
+        <span class="notification-badge notification-badge--top notification-badge--with-count">3</span>
         <span class="elv-text-sm elv-text-default">Top Priority (Brand Red) — urgent notifications</span>
       </div>
       <div class="example-row">
-        <span class="elv-notification-badge elv-notification-badge--mid elv-notification-badge--with-count">5</span>
+        <span class="notification-badge notification-badge--mid notification-badge--with-count">5</span>
         <span class="elv-text-sm elv-text-default">Mid Priority (Primary Purple) — important updates</span>
       </div>
       <div class="example-row">
-        <span class="elv-notification-badge elv-notification-badge--low elv-notification-badge--with-count">12</span>
+        <span class="notification-badge notification-badge--low notification-badge--with-count">12</span>
         <span class="elv-text-sm elv-text-default">Low Priority (Subtle) — informational counts</span>
       </div>
     </div>
     <pre><code>&lt;!-- Top priority --&gt;
-&lt;span class="elv-notification-badge elv-notification-badge--top elv-notification-badge--with-count"&gt;3&lt;/span&gt;
+&lt;span class="notification-badge notification-badge--top notification-badge--with-count"&gt;3&lt;/span&gt;
 
 &lt;!-- Mid priority --&gt;
-&lt;span class="elv-notification-badge elv-notification-badge--mid elv-notification-badge--with-count"&gt;5&lt;/span&gt;
+&lt;span class="notification-badge notification-badge--mid notification-badge--with-count"&gt;5&lt;/span&gt;
 
 &lt;!-- Low priority --&gt;
-&lt;span class="elv-notification-badge elv-notification-badge--low elv-notification-badge--with-count"&gt;12&lt;/span&gt;</code></pre>
+&lt;span class="notification-badge notification-badge--low notification-badge--with-count"&gt;12&lt;/span&gt;</code></pre>
   </div>
 
   <!-- Display Modes -->
@@ -184,25 +184,25 @@
       <div>
         <p class="elv-text-xs elv-text-subtle elv-mb-3">With Count</p>
         <div class="example-row">
-          <span class="elv-notification-badge elv-notification-badge--top elv-notification-badge--with-count">8</span>
-          <span class="elv-notification-badge elv-notification-badge--mid elv-notification-badge--with-count">23</span>
-          <span class="elv-notification-badge elv-notification-badge--low elv-notification-badge--with-count">99+</span>
+          <span class="notification-badge notification-badge--top notification-badge--with-count">8</span>
+          <span class="notification-badge notification-badge--mid notification-badge--with-count">23</span>
+          <span class="notification-badge notification-badge--low notification-badge--with-count">99+</span>
         </div>
       </div>
       <div>
         <p class="elv-text-xs elv-text-subtle elv-mb-3">Dot Indicator (No Count)</p>
         <div class="example-row">
-          <span class="elv-notification-badge elv-notification-badge--top elv-notification-badge--dot"></span>
-          <span class="elv-notification-badge elv-notification-badge--mid elv-notification-badge--dot"></span>
-          <span class="elv-notification-badge elv-notification-badge--low elv-notification-badge--dot"></span>
+          <span class="notification-badge notification-badge--top notification-badge--dot"></span>
+          <span class="notification-badge notification-badge--mid notification-badge--dot"></span>
+          <span class="notification-badge notification-badge--low notification-badge--dot"></span>
         </div>
       </div>
     </div>
     <pre><code>&lt;!-- With count --&gt;
-&lt;span class="elv-notification-badge elv-notification-badge--top elv-notification-badge--with-count"&gt;8&lt;/span&gt;
+&lt;span class="notification-badge notification-badge--top notification-badge--with-count"&gt;8&lt;/span&gt;
 
 &lt;!-- Dot indicator --&gt;
-&lt;span class="elv-notification-badge elv-notification-badge--top elv-notification-badge--dot"&gt;&lt;/span&gt;</code></pre>
+&lt;span class="notification-badge notification-badge--top notification-badge--dot"&gt;&lt;/span&gt;</code></pre>
   </div>
 
   <!-- Number Handling -->
@@ -213,23 +213,23 @@
     </p>
     <div class="examples">
       <div class="example-row">
-        <span class="elv-notification-badge elv-notification-badge--mid elv-notification-badge--with-count">1</span>
+        <span class="notification-badge notification-badge--mid notification-badge--with-count">1</span>
         <span class="elv-text-sm elv-text-default">Single digit</span>
       </div>
       <div class="example-row">
-        <span class="elv-notification-badge elv-notification-badge--mid elv-notification-badge--with-count">42</span>
+        <span class="notification-badge notification-badge--mid notification-badge--with-count">42</span>
         <span class="elv-text-sm elv-text-default">Double digit</span>
       </div>
       <div class="example-row">
-        <span class="elv-notification-badge elv-notification-badge--mid elv-notification-badge--with-count">99+</span>
+        <span class="notification-badge notification-badge--mid notification-badge--with-count">99+</span>
         <span class="elv-text-sm elv-text-default">Capped at 99+ for large counts</span>
       </div>
     </div>
     <pre><code>&lt;!-- Show exact count under 100 --&gt;
-&lt;span class="elv-notification-badge elv-notification-badge--mid elv-notification-badge--with-count"&gt;42&lt;/span&gt;
+&lt;span class="notification-badge notification-badge--mid notification-badge--with-count"&gt;42&lt;/span&gt;
 
 &lt;!-- Cap at 99+ for large numbers --&gt;
-&lt;span class="elv-notification-badge elv-notification-badge--mid elv-notification-badge--with-count"&gt;99+&lt;/span&gt;</code></pre>
+&lt;span class="notification-badge notification-badge--mid notification-badge--with-count"&gt;99+&lt;/span&gt;</code></pre>
   </div>
 
   <!-- In Context: Navigation -->
@@ -241,24 +241,24 @@
     <div class="example-row elv-mb-4">
       <div class="nav-icon">
         <span class="elv-text-xl">🔔</span>
-        <span class="elv-notification-badge elv-notification-badge--top elv-notification-badge--with-count">3</span>
+        <span class="notification-badge notification-badge--top notification-badge--with-count">3</span>
       </div>
       <div class="nav-icon">
         <span class="elv-text-xl">💬</span>
-        <span class="elv-notification-badge elv-notification-badge--mid elv-notification-badge--with-count">12</span>
+        <span class="notification-badge notification-badge--mid notification-badge--with-count">12</span>
       </div>
       <div class="nav-icon">
         <span class="elv-text-xl">📧</span>
-        <span class="elv-notification-badge elv-notification-badge--top elv-notification-badge--dot"></span>
+        <span class="notification-badge notification-badge--top notification-badge--dot"></span>
       </div>
       <div class="nav-icon">
         <span class="elv-text-xl">🛒</span>
-        <span class="elv-notification-badge elv-notification-badge--low elv-notification-badge--with-count">2</span>
+        <span class="notification-badge notification-badge--low notification-badge--with-count">2</span>
       </div>
     </div>
     <pre><code>&lt;div class="nav-icon"&gt;
   &lt;span&gt;🔔&lt;/span&gt;
-  &lt;span class="elv-notification-badge elv-notification-badge--top elv-notification-badge--with-count"&gt;3&lt;/span&gt;
+  &lt;span class="notification-badge notification-badge--top notification-badge--with-count"&gt;3&lt;/span&gt;
 &lt;/div&gt;</code></pre>
   </div>
 
@@ -270,21 +270,21 @@
     </p>
     <div class="examples">
       <div class="list-item">
-        <span class="elv-notification-badge elv-notification-badge--mid elv-notification-badge--dot"></span>
+        <span class="notification-badge notification-badge--mid notification-badge--dot"></span>
         <div class="list-item-content">
           <div class="list-item-title">New message from Sarah Chen</div>
           <div class="list-item-desc">2 minutes ago</div>
         </div>
       </div>
       <div class="list-item">
-        <span class="elv-notification-badge elv-notification-badge--low elv-notification-badge--with-count">4</span>
+        <span class="notification-badge notification-badge--low notification-badge--with-count">4</span>
         <div class="list-item-content">
           <div class="list-item-title">Product Team Discussion</div>
           <div class="list-item-desc">4 unread messages</div>
         </div>
       </div>
       <div class="list-item">
-        <span class="elv-notification-badge elv-notification-badge--top elv-notification-badge--dot"></span>
+        <span class="notification-badge notification-badge--top notification-badge--dot"></span>
         <div class="list-item-content">
           <div class="list-item-title">Action Required: Review approval needed</div>
           <div class="list-item-desc">1 hour ago</div>
@@ -302,14 +302,14 @@
     <div class="elv-flex elv-gap-4 elv-border-b elv-border-light elv-pb-2">
       <div class="elv-flex elv-items-center elv-gap-2 elv-px-3 elv-py-2 elv-text-sm elv-font-semibold elv-text-default" style="border-bottom: 2px solid #5746b2;">
         <span>Inbox</span>
-        <span class="elv-notification-badge elv-notification-badge--mid elv-notification-badge--with-count">8</span>
+        <span class="notification-badge notification-badge--mid notification-badge--with-count">8</span>
       </div>
       <div class="elv-flex elv-items-center elv-gap-2 elv-px-3 elv-py-2 elv-text-sm elv-text-subtle">
         <span>Archive</span>
       </div>
       <div class="elv-flex elv-items-center elv-gap-2 elv-px-3 elv-py-2 elv-text-sm elv-text-subtle">
         <span>Drafts</span>
-        <span class="elv-notification-badge elv-notification-badge--low elv-notification-badge--with-count">3</span>
+        <span class="notification-badge notification-badge--low notification-badge--with-count">3</span>
       </div>
     </div>
   </div>
@@ -340,12 +340,12 @@
     <pre><code>&lt;!-- With ARIA label --&gt;
 &lt;div class="nav-icon" aria-label="Notifications"&gt;
   &lt;span&gt;🔔&lt;/span&gt;
-  &lt;span class="elv-notification-badge elv-notification-badge--top elv-notification-badge--with-count"
+  &lt;span class="notification-badge notification-badge--top notification-badge--with-count"
         aria-label="3 unread notifications"&gt;3&lt;/span&gt;
 &lt;/div&gt;
 
 &lt;!-- With live region for updates --&gt;
-&lt;span class="elv-notification-badge elv-notification-badge--mid elv-notification-badge--with-count"
+&lt;span class="notification-badge notification-badge--mid notification-badge--with-count"
       aria-live="polite" aria-atomic="true"&gt;5&lt;/span&gt;</code></pre>
   </div>
 
