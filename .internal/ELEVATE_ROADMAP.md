@@ -473,6 +473,45 @@ Every component template should include:
 
 ---
 
+## Future Strategic Initiative: Full Package Transition
+
+**Goal**: Transition elevate-lite to consume all components and styles from the official `@g2crowd/elevate` package (maintained in `g2crowd/elevate-g2`), eliminating custom/hand-maintained CSS and component implementations where possible.
+
+**Current State** (as of May 2026):
+- ✅ Core CSS now sourced from `@g2crowd/elevate@0.8.0` package (via Michael Wheeler's PR)
+- ⚠️ Custom components still maintained locally (navigation, product-specific, complex forms)
+- ⚠️ Some components exist in both projects with potential drift
+
+**Vision**:
+- elevate-lite becomes primarily an HTML template library + demo gallery
+- All CSS/styling sourced from official `@g2crowd/elevate` package
+- Custom components either:
+  1. Contributed upstream to `g2crowd/elevate-g2` as official components, OR
+  2. Maintained as elevate-lite-specific extensions (clearly documented)
+
+**Benefits**:
+- Automatic sync with official Elevate design system updates
+- Reduced maintenance burden (CSS/styling maintained by design system team)
+- Single source of truth for component styling
+- Easier to stay current with UX/design changes
+
+**Requires**:
+1. **Gap analysis**: Identify components in elevate-lite that aren't in official package
+2. **Contribution plan**: Decide which custom components should be contributed upstream
+3. **Extension strategy**: Define how elevate-lite-specific components are documented/maintained
+4. **Migration roadmap**: Phased approach to transition remaining custom components
+5. **Coordination**: Work with design system team on contribution process and versioning
+
+**Next Steps**:
+- [ ] Create detailed gap analysis document comparing elevate-lite vs `g2crowd/elevate-g2`
+- [ ] Establish contribution guidelines with design system team
+- [ ] Define criteria for "elevate-lite extension" vs "upstream candidate"
+- [ ] Build migration plan with phases and timelines
+
+**Priority**: FUTURE (after Phase 4 completion) — Document for strategic planning
+
+---
+
 ## Questions & Open Items
 
 - **Q**: Should we version this library or just track with UE Elevate versions?
